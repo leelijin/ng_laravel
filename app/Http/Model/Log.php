@@ -18,9 +18,9 @@ class Log extends Model
             'url'         => $request->url(),
             'ip'          => $request->ip(),
             'create_time' => time(),
-            'param'       => json_encode($request->all()),
+            'params'       => json_encode($request->all()),
             'code'        => $response->getStatusCode(),
         ];
-        DB::table('log')->insert($data);
+        DB::table('logs')->insert($data);
     }
 }
