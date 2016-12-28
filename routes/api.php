@@ -65,6 +65,51 @@ Route::group(['prefix'=>'user'],function(){
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
         return apiSuccess($data);
     }) ;
+    Route::any('login',function(){
+        $data['userInfo']=[
+            'uid'=>'121',
+            'mobile'=>'18782960000',
+            'nickname'=>'皮皮熊',
+            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
+            'rank'=>'土豪',
+            'gold'=>2000,
+            'star'=>100,
+            'strength'=>100,
+        ];
+        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
+        return apiSuccess($data);
+    }) ;
+    Route::any('thirdLogin',function(){
+        $data['userInfo']=[
+            'uid'=>'121',
+            'mobile'=>'18782960000',
+            'nickname'=>'皮皮熊',
+            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
+            'rank'=>'土豪',
+            'gold'=>2000,
+            'star'=>100,
+            'strength'=>100,
+        ];
+        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
+        return apiSuccess($data);
+    }) ;
+    Route::any('getUserItems',function(){
+        $data['userInfo']=[
+            'uid'=>'121',
+            'mobile'=>'18782960000',
+            'nickname'=>'皮皮熊',
+            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
+            'rank'=>'土豪',
+            'gold'=>2000,
+            'star'=>100,
+            'strength'=>100,
+        ];
+        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
+        return apiSuccess($data);
+    }) ;
+    Route::any('uploadAvatar',function(){
+        return apiSuccess(['uid'=>'121','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg']);
+    }) ;
     
 });
 
