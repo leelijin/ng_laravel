@@ -2,11 +2,15 @@
 
 namespace App\Http\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Log extends Model
 {
+    public $incrementing=false;
+    public $timestamps=false;
+    
     public static function insertLog($request,$response)
     {
         $data = [
@@ -21,6 +25,6 @@ class Log extends Model
             'params'       => json_encode($request->all()),
             'code'        => $response->getStatusCode(),
         ];
-        DB::table('logs')->insert($data);
+        self::insert($data);
     }
 }
