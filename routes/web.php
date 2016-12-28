@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return 'lijin';
+    return redirect('test.php');
 });
 
 Route::get('timestamp',function(){

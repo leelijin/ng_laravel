@@ -8,10 +8,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use Dotenv\Validator;
+use Illuminate\Support\Facades\Crypt;
+
 class IndexController
 {
     public function index()
     {
+        Validator::make();
         return 'api_index';
     }
 }

@@ -30,6 +30,8 @@ function apiError($error_code=1,$message='') {
     return apiReturn([], $error_code,$message);
 }
 
+Route::any('index','IndexController@Index');
+
 Route::group(['prefix'=>'user'],function(){
     Route::any('reg',function(){
         $data['userInfo']=[
@@ -215,9 +217,7 @@ Route::group(['prefix'=>'Rank'],function(){
     });
 });
 
-
-
-
+Route::resource('article','IndexController');
 
 
 //Route::get('/user', function (Request $request) {
