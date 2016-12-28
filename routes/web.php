@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'lijin';
+});
+
+Route::get('timestamp',function(){
+    return time();
 });
