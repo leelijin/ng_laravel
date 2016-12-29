@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \App\Http\Middleware\Log::class,
     ];
-
+    
     /**
      * The application's route middleware groups.
      *
@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             'bindings',
         ],
     ];
-
+    
     /**
      * The application's route middleware.
      *
@@ -53,5 +53,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'require.uid'=>\App\Http\Middleware\RequireUid::class,
     ];
 }

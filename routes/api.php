@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 Route::any('index','IndexController@Index');
 
-Route::group(['prefix'=>'user'],function(){
+Route::group(['prefix'=>'user','middleware'=>'require.uid'],function(){
     Route::any('reg',function(){
         $data['userInfo']=[
             'uid'=>'121',
@@ -62,9 +62,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::any('getUserItems',function(){
         
     }) ;
-    Route::any('uploadAvatar',function(){
-        return Api::apiSuccess(['uid'=>'121','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg']);
-    }) ;
+    Route::post('uploadAvatar','UserController@uploadAvatar');
 });
 
 Route::any('startad',function(){
