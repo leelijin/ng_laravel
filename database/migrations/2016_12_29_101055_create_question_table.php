@@ -22,7 +22,7 @@ class CreateQuestionTable extends Migration
             $table->string('image1');
             $table->string('image2');
             $table->string('answer_options')->comment('问题选项');
-            $table->enum([0,1,2,3])->comment('正确答案');
+            $table->enum('right_answer',[0,1,2,3])->comment('正确答案');
             $table->timestamps();
         });
     }

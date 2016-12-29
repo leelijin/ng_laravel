@@ -15,7 +15,6 @@ class ChangeUsersTable extends Migration
     {
         Schema::table('users',function(Blueprint $table){
             $table->unsignedSmallInteger('rank')->comment('等级');
-            $table->unsignedSmallInteger('rank')->comment('等级');
             $table->unsignedSmallInteger('gold')->comment('金币');
             $table->unsignedSmallInteger('star')->comment('星级');
             $table->unsignedSmallInteger('strength')->comment('体力');
