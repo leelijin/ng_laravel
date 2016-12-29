@@ -4,6 +4,7 @@ namespace App\Http\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Log extends Model
@@ -14,7 +15,7 @@ class Log extends Model
     public static function insertLog($request,$response)
     {
         $data = [
-            'uid'         => $request->input('uid',0),
+            'uid'         => (int)$request->input('uid',0),
             'method'      => $request->method(),
             'client'      => $request->input('client','others'),
             'device_id'   => $request->input('device_id',''),
