@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('test.php');
+    return redirect('admin');
 });
 
 Route::get('timestamp',function(){
