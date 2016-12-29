@@ -163,7 +163,7 @@ Route::group(['prefix'=>'level'],function(){
     
 });
 
-Route::group(['prefix'=>'Items'],function(){
+Route::group(['prefix'=>'items'],function(){
     Route::any('store',function(){
         $data = [
             ['id'=>1,'title'=>'时间暂定卡','need_gold'=>10000,'already_have'=>0],
