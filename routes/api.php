@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Service\Api;
 use Illuminate\Http\Request;
 
 /*
@@ -13,22 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-function apiReturn($data,$code,$message) {
-    $result['error_code'] = $code?:0;
-    $result['message']=$message?:'';
-    $result['data']=$data?:[];
-    return $result;
-}
 
-function apiSuccess($data,$message='请求成功') {
-    if(is_string($data))$data=['message'=>$data];
-    return apiReturn($data, 0, $message);
-}
-
-function apiError($error_code=1,$message='') {
-    if(!is_numeric($error_code))exception('错误码应该是一个数字');
-    return apiReturn([], $error_code,$message);
-}
 
 Route::any('index','IndexController@Index');
 
@@ -45,7 +31,7 @@ Route::group(['prefix'=>'user'],function(){
             'strength'=>100,
         ];
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     }) ;
     Route::any('login',function(){
         $data['userInfo']=[
@@ -59,7 +45,7 @@ Route::group(['prefix'=>'user'],function(){
             'strength'=>100,
         ];
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     }) ;
     Route::any('thirdLogin',function(){
         $data['userInfo']=[
@@ -73,13 +59,13 @@ Route::group(['prefix'=>'user'],function(){
             'strength'=>100,
         ];
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     }) ;
     Route::any('getUserItems',function(){
         
     }) ;
     Route::any('uploadAvatar',function(){
-        return apiSuccess(['uid'=>'121','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg']);
+        return Api::apiSuccess(['uid'=>'121','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg']);
     }) ;
 });
 
@@ -90,7 +76,7 @@ Route::any('startad',function(){
         'second'=>3,
         'link'=>'http://www.baidu.com',
     ];
-    return apiSuccess($data);
+    return Api::apiSuccess($data);
 }) ;
 
 Route::group(['prefix'=>'index'],function(){
@@ -115,7 +101,7 @@ Route::group(['prefix'=>'index'],function(){
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
 });
 
@@ -134,7 +120,7 @@ Route::group(['prefix'=>'level'],function(){
             ['id'=>9,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200],
             ['id'=>10,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
     Route::any('starDetail',function(){
         $data=[
@@ -144,7 +130,7 @@ Route::group(['prefix'=>'level'],function(){
             ['id'=>4,'question'=>'请在以下选择一个正确答案','content'=>'问题描述','image1'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','image2'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','answer_options'=>['选项A','选项B','选项C','选项D'],'right_answer'=>3],
             ['id'=>5,'question'=>'请在以下选择一个正确答案','content'=>'问题描述','image1'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','image2'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','answer_options'=>['选项A','选项B','选项C','选项D'],'right_answer'=>0],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
     Route::any('goldList',function(){
         $data['current_level']=5;
@@ -160,7 +146,7 @@ Route::group(['prefix'=>'level'],function(){
             ['id'=>9,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>0],
             ['id'=>10,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>0],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
     Route::any('goldDetail',function(){
         $data=[
@@ -170,13 +156,13 @@ Route::group(['prefix'=>'level'],function(){
             ['id'=>4,'question'=>'请在以下选择一个正确答案','content'=>'问题描述','image1'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','image2'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','answer_options'=>['选项A','选项B','选项C','选项D'],'right_answer'=>3],
             ['id'=>5,'question'=>'请在以下选择一个正确答案','content'=>'问题描述','image1'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','image2'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','answer_options'=>['选项A','选项B','选项C','选项D'],'right_answer'=>0],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
     Route::any('wrong',function(){
         
     });
     Route::any('submit',function(){
-        return apiSuccess('恭喜过关');
+        return Api::apiSuccess('恭喜过关');
     });
     
 });
@@ -188,7 +174,7 @@ Route::group(['prefix'=>'Items'],function(){
             ['id'=>1,'title'=>'延时挑战卡','need_gold'=>20000,'already_have'=>2],
             ['id'=>1,'title'=>'重复挑战卡','need_gold'=>30000,'already_have'=>0],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
 });
 
@@ -202,7 +188,7 @@ Route::group(['prefix'=>'Rank'],function(){
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
     Route::any('gold',function(){
         $data=[
@@ -213,7 +199,7 @@ Route::group(['prefix'=>'Rank'],function(){
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
         ];
-        return apiSuccess($data);
+        return Api::apiSuccess($data);
     });
 });
 
