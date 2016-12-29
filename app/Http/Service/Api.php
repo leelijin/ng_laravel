@@ -9,7 +9,7 @@
 namespace App\Http\Service;
 
 
-class Service
+class Api
 {
     
 }
