@@ -14,8 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
-
 Route::any('index','IndexController@Index');
 
 Route::group(['prefix'=>'user'],function(){
@@ -202,9 +200,6 @@ Route::group(['prefix'=>'Rank'],function(){
         return Api::apiSuccess($data);
     });
 });
-
-Route::resource('article','IndexController');
-
 
 //Route::get('/user', function (Request $request) {
 //    return $request->user();
