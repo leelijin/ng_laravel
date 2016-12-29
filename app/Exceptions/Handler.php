@@ -24,7 +24,7 @@ class Handler extends ExceptionHandler
 
     /**
      * Report or log an exception.
-     *
+     * report方法用于记录异常并将其发送给外部服务
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
      * @param  \Exception  $exception
@@ -37,13 +37,14 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
-     *
+     * render方法负责将给定异常转化为发送给浏览器的HTTP响应
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
+        
         return parent::render($request, $exception);
     }
 
