@@ -10,8 +10,9 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\User;
 use App\Http\Service\Api;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -29,6 +30,15 @@ class UserController extends Controller
     
     public function reg()
     {
-        
+        $valid = Validator::make($this->params,[
+            'nickname'=>'required',
+            'mobile'=>'required',
+            'password'=>'required',
+        ]);
+        if($valid->passes()){
+            return $re = User::create($this->params);
+        }else{
+            dd($valid->errors());
+        }
     }
 }
