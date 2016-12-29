@@ -15,15 +15,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function uploadAvatar(Request $request)
+    public function uploadAvatar()
     {
-        if(!$request->has('uid'))return Api::apiError(10,'需要登录');
-        if(!$request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
-        $file_name = $request->file('avatar')->store('avatars');
+        if(!$this->request->has('uid'))return Api::apiError(10,'需要登录');
+        if(!$this->request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
+        $file_name = $this->request->file('avatar')->store('avatars');
         $avatar = config('app.url').'/storage/app/'.$file_name;
         return Api::apiSuccess([
             'uid'    => $this->uid,
             'avatar' => $avatar,
         ]);
+    }
+    
+    public function reg()
+    {
+        
     }
 }

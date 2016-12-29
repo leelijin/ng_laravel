@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 Route::any('index','IndexController@Index');
 
-Route::group(['prefix'=>'user','middleware'=>'require.uid'],function(){
+Route::group(['prefix'=>'user'],function(){
     Route::any('reg',function(){
         $data['userInfo']=[
             'uid'=>'121',
@@ -31,6 +31,7 @@ Route::group(['prefix'=>'user','middleware'=>'require.uid'],function(){
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
         return Api::apiSuccess($data);
     }) ;
+    
     Route::any('login',function(){
         $data['userInfo']=[
             'uid'=>'121',
