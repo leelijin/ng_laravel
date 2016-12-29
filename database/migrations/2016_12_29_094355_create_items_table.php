@@ -13,7 +13,12 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('items',function(Blueprint $table){
+            $table->increments('id');
+            $table->string('title',20)->comment('道具名称');
+            $table->unsignedInteger('need_gold')->comment('需要金币');
+            $table->string('setting')->comment('道具效果设置');
+        });
     }
 
     /**
