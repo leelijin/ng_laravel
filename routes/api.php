@@ -66,15 +66,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('uploadAvatar','UserController@uploadAvatar');
 });
 
-Route::any('startad',function(){
-    $data = [
-        'title'=>'启动页广告',
-        'cover'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-        'second'=>3,
-        'link'=>'http://www.baidu.com',
-    ];
-    return Api::apiSuccess($data);
-}) ;
+Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'index'],function(){
     Route::any('notice',function(){

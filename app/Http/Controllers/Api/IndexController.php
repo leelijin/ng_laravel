@@ -8,14 +8,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Model\StartAd;
+use App\Http\Service\Api;
 use Dotenv\Validator;
-use Illuminate\Support\Facades\Crypt;
 
 class IndexController
 {
     public function index()
     {
-        Validator::make();
         return 'api_index';
     }
+    
+    public function startAd()
+    {
+        $info = StartAd::first();
+        return Api::apiSuccess($info);
+    }
+    
 }
