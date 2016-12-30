@@ -20,6 +20,7 @@ class IndexController
     
     public function startAd()
     {
+        
         $info = StartAd::first();
         return Api::apiSuccess($info);
     }
