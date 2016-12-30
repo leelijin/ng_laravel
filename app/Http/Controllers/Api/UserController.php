@@ -75,12 +75,12 @@ class UserController extends Controller
         ]);
         if($valid->passes()){
             $userInfo = User::where('uuid',$this->request['uuid'])->base()->first();
-            if($userInfo->isEmpty()){
+            if(!$userInfo){
                 $this->params['token']=substr($this->params['uuid'],0,20);
                 $this->params['mobile']=substr($this->params['uuid'],0,11);
                 $this->params['password']=str_random(20);
                 $re = User::create($this->params);
-                if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
+                if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->first();
             }
             return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{
