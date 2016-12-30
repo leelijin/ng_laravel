@@ -21,6 +21,6 @@ class Log
     public function terminate($request,$response)
     {
         //记录全局日志
-        \App\Http\Model\Log::insertLog($request,$response);
+        \App\Log::insertLog($request,$response);
     }
 }

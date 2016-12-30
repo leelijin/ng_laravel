@@ -8,9 +8,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Model\StartAd;
 use App\Http\Service\Api;
-use Dotenv\Validator;
+use App\StartAd;
 
 class IndexController
 {
@@ -21,6 +20,7 @@ class IndexController
     
     public function startAd()
     {
+        
         $info = StartAd::first();
         return Api::apiSuccess($info);
     }
