@@ -61,4 +61,33 @@ class UserController extends Controller
             return Api::apiError(1,'用户不存在或密码错误');
         }
     }
+    
+    public function thirdLogin()
+    {
+        $valid = Validator::make($this->params,[
+            'uuid'=>'required',
+            'nickname'=>'required',
+        ],[
+            'uiid.required'=>'uuid必须',
+            'nickname.required'=>'需要填写昵称',
+        ]);
+        if($valid->passes()){
+            $userInfo = User::where('uuid',$this->request['uuid'])
+                ->base()->get();
+            if($userInfo->isNotEmpty()){
+                return Api::apiSuccess(compact('userInfo'));
+            }else{
+                $this->params['token']=substr($this->params['uuid'],0,20);
+                $this->params['mobile']=substr($this->params['uuid'],0,11);
+                $this->params['password']=str_random(20);
+                $re = User::create($this->params);
+                if($re){
+                    $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
+                    return Api::apiSuccess(compact('userInfo'));
+                }
+            }
+        }else{
+            return Api::apiError(1,$valid->errors()->first());
+        }
+    }
 }
