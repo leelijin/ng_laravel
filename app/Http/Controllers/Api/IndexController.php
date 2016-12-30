@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Service\Api;
+use App\Services\Api;
 use App\StartAd;
 
 class IndexController
