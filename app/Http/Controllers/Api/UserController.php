@@ -31,19 +31,6 @@ class UserController extends Controller
     
     public function reg()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
-        
         $valid = Validator::make($this->params,[
             'nickname'=>'required',
             'mobile'=>'required|unique:users',
@@ -68,22 +55,10 @@ class UserController extends Controller
     
     public function login()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
         $userInfo = User::where('mobile',$this->request['mobile'])
-            ->where('password',$this->request['password'])->base()->get();
+            ->where('password',$this->request['password'])->base()->first();
         if($userInfo){
-            return Api::apiSuccess(['userInfo'=>$userInfo->toArray()]);
+            return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{
             return Api::apiError(1,'用户不存在或密码错误');
         }
@@ -91,18 +66,6 @@ class UserController extends Controller
     
     public function thirdLogin()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
         $valid = Validator::make($this->params,[
             'uuid'=>'required',
             'nickname'=>'required',
@@ -111,7 +74,7 @@ class UserController extends Controller
             'nickname.required'=>'需要填写昵称',
         ]);
         if($valid->passes()){
-            $userInfo = User::where('uuid',$this->request['uuid'])->base()->get();
+            $userInfo = User::where('uuid',$this->request['uuid'])->base()->first();
             if($userInfo->isEmpty()){
                 $this->params['token']=substr($this->params['uuid'],0,20);
                 $this->params['mobile']=substr($this->params['uuid'],0,11);
