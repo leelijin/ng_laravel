@@ -15,12 +15,11 @@ class IndexController
 {
     public function index()
     {
-        return 'api_index';
+        
     }
     
     public function startAd()
     {
-        
         $info = StartAd::first();
         return Api::apiSuccess($info);
     }
