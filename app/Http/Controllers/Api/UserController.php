@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Service\Func;
 use App\User;
 use App\Http\Service\Api;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +42,7 @@ class UserController extends Controller
         ]);
         if($valid->passes()){
             $this->params['token']=str_random(20);
+            $this->params['avatar'] = $this->request->has('avatar')?$this->params['avatar']:Func::default_avatar();
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);

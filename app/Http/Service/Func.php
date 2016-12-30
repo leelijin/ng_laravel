@@ -37,4 +37,9 @@ class Func
         return $str;
         
     }
+    
+    public static function default_avatar()
+    {
+        return 'http://lorempixel.com/80/80/?70570';
+    }
 }
