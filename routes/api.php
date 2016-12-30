@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Service\Api;
+use App\Services\Api;
 use Illuminate\Http\Request;
 
 /*

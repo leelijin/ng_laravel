@@ -6,7 +6,7 @@
  * Time: 13:32
  */
 
-namespace App\Http\Service;
+namespace App\Services;
 
 
 class Api

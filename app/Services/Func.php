@@ -6,7 +6,7 @@
  * Time: 10:48
  */
 
-namespace App\Http\Service;
+namespace App\Services;
 
 
 class Func

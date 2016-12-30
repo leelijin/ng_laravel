@@ -10,9 +10,9 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Service\Func;
+use App\Services\Func;
 use App\User;
-use App\Http\Service\Api;
+use App\Services\Api;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -26,7 +26,6 @@ class UserController extends Controller
             return Api::apiSuccess(['avatar' => $avatar],'头像上传成功');
         }
         return Api::apiError(1,'上传错误');
-        
     }
     
     public function reg()

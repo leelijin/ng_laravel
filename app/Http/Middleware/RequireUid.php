@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Service\Api;
+use App\Services\Api;
 use Closure;
 
 class RequireUid
