@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Model\User;
+use App\User;
 use App\Http\Service\Api;
 use Illuminate\Support\Facades\Validator;
 
