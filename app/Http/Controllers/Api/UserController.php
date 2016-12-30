@@ -18,14 +18,23 @@ class UserController extends Controller
 {
     public function uploadAvatar()
     {
-        if(!$this->request->has('uid'))return Api::apiError(10,'需要登录');
         if(!$this->request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
         $file_name = $this->request->file('avatar')->store('avatars');
         $avatar = config('app.url').'/storage/app/'.$file_name;
-        return Api::apiSuccess([
-            'uid'    => $this->uid,
-            'avatar' => $avatar,
-        ]);
+        $user = User::find($this->uid);
+        if($user){
+            $user->avatar=$avatar;
+            $re = $user->update();
+            if($re){
+                return Api::apiSuccess([
+                    'avatar' => $avatar,
+                ],'头像保存成功');
+            }
+        }else{
+            
+        }
+        return Api::apiError(1,'上传错误');
+        
     }
     
     public function reg()
