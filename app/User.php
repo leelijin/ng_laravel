@@ -2,8 +2,10 @@
 
 namespace App;
 
+use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * App\User
@@ -40,20 +42,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCurrentGoldLevel($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereToken($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Query\Builder|\App\User base()
  */
 class User extends Model
 {
     use SoftDeletes;
     
     protected $guarded=[];
+    protected $hidden=['password','deleted_at'];
     
     public function questions()
     {
         return $this->belongsToMany(Question::class);
     }
     
+    //public function setPasswordAttribute()
+    //{
+    //
+    //}
+    
     public function setTokenAttribute()
     {
-        return str_random(20);
+        $this->attributes['token'] = str_random(20);
+    }
+    
+    public function scopeBase($query)
+    {
+        return $query->select('id as uid','nickname','mobile','avatar','rank','gold','star','strength','token');
     }
 }
