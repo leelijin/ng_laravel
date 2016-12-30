@@ -46,7 +46,7 @@ class UserController extends Controller
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);
-                return Api::apiSuccess($userInfo);
+                return Api::apiSuccess(['userInfo'=>$userInfo]);
             }
         }else{
             return Api::apiError(1,$valid->errors()->first());
@@ -58,7 +58,7 @@ class UserController extends Controller
         $userInfo = User::where('mobile',$this->request['mobile'])
             ->where('password',$this->request['password'])->base()->get();
         if($userInfo){
-            return Api::apiSuccess($userInfo);
+            return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{
             return Api::apiError(1,'用户不存在或密码错误');
         }
@@ -82,7 +82,7 @@ class UserController extends Controller
                 $re = User::create($this->params);
                 if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
             }
-            return Api::apiSuccess($userInfo);
+            return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{
             return Api::apiError(1,$valid->errors()->first());
         }
