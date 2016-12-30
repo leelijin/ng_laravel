@@ -15,7 +15,7 @@ class Api
         $result['error_code'] = $code?:0;
         $result['message']=$message?:'';
         $result['data']=$data?:[];
-        return $result;
+        return response()->json($result);
     }
     
     public static function apiSuccess($data,$message='请求成功') {
