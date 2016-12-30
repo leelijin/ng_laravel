@@ -11,13 +11,20 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Http\Model\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'nickname' => $faker->name,
+        'mobile' => $faker->unique()->phoneNumber,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'avatar'=>$faker->imageUrl(80,80),
+        'rank'=>$faker->randomDigit,
+        'gold'=>$faker->randomDigit,
+        'star'=>$faker->randomDigit,
+        'strength'=>$faker->randomDigit,
+        'current_star_level'=>$faker->randomDigit,
+        'current_gold_level'=>$faker->randomDigit,
+        'token' => str_random(20),
     ];
 });

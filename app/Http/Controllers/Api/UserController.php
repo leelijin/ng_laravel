@@ -30,6 +30,30 @@ class UserController extends Controller
     
     public function reg()
     {
+        $valid = Validator::make($this->params,[
+            'nickname'=>'required',
+            'mobile'=>'required|unique:users',
+            'password'=>'required',
+        ],[
+            'nickname.required'=>'需要填写昵称',
+            'mobile.unique'=>'手机号码已注册',
+            
+        ]);
+        if($valid->passes()){
+            return $re = User::create($this->params);
+        }else{
+            return Api::apiError(1,$valid->errors()->first());
+        }
+    }
+    
+    public function login()
+    {
+        $userInfo = User::where('mobile',$this->request['mobile'])->get();
+        if($userInfo){
+            
+        }else{
+            
+        }
         $data['userInfo']=[
             'uid'=>'121',
             'mobile'=>'18782960000',
@@ -42,16 +66,5 @@ class UserController extends Controller
         ];
         $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
         return Api::apiSuccess($data);
-        
-        $valid = Validator::make($this->params,[
-            'nickname'=>'required',
-            'mobile'=>'required',
-            'password'=>'required',
-        ]);
-        if($valid->passes()){
-            return $re = User::create($this->params);
-        }else{
-            dd($valid->errors());
-        }
     }
 }
