@@ -20,18 +20,9 @@ class UserController extends Controller
     {
         if(!$this->request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
         $file_name = $this->request->file('avatar')->store('avatars');
-        $avatar = config('app.url').'/storage/app/'.$file_name;
-        $user = User::find($this->uid);
-        if($user){
-            $user->avatar=$avatar;
-            $re = $user->update();
-            if($re){
-                return Api::apiSuccess([
-                    'avatar' => $avatar,
-                ],'头像保存成功');
-            }
-        }else{
-            
+        if($file_name){
+            $avatar = config('app.url').'/storage/app/'.$file_name;
+            return Api::apiSuccess(['avatar' => $avatar],'头像上传成功');
         }
         return Api::apiError(1,'上传错误');
         
