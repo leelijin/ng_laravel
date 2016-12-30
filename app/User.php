@@ -45,8 +45,15 @@ class User extends Model
 {
     use SoftDeletes;
     
+    protected $guarded=[];
+    
     public function questions()
     {
         return $this->belongsToMany(Question::class);
+    }
+    
+    public function setTokenAttribute()
+    {
+        return str_random(20);
     }
 }

@@ -35,6 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Question extends Model
 {
+    protected $casts=[
+        'answer_options'=>'array',
+    ];
     //
     public function level()
     {

@@ -142,7 +142,7 @@ Route::group(['prefix'=>'items'],function(){
     });
 });
 
-Route::group(['prefix'=>'Rank'],function(){
+Route::group(['prefix'=>'rank'],function(){
     Route::any('star',function(){
         $data=[
             ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
