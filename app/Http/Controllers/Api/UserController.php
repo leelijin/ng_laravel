@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    
     public function uploadAvatar()
     {
         if(!$this->request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
@@ -45,7 +46,7 @@ class UserController extends Controller
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);
-                return Api::apiSuccess(compact('userInfo'));
+                return Api::apiSuccess($userInfo);
             }
         }else{
             return Api::apiError(1,$valid->errors()->first());
@@ -57,7 +58,7 @@ class UserController extends Controller
         $userInfo = User::where('mobile',$this->request['mobile'])
             ->where('password',$this->request['password'])->base()->get();
         if($userInfo){
-            return Api::apiSuccess(compact('userInfo'));
+            return Api::apiSuccess($userInfo);
         }else{
             return Api::apiError(1,'用户不存在或密码错误');
         }
@@ -73,20 +74,15 @@ class UserController extends Controller
             'nickname.required'=>'需要填写昵称',
         ]);
         if($valid->passes()){
-            $userInfo = User::where('uuid',$this->request['uuid'])
-                ->base()->get();
-            if($userInfo->isNotEmpty()){
-                return Api::apiSuccess(compact('userInfo'));
-            }else{
+            $userInfo = User::where('uuid',$this->request['uuid'])->base()->get();
+            if($userInfo->isEmpty()){
                 $this->params['token']=substr($this->params['uuid'],0,20);
                 $this->params['mobile']=substr($this->params['uuid'],0,11);
                 $this->params['password']=str_random(20);
                 $re = User::create($this->params);
-                if($re){
-                    $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
-                    return Api::apiSuccess(compact('userInfo'));
-                }
+                if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
             }
+            return Api::apiSuccess($userInfo);
         }else{
             return Api::apiError(1,$valid->errors()->first());
         }
