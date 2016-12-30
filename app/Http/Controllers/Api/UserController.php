@@ -30,6 +30,19 @@ class UserController extends Controller
     
     public function reg()
     {
+        $data['userInfo']=[
+            'uid'=>'121',
+            'mobile'=>'18782960000',
+            'nickname'=>'皮皮熊',
+            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
+            'rank'=>'土豪',
+            'gold'=>2000,
+            'star'=>100,
+            'strength'=>100,
+        ];
+        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
+        return Api::apiSuccess($data);
+        
         $valid = Validator::make($this->params,[
             'nickname'=>'required',
             'mobile'=>'required',
