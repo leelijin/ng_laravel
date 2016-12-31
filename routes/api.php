@@ -31,30 +31,15 @@ Route::group(['prefix'=>'user'],function(){
 
 Route::any('startad','IndexController@startAd') ;
 
+Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
+    Route::post('add','FriendController@add')->middleware('need:to_uid');
+    Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
+    Route::post('handle','FriendController@handle')->middleware('need:request','need:id');
+    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:id');
+});
+
 Route::group(['prefix'=>'index'],function(){
-    Route::any('notice',function(){
-        $data['announce'] = [
-            'title'=>'游戏公告',
-            'content'=>'两类关卡均有时间限制，后台可设置
-关卡通过标准：规定时间内100%完成答题
-关卡失败标准：超时未完成或者答题错误
-星级场每通过一个关卡获得一个星级奖励
-金币场每通过一个关卡获得不等金币奖励
-失败则需重新挑战，所有题目随机不重复
-',
-            'link'=>'http://www.baidu.com',
-            'create_time'=>time(),
-        ];
-        $data['friend_requests']=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-        ];
-        $data['friend_strength']=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-        ];
-        return Api::apiSuccess($data);
-    });
+    Route::any('notice','IndexController@notice');
 });
 
 Route::group(['prefix'=>'level'],function(){

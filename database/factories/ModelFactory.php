@@ -11,6 +11,9 @@
 |
 */
 
+
+use Illuminate\Support\Facades\DB;
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -55,4 +58,53 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
 });
 
 
+
+$factory->define(App\Friend::class, function (Faker\Generator $faker) {
+    return [
+        'from_uid' =>  function () {
+            return DB::table('users')->inRandomOrder()->value('id');
+        } ,
+        'to_uid' =>  function () {
+            return DB::table('users')->inRandomOrder()->value('id');
+        } ,
+        'type' =>  $faker->numberBetween(1,2) ,
+        'status' =>  function(){
+            return 0;
+            $array = [-1,0,1];
+            return $array[mt_rand(0,2)];
+        } ,
+    ];
+});
+
+$factory->define(App\Log::class, function (Faker\Generator $faker) {
+    return [
+        'uid' =>  $faker->randomNumber() ,
+        'method' =>  $faker->word ,
+        'client' =>  $faker->word ,
+        'device_id' =>  $faker->word ,
+        'version' =>  $faker->word ,
+        'url' =>  $faker->url ,
+        'ip' =>  $faker->word ,
+        'create_time' =>  $faker->randomNumber() ,
+        'params' =>  $faker->text ,
+        'code' =>  $faker->randomNumber() ,
+    ];
+});
+
+$factory->define(App\Notice::class, function (Faker\Generator $faker) {
+    return [
+        'title' =>  $faker->word ,
+        'content' =>  $faker->word ,
+        'link' =>  $faker->word ,
+    ];
+});
+
+$factory->define(App\StartAd::class, function (Faker\Generator $faker) {
+    return [
+        'title' =>  $faker->word ,
+        'cover' =>  $faker->word ,
+        'second' =>  $faker->randomNumber() ,
+        'link' =>  $faker->word ,
+    ];
+});
 
