@@ -105,14 +105,8 @@ Route::group(['prefix'=>'level'],function(){
 });
 
 Route::group(['prefix'=>'items'],function(){
-    Route::any('store',function(){
-        $data = [
-            ['id'=>1,'title'=>'时间暂定卡','need_gold'=>10000,'already_have'=>0],
-            ['id'=>1,'title'=>'延时挑战卡','need_gold'=>20000,'already_have'=>2],
-            ['id'=>1,'title'=>'重复挑战卡','need_gold'=>30000,'already_have'=>0],
-        ];
-        return Api::apiSuccess($data);
-    });
+    Route::post('user','ItemController@user');
+    Route::post('store','ItemController@store');
 });
 
 Route::group(['prefix'=>'rank'],function(){

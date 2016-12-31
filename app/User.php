@@ -56,6 +56,11 @@ class User extends Model
         return $this->belongsToMany(Question::class);
     }
     
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
+    
     //public function setPasswordAttribute()
     //{
     //
