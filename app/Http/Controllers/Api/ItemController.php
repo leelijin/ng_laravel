@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Item;
-use App\Services\Api;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
@@ -15,6 +13,6 @@ class ItemController extends Controller
         foreach ($items as &$item) {
             $item->already_have=0;
         }
-        return Api::apiSuccess($items);
+        return apiSuccess($items);
     }
 }

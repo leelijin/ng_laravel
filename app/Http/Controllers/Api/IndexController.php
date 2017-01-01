@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Friend;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
-use App\Services\Api;
 use App\Models\StartAd;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +26,7 @@ class IndexController extends Controller
     public function startAd()
     {
         $info = StartAd::first();
-        return Api::apiSuccess($info);
+        return apiSuccess($info);
     }
     
     public function notice()
@@ -41,7 +40,7 @@ class IndexController extends Controller
             $friend_requests=$friend_strength=[];
         }
         
-        return Api::apiSuccess(compact('announce','friend_requests','friend_strength'));
+        return apiSuccess(compact('announce','friend_requests','friend_strength'));
     }
     
 }

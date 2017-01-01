@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\Func;
 use App\Models\User;
-use App\Services\Api;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -20,13 +19,13 @@ class UserController extends Controller
     
     public function uploadAvatar()
     {
-        if(!$this->request->hasFile('avatar'))return Api::apiError(1,'无上传文件');
+        if(!$this->request->hasFile('avatar'))return apiError(1,'无上传文件');
         $file_name = $this->request->file('avatar')->store('avatars');
         if($file_name){
             $avatar = config('app.url').'/storage/app/'.$file_name;
-            return Api::apiSuccess(['avatar' => $avatar],'头像上传成功');
+            return apiSuccess(['avatar' => $avatar],'头像上传成功');
         }
-        return Api::apiError(1,'上传错误');
+        return apiError(1,'上传错误');
     }
     
     public function reg()
@@ -46,10 +45,10 @@ class UserController extends Controller
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);
-                return Api::apiSuccess(['userInfo'=>$userInfo]);
+                return apiSuccess(['userInfo'=>$userInfo]);
             }
         }else{
-            return Api::apiError(1,$valid->errors()->first());
+            return apiError(1,$valid->errors()->first());
         }
     }
     
@@ -58,9 +57,9 @@ class UserController extends Controller
         $userInfo = User::where('mobile',$this->request['mobile'])
             ->where('password',$this->request['password'])->base()->first();
         if($userInfo){
-            return Api::apiSuccess(['userInfo'=>$userInfo]);
+            return apiSuccess(['userInfo'=>$userInfo]);
         }else{
-            return Api::apiError(1,'用户不存在或密码错误');
+            return apiError(1,'用户不存在或密码错误');
         }
     }
     
@@ -82,9 +81,9 @@ class UserController extends Controller
                 $re = User::create($this->params);
                 if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->first();
             }
-            return Api::apiSuccess(['userInfo'=>$userInfo]);
+            return apiSuccess(['userInfo'=>$userInfo]);
         }else{
-            return Api::apiError(1,$valid->errors()->first());
+            return apiError(1,$valid->errors()->first());
         }
     }
 }
