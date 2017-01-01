@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 
 /**
- * App\User
+ * App\Models\User
  *
  * @property int $id
  * @property string $nickname
@@ -25,24 +25,28 @@ use Illuminate\Support\Facades\Crypt;
  * @property int $current_star_level 当前星级场关卡
  * @property int $current_gold_level 当前金币场关卡
  * @property string $token
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Question[] $questions
- * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereNickname($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereMobile($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereAvatar($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRank($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereGold($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereStar($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereStrength($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCurrentStarLevel($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCurrentGoldLevel($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereToken($value)
+ * @property string $uuid
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Question[] $questions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Item[] $items
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereNickname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereMobile($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereAvatar($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereRank($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereGold($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStar($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStrength($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereCurrentStarLevel($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereCurrentGoldLevel($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereUuid($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User base()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User simple()
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Query\Builder|\App\User base()
  */
 class User extends Model
 {
@@ -74,5 +78,10 @@ class User extends Model
     public function scopeBase($query)
     {
         return $query->select('id as uid','nickname','mobile','avatar','rank','gold','star','strength','token');
+    }
+    
+    public function scopeSimple($query)
+    {
+        return $query->select('id as uid','nickname','avatar');
     }
 }

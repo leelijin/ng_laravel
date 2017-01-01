@@ -12,15 +12,11 @@ use App\Models\Friend;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use App\Models\StartAd;
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $con = DB::table('friend_requests')->where('status',0)->inRandomOrder()->first();
-        dd($con);
-        return array_rand(['accept'=>1,'reject'=>2]);
     }
     
     public function startAd()

@@ -32,6 +32,7 @@ Route::group(['prefix'=>'user'],function(){
 Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
+    Route::post('mine','FriendController@mine');
     Route::post('add','FriendController@add')->middleware('need:to_uid');
     Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
     Route::post('handle','FriendController@handle')->middleware('need:request','need:id');

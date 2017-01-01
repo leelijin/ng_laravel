@@ -14,7 +14,7 @@ use App\Models\User;
 
 class FriendRepo
 {
-    public function triggerRequest($from_uid,$to_uid,$type,$type_message)
+    public static function triggerRequest($from_uid,$to_uid,$type,$type_message)
     {
         
         $check_user = User::find($to_uid);
@@ -29,7 +29,7 @@ class FriendRepo
         return apiError(1,'对方不存在');
     }
     
-    public function handleRequest($id,$uid,$request,$type,$type_message)
+    public static function handleRequest($id,$uid,$request,$type,$type_message)
     {
         //检查是否有此请求
         $requestInfo = Friend::where([['id',$id],['to_uid',$uid],['type',$type],['status',0]])->first();
@@ -42,6 +42,17 @@ class FriendRepo
             Friend::where('id',$id)->update(['status'=>-1]);
             return apiSuccess('您已拒绝'.$type_message);
         }
+    }
+    
+    public static function getMineFriendList($uid)
+    {
+        $reqs = Friend::where('to_uid',$uid)->where('status',1)
+            ->pluck('from_uid');
+        if($reqs->isEmpty())return [];
+        foreach ($reqs as $v) {
+            $list[]=UserRepo::getUserSimpleInfo($v);
+        }
+        return $list;
     }
     
 }

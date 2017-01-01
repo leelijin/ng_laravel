@@ -14,7 +14,7 @@
 
 use Illuminate\Support\Facades\DB;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -31,18 +31,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'token' => str_random(20),
     ];
 });
-$factory->define(App\Level::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Level::class, function (Faker\Generator $faker) {
     return [
-        'need_strength' =>  $faker->randomNumber() ,
+        'need_strength' =>  $faker->numberBetween(5,10)*10 ,
         'question_number' =>  100 ,
-        'time_limit' =>  $faker->randomNumber() ,
-        'reward' =>  $faker->randomNumber() ,
-        'challenge_times' =>  $faker->randomNumber() ,
+        'time_limit' =>  $faker->numberBetween(2,5)*10 ,
+        'reward' =>  $faker->numberBetween(1,10)*100 ,
         'level_type' =>  $faker->numberBetween(1,2) ,
     ];
 });
 
-$factory->define(App\Question::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Question::class, function (Faker\Generator $faker) {
     return [
         'level_id' =>  function () {
              return factory(App\Level::class)->create()->id;
@@ -59,7 +58,7 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
 
 
 
-$factory->define(App\Friend::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Friend::class, function (Faker\Generator $faker) {
     return [
         'from_uid' =>  function () {
             return DB::table('users')->inRandomOrder()->value('id');
@@ -76,7 +75,7 @@ $factory->define(App\Friend::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Log::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Log::class, function (Faker\Generator $faker) {
     return [
         'uid' =>  $faker->randomNumber() ,
         'method' =>  $faker->word ,
@@ -91,7 +90,7 @@ $factory->define(App\Log::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Notice::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Notice::class, function (Faker\Generator $faker) {
     return [
         'title' =>  $faker->word ,
         'content' =>  $faker->word ,
@@ -99,7 +98,7 @@ $factory->define(App\Notice::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\StartAd::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\StartAd::class, function (Faker\Generator $faker) {
     return [
         'title' =>  $faker->word ,
         'cover' =>  $faker->word ,

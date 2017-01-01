@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * App\Question
+ * App\Models\Question
  *
  * @property int $id
  * @property int $level_id
@@ -14,23 +15,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $content 描述
  * @property string $image1
  * @property string $image2
- * @property string $answer_options 问题选项
+ * @property array $answer_options 问题选项
  * @property string $right_answer 正确答案
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \App\Level $level
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereLevelId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereLevelType($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereTitle($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereContent($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereImage1($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereImage2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereAnswerOptions($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereRightAnswer($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Question whereUpdatedAt($value)
+ * @property-read \App\Models\Level $level
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereLevelId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereLevelType($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereTitle($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereContent($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereImage1($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereImage2($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereAnswerOptions($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereRightAnswer($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Question extends Model
