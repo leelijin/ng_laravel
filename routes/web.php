@@ -15,9 +15,7 @@ Route::get('/', function () {
     return redirect('admin');
 });
 
-Route::get('/seed',function(){
-   return Artisan::call('db:seed');
-});
+Route::get('/test','TestController@index');
 
 Route::get('timestamp',function(){
     return time();

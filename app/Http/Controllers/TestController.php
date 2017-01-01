@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: 59431
+ * Date: 2017/1/1
+ * Time: 11:39
+ */
+
+namespace App\Http\Controllers;
+
+
+use Illuminate\Support\Facades\App;
+
+class TestController
+{
+    public function index()
+    {
+        //return config('app.lijin.one');
+        return App::environment();
+    }
+}

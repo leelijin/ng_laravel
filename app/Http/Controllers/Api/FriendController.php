@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Friend;
+use App\Models\Friend;
 use App\Services\Api;
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class FriendController extends Controller
