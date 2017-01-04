@@ -9,16 +9,15 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
+use App\Models\Level;
+use App\Models\LevelSetting;
+use App\Models\User;
 
 class TestController
 {
     public function index()
     {
-        //return 123;
-        //return config('app.lijin.one');
-        //return App::environment();
-        return DB::select('select * from ng_users');
+        return Level::find(1)->levelSettings()->get();
+        
     }
 }

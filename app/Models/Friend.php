@@ -31,13 +31,13 @@ class Friend extends Model
     
     public function scopeType($query,$type)
     {
-        return $query->where('type',$type)
+        return $query->whereType($type)
             ->orderBy('status','desc')
             ->orderBy('id','desc');
     }
     
     public function getMyHandleRequest($to_uid)
     {
-        return $this->where('to_uid',$to_uid)->where('status',0)->type(1)->get();
+        return $this->whereToUid($to_uid)->whereStatus(0)->type(1)->get();
     }
 }

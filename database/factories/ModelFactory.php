@@ -44,7 +44,7 @@ $factory->define(App\Models\Level::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Question::class, function (Faker\Generator $faker) {
     return [
         'level_id' =>  function () {
-             return factory(App\Level::class)->create()->id;
+             return factory(App\Models\Level::class)->create()->id;
         } ,
         'level_type' =>  $faker->boolean ,
         'title' =>  $faker->sentence(5) ,

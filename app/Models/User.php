@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Scope\UserScope;
 use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
@@ -54,6 +56,14 @@ class User extends Model
     
     protected $guarded=[];
     protected $hidden=['password','deleted_at'];
+    
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('status',function(Builder $builder){
+            $builder->whereStatus(1);
+        });
+    }
     
     public function questions()
     {

@@ -34,4 +34,9 @@ class Level extends Model
     {
         return $this->hasMany(Question::class);
     }
+    
+    public function levelSettings()
+    {
+        return $this->hasOne(LevelSetting::class,'level_id');
+    }
 }
