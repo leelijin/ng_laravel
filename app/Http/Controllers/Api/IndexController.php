@@ -8,11 +8,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Friend;
+use App\Models\Friend;
 use App\Http\Controllers\Controller;
-use App\Notice;
+use App\Models\Notice;
 use App\Services\Api;
-use App\StartAd;
+use App\Models\StartAd;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,6 +20,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        
     }
     
     public function startAd()

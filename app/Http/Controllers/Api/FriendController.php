@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
 use App\Repository\FriendRepo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

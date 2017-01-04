@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\Func;
-use App\User;
+use App\Models\User;
 use App\Services\Api;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
