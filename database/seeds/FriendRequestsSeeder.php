@@ -1,6 +1,6 @@
 <?php
 
-use App\Friend;
+use App\Models\Friend;
 use Illuminate\Database\Seeder;
 
 class FriendRequestsSeeder extends Seeder

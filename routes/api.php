@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 
 Route::any('index','IndexController@Index');
 
+Route::any('startad','IndexController@startAd') ;
+
 Route::group(['prefix'=>'user'],function(){
     Route::post('reg','UserController@reg') ;
     
@@ -23,13 +25,8 @@ Route::group(['prefix'=>'user'],function(){
     
     Route::post('thirdLogin','UserController@thirdLogin') ;
     
-    Route::any('getUserItems',function(){
-        
-    }) ;
     Route::post('uploadAvatar','UserController@uploadAvatar');
 });
-
-Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
     Route::post('mine','FriendController@mine');
@@ -43,7 +40,7 @@ Route::group(['prefix'=>'index'],function(){
     Route::any('notice','IndexController@notice');
 });
 
-Route::group(['prefix'=>'level'],function(){
+Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('starList',function(){
         $data['current_level']=4;
         $data['star_level_info']=[
@@ -105,7 +102,7 @@ Route::group(['prefix'=>'level'],function(){
     
 });
 
-Route::group(['prefix'=>'items'],function(){
+Route::group(['prefix'=>'items','middleware'=>'need:uid'],function(){
     Route::post('store','ItemController@store');
     Route::post('user','ItemController@user')->middleware('need:uid');
     Route::post('buy','ItemController@buy')->middleware('need:uid');
@@ -113,11 +110,7 @@ Route::group(['prefix'=>'items'],function(){
 
 Route::group(['prefix'=>'rank'],function(){
     Route::any('star','LevelController@rankStar');
-    Route::any('star/friends','LevelController@rankStarFriends');
+    Route::any('star/friends','LevelController@rankStarFriends')->middleware('need:uid');
     Route::any('gold','LevelController@rankGold');
-    Route::any('gold/friends','LevelController@rankGoldFriends');
+    Route::any('gold/friends','LevelController@rankGoldFriends')->middleware('need:uid');
 });
-
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:api');

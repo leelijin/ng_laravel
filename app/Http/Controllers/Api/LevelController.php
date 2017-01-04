@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Repository\RankRepo;
 
 class LevelController extends Controller
 {
+    
+    public function starList()
+    {
+        $current_level=User::whereId($this->uid)->value('current_star_level');
+        $star_level_info ;
+    }
     
     public function rankStar()
     {
