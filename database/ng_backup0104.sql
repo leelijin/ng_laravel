@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-01-04 19:35:39
+Date: 2017-01-04 19:39:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -7592,7 +7592,7 @@ CREATE TABLE `ng_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nickname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `mobile` char(11) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` char(60) COLLATE utf8_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
