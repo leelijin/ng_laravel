@@ -71,7 +71,7 @@ Route::group(['prefix'=>'level'],function(){
     });
     Route::any('goldList',function(){
         $data['current_level']=5;
-        $data['star_level_info']=[
+        $data['gold_level_info']=[
             ['id'=>1,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
             ['id'=>2,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
             ['id'=>3,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
