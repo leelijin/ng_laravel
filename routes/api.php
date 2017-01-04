@@ -112,28 +112,10 @@ Route::group(['prefix'=>'items'],function(){
 });
 
 Route::group(['prefix'=>'rank'],function(){
-    Route::any('star',function(){
-        $data=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','star'=>10200],
-        ];
-        return Api::apiSuccess($data);
-    });
-    Route::any('gold',function(){
-        $data=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','gold'=>10200],
-        ];
-        return Api::apiSuccess($data);
-    });
+    Route::any('star','LevelController@rankStar');
+    Route::any('star/friends','LevelController@rankStarFriends');
+    Route::any('gold','LevelController@rankGold');
+    Route::any('gold/friends','LevelController@rankGoldFriends');
 });
 
 //Route::get('/user', function (Request $request) {

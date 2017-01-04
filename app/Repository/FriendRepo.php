@@ -44,6 +44,11 @@ class FriendRepo
         }
     }
     
+    public static function getMineFriendUid($uid)
+    {
+        return self::getList($uid,1,1,true);
+    }
+    
     public static function getMineFriendList($uid)
     {
         return self::getList($uid,1,1);
@@ -59,10 +64,11 @@ class FriendRepo
         return self::getList($uid,0,2);
     }
     
-    private static function getList($uid,$status,$type)
+    private static function getList($uid,$status,$type,$justUid=false)
     {
         $reqs = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid');
         if($reqs->isEmpty())return [];
+        if($justUid)return $reqs;
         foreach ($reqs as $v) {
             $list[]=UserRepo::getUserSimpleInfo($v);
         }

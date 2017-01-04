@@ -12,3 +12,9 @@ if(!function_exists('apiError')){
         return Api::apiError($error_code,$message);
     }
 }
+
+if(!function_exists('requireLogin')){
+    function requireLogin(){
+        return apiError(10,'需要登录');
+    }
+}
