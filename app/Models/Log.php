@@ -1,11 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * App\Log
+ * App\Models\Log
  *
  * @property int $uid
  * @property string $method
@@ -17,16 +18,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $create_time
  * @property string $params
  * @property int $code
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereUid($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereMethod($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereClient($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereDeviceId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereVersion($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereUrl($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereIp($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereCreateTime($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereParams($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Log whereCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereUid($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereMethod($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereClient($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereDeviceId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereVersion($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereIp($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereCreateTime($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereParams($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Log whereCode($value)
  * @mixin \Eloquent
  */
 class Log extends Model

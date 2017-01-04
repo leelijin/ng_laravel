@@ -11,8 +11,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\Func;
-use App\User;
+use App\Models\User;
 use App\Services\Api;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -31,19 +32,6 @@ class UserController extends Controller
     
     public function reg()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
-        
         $valid = Validator::make($this->params,[
             'nickname'=>'required',
             'mobile'=>'required|unique:users',
@@ -56,6 +44,7 @@ class UserController extends Controller
         if($valid->passes()){
             $this->params['token']=str_random(20);
             $this->params['avatar'] = $this->request->has('avatar')?$this->params['avatar']:Func::default_avatar();
+            $this->params['password']=Hash::make($this->params['password']);
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);
@@ -68,41 +57,21 @@ class UserController extends Controller
     
     public function login()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
-        $userInfo = User::where('mobile',$this->request['mobile'])
-            ->where('password',$this->request['password'])->base()->get();
-        if($userInfo){
-            return Api::apiSuccess(['userInfo'=>$userInfo->toArray()]);
+        $userSimpleInfo = User::where('mobile',$this->request['mobile'])->select('id','password')->first();
+        if($userSimpleInfo){
+            if(Hash::check($this->request['password'],$userSimpleInfo->password)){
+                $userInfo = User::base()->find($userSimpleInfo->id);
+                return Api::apiSuccess(['userInfo'=>$userInfo]);
+            }else{
+                return Api::apiError(1,'密码错误');
+            }
         }else{
-            return Api::apiError(1,'用户不存在或密码错误');
+            return Api::apiError(1,'用户不存在');
         }
     }
     
     public function thirdLogin()
     {
-        $data['userInfo']=[
-            'uid'=>'121',
-            'mobile'=>'18782960000',
-            'nickname'=>'皮皮熊',
-            'avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg',
-            'rank'=>'土豪',
-            'gold'=>2000,
-            'star'=>100,
-            'strength'=>100,
-        ];
-        $data['token']='TsnKXtglprH8ybEOehJZLaDikB9d4qS1UWYQjGCo';
-        return Api::apiSuccess($data);
         $valid = Validator::make($this->params,[
             'uuid'=>'required',
             'nickname'=>'required',
@@ -111,13 +80,13 @@ class UserController extends Controller
             'nickname.required'=>'需要填写昵称',
         ]);
         if($valid->passes()){
-            $userInfo = User::where('uuid',$this->request['uuid'])->base()->get();
-            if($userInfo->isEmpty()){
+            $userInfo = User::where('uuid',$this->request['uuid'])->base()->first();
+            if(!$userInfo){
                 $this->params['token']=substr($this->params['uuid'],0,20);
                 $this->params['mobile']=substr($this->params['uuid'],0,11);
-                $this->params['password']=str_random(20);
+                $this->params['password']=Hash::make($this->params['uuid']);
                 $re = User::create($this->params);
-                if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->get();
+                if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->first();
             }
             return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{

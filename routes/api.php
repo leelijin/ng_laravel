@@ -31,30 +31,16 @@ Route::group(['prefix'=>'user'],function(){
 
 Route::any('startad','IndexController@startAd') ;
 
+Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
+    Route::post('mine','FriendController@mine');
+    Route::post('add','FriendController@add')->middleware('need:to_uid');
+    Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
+    Route::post('handle','FriendController@handle')->middleware('need:request','need:id');
+    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:id');
+});
+
 Route::group(['prefix'=>'index'],function(){
-    Route::any('notice',function(){
-        $data['announce'] = [
-            'title'=>'游戏公告',
-            'content'=>'两类关卡均有时间限制，后台可设置
-关卡通过标准：规定时间内100%完成答题
-关卡失败标准：超时未完成或者答题错误
-星级场每通过一个关卡获得一个星级奖励
-金币场每通过一个关卡获得不等金币奖励
-失败则需重新挑战，所有题目随机不重复
-',
-            'link'=>'http://www.baidu.com',
-            'create_time'=>time(),
-        ];
-        $data['friend_requests']=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-        ];
-        $data['friend_strength']=[
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-            ['uid'=>1,'nickname'=>'nickname1','avatar'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg'],
-        ];
-        return Api::apiSuccess($data);
-    });
+    Route::any('notice','IndexController@notice');
 });
 
 Route::group(['prefix'=>'level'],function(){
@@ -86,7 +72,7 @@ Route::group(['prefix'=>'level'],function(){
     });
     Route::any('goldList',function(){
         $data['current_level']=5;
-        $data['star_level_info']=[
+        $data['gold_level_info']=[
             ['id'=>1,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
             ['id'=>2,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
             ['id'=>3,'need_strength'=>40,'question_number'=>100,'time_limit'=>1200,'reward'=>2000,'challenge_times'=>2],
@@ -120,14 +106,8 @@ Route::group(['prefix'=>'level'],function(){
 });
 
 Route::group(['prefix'=>'items'],function(){
-    Route::any('store',function(){
-        $data = [
-            ['id'=>1,'title'=>'时间暂定卡','need_gold'=>10000,'already_have'=>0],
-            ['id'=>1,'title'=>'延时挑战卡','need_gold'=>20000,'already_have'=>2],
-            ['id'=>1,'title'=>'重复挑战卡','need_gold'=>30000,'already_have'=>0],
-        ];
-        return Api::apiSuccess($data);
-    });
+    Route::post('user','ItemController@user');
+    Route::post('store','ItemController@store');
 });
 
 Route::group(['prefix'=>'rank'],function(){

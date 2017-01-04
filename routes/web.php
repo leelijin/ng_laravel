@@ -15,10 +15,6 @@ Route::get('/', function () {
     return redirect('admin');
 });
 
-Route::get('/seed',function(){
-   return Artisan::call('db:seed');
-});
-
 Route::get('timestamp',function(){
     return time();
 });

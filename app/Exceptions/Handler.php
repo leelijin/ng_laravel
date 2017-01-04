@@ -32,6 +32,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        
         parent::report($exception);
     }
 
@@ -44,8 +45,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return response()->json(['error_code'=>404,'message'=>$exception->getMessage(),'data'=>[]]);
-        //return parent::render($request, $exception);
+        //return response()->json(['error_code'=>404,'message'=>$exception->getMessage(),'data'=>[]]);
+        return parent::render($request, $exception);
     }
 
     /**

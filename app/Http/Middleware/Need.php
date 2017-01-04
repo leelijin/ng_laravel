@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\Api;
 use Closure;
 
 class Need
