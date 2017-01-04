@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Friend;
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
+use App\Repository\FriendRepo;
 use App\Services\Api;
 use App\Models\StartAd;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,9 @@ class IndexController extends Controller
     public function notice()
     {
         $announce=Notice::first()?:[];
-        $friend = new Friend();
         if($this->request->has('uid')){
-            $friend_requests=$friend->getMyHandleRequest($this->params['uid']);
-            $friend_strength=Friend::where('to_uid',$this->uid)->type(2)->get();
+            $friend_requests=FriendRepo::getMyFriendRequest($this->uid);
+            $friend_strength=FriendRepo::getMyStrengthRequest($this->uid);
         }else{
             $friend_requests=$friend_strength=[];
         }
