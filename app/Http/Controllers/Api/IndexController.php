@@ -14,14 +14,12 @@ use App\Notice;
 use App\Services\Api;
 use App\StartAd;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $con = DB::table('friend_requests')->where('status',0)->inRandomOrder()->first();
-        dd($con);
-        return array_rand(['accept'=>1,'reject'=>2]);
     }
     
     public function startAd()
@@ -32,7 +30,7 @@ class IndexController extends Controller
     
     public function notice()
     {
-        $announce=Notice::first();
+        $announce=Notice::first()?:[];
         $friend = new Friend();
         if($this->request->has('uid')){
             $friend_requests=$friend->getMyHandleRequest($this->params['uid']);

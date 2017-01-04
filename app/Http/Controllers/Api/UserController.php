@@ -57,12 +57,16 @@ class UserController extends Controller
     
     public function login()
     {
-        $userInfo = User::where('mobile',$this->request['mobile'])
-            ->where('password',Hash::make($this->request['password']))->base()->first();
-        if($userInfo){
-            return Api::apiSuccess(['userInfo'=>$userInfo]);
+        $userSimpleInfo = User::where('mobile',$this->request['mobile'])->select('id','password')->first();
+        if($userSimpleInfo){
+            if(Hash::check($this->request['password'],$userSimpleInfo->password)){
+                $userInfo = User::base()->find($userSimpleInfo->id);
+                return Api::apiSuccess(['userInfo'=>$userInfo]);
+            }else{
+                return Api::apiError(1,'密码错误');
+            }
         }else{
-            return Api::apiError(1,'用户不存在或密码错误');
+            return Api::apiError(1,'用户不存在');
         }
     }
     
