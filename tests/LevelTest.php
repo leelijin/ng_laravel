@@ -10,11 +10,11 @@ class LevelTest extends TestCase
     public function testStarlist()
     {
         $this->base('/api/level/starList',[
-        
+            'uid'=>2,
         ],[
             'current_level',
             'star_level_info'=>[
-                ['id','question_number','status'],
+                ['id','need_strength','question_number','time_limit'],
             ],
         ]);
     }
@@ -22,11 +22,11 @@ class LevelTest extends TestCase
     public function testGoldlist()
     {
         $this->base('/api/level/goldList',[
-        
+            'uid'=>2,
         ],[
             'current_level',
             'gold_level_info'=>[
-                ['id','question_number','reward'],
+                ['id','need_strength','question_number','time_limit','reward','challenge_times'],
             ],
         ]);
     }
@@ -34,7 +34,7 @@ class LevelTest extends TestCase
     public function testStarDetail()
     {
         $this->base('/api/level/starDetail',[
-            'star_id'=>1,
+            'star_id'=>1,'uid'=>2,
         ],[
             ['id','question','content','image1','image2','answer_options','right_answer'],
         ]);
@@ -43,7 +43,7 @@ class LevelTest extends TestCase
     public function testGoldDetail()
     {
         $this->base('/api/level/goldDetail',[
-            'gold_id'=>1,
+            'gold_id'=>1,'uid'=>2,
         ],[
             ['id','question','content','image1','image2','answer_options','right_answer'],
         ]);
@@ -52,7 +52,7 @@ class LevelTest extends TestCase
     public function testLevelSubmit()
     {
         $this->base('/api/level/submit',[
-            'star_id'=>1,
+            'star_id'=>1,'uid'=>2,
             //'gold_id'=>1,
         ],[
         

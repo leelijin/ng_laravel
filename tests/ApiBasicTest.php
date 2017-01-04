@@ -27,8 +27,8 @@ class ApiBasicTest extends TestCase
             
         ],[
             'announce'=>['title'],
-            'friend_requests'=>['uid'],
-            'friend_strength'=>['uid']
+            'friend_requests'=>[],
+            'friend_strength'=>[]
         ]);
     }
     
