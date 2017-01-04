@@ -25,7 +25,7 @@ class LevelTest extends TestCase
         
         ],[
             'current_level',
-            'star_level_info'=>[
+            'gold_level_info'=>[
                 ['id','question_number','reward'],
             ],
         ]);
