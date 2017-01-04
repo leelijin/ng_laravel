@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Func;
 use App\User;
 use App\Services\Api;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -43,6 +44,7 @@ class UserController extends Controller
         if($valid->passes()){
             $this->params['token']=str_random(20);
             $this->params['avatar'] = $this->request->has('avatar')?$this->params['avatar']:Func::default_avatar();
+            $this->params['password']=Hash::make($this->params['password']);
             $re = User::create($this->params);
             if($re){
                 $userInfo = User::base()->find($re['id']);
@@ -56,7 +58,7 @@ class UserController extends Controller
     public function login()
     {
         $userInfo = User::where('mobile',$this->request['mobile'])
-            ->where('password',$this->request['password'])->base()->first();
+            ->where('password',Hash::make($this->request['password']))->base()->first();
         if($userInfo){
             return Api::apiSuccess(['userInfo'=>$userInfo]);
         }else{
@@ -78,7 +80,7 @@ class UserController extends Controller
             if(!$userInfo){
                 $this->params['token']=substr($this->params['uuid'],0,20);
                 $this->params['mobile']=substr($this->params['uuid'],0,11);
-                $this->params['password']=str_random(20);
+                $this->params['password']=Hash::make($this->params['uuid']);
                 $re = User::create($this->params);
                 if($re) $userInfo = User::base()->where('uuid',$this->request['uuid'])->first();
             }
