@@ -26,10 +26,9 @@ class ApiBasicTest extends TestCase
         $this->base('/api/index/notice',[
             
         ],[
-            'announce'=>[
-                'title'
-            ],
-            'friend_requests','friend_strength'
+            'announce'=>['title'],
+            'friend_requests'=>['uid'],
+            'friend_strength'=>['uid']
         ]);
     }
     

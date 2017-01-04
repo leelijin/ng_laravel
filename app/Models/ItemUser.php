@@ -20,8 +20,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ItemUser whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ItemUser whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $amount
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ItemUser whereAmount($value)
  */
 class ItemUser extends Model
 {
-    //
+    public static function getUserItemCount($uid,$item_id)
+    {
+        return self::whereUserId($uid)->whereItemId($item_id)->value('amount')?:0;
+    }
 }

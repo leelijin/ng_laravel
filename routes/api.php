@@ -106,8 +106,9 @@ Route::group(['prefix'=>'level'],function(){
 });
 
 Route::group(['prefix'=>'items'],function(){
-    Route::post('user','ItemController@user');
     Route::post('store','ItemController@store');
+    Route::post('user','ItemController@user')->middleware('need:uid');
+    Route::post('buy','ItemController@buy')->middleware('need:uid');
 });
 
 Route::group(['prefix'=>'rank'],function(){

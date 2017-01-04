@@ -49,6 +49,8 @@ use Illuminate\Support\Facades\Crypt;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User base()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User simple()
  * @mixin \Eloquent
+ * @property bool $status
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStatus($value)
  */
 class User extends Model
 {
