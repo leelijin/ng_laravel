@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereLevelId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereLevelType($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereContent($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereImage1($value)
@@ -36,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Question extends Model
 {
+    protected $hidden=['level_id','created_at','updated_at'];
     protected $casts=[
         'answer_options'=>'array',
     ];
@@ -50,8 +50,8 @@ class Question extends Model
         return $this->belongsToMany(User::class);
     }
     
-    public function scopeBase()
+    public function scopeBase($query)
     {
-        
+        return $query->select();
     }
 }

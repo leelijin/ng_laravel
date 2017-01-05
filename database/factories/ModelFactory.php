@@ -47,12 +47,11 @@ $factory->define(App\Models\Question::class, function (Faker\Generator $faker) {
         'level_id' =>  function () {
              return factory(App\Models\Level::class)->create()->id;
         } ,
-        'level_type' =>  $faker->boolean ,
-        'title' =>  $faker->sentence(5) ,
+        'question' =>  $faker->sentence(5) ,
         'content' =>  $faker->paragraph(2) ,
         'image1' =>  $faker->imageUrl(500,500) ,
         'image2' =>  $faker->imageUrl(500,500) ,
-        'answer_options' =>  json_encode($faker->shuffle(['ans1','ans2','ans3','ans4'])),
+        'answer_options' =>  $faker->shuffleArray(['ans1','ans2','ans3','ans4']),
         'right_answer' =>  $faker->numberBetween(1,3) ,
     ];
 });

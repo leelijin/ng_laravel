@@ -19,7 +19,7 @@ class LevelRepo
         if ($current_level > 10) {
             $page = (int)($current_level / 10) + $page;
         }
-        $level_info = Level::whereLevelType($type)->star()->take($limit)->offset(($page - 1) * $limit)->get();
+        $level_info = Level::$type()->take($limit)->offset(($page - 1) * $limit)->get();
         if($level_info->isEmpty())return [];
         $i = 1 * ($page - 1) * $limit + 1;
         foreach ($level_info as &$v) {

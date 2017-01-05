@@ -10,7 +10,7 @@ class LevelTest extends TestCase
     public function testStarlist()
     {
         $this->base('/api/level/starList',[
-            'uid'=>2,
+            'uid'=>$this->params['uid'],
         ],[
             'current_level',
             'star_level_info'=>[
@@ -22,7 +22,7 @@ class LevelTest extends TestCase
     public function testGoldlist()
     {
         $this->base('/api/level/goldList',[
-            'uid'=>2,
+            'uid'=>$this->params['uid'],
         ],[
             'current_level',
             'gold_level_info'=>[
@@ -34,25 +34,25 @@ class LevelTest extends TestCase
     public function testStarDetail()
     {
         $this->base('/api/level/starDetail',[
-            'star_id'=>1,'uid'=>2,
+            'star_id'=>1,'uid'=>$this->params['uid'],
         ],[
-            ['id','question','content','image1','image2','answer_options','right_answer'],
+            ['id','question','content','image1','image2','answer_options'=>[],'right_answer'],
         ]);
     }
     
     public function testGoldDetail()
     {
         $this->base('/api/level/goldDetail',[
-            'gold_id'=>1,'uid'=>2,
+            'gold_id'=>1,'uid'=>$this->params['uid'],
         ],[
-            ['id','question','content','image1','image2','answer_options','right_answer'],
+            ['id','question','content','image1','image2','answer_options'=>[],'right_answer'],
         ]);
     }
     
     public function testLevelSubmit()
     {
         $this->base('/api/level/submit',[
-            'star_id'=>1,'uid'=>2,
+            'star_id'=>1,'uid'=>$this->params['uid'],
             //'gold_id'=>1,
         ],[
         

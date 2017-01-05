@@ -45,11 +45,11 @@ class Level extends Model
     
     public function scopeStar($query)
     {
-        return $query->select('id','need_strength','question_number','time_limit','status');
+        return $query->select('id','need_strength','question_number','time_limit','status')->whereLevelType(1);
     }
     
     public function scopeGold($query)
     {
-        return $query->select('id','need_strength','question_number','time_limit','reward','status');
+        return $query->select('id','need_strength','question_number','time_limit','reward','status')->whereLevelType(2);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Repository\FriendRepo;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
@@ -32,6 +31,6 @@ class FriendController extends Controller
     
     public function mine()
     {
-        return FriendRepo::getMineFriendList($this->uid);
+        return apiSuccess(FriendRepo::getMineFriendList($this->uid));
     }
 }

@@ -7,11 +7,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ApiBasicTest extends TestCase
 {
     
-    public function testTimestamp()
-    {
-        $this->visit('/timestamp')->see(time());
-    }
-    
     public function testStartAd()
     {
         $this->base('/api/startad',[],[

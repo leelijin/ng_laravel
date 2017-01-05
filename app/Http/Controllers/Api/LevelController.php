@@ -19,16 +19,20 @@ class LevelController extends Controller
         
         $current_level=User::whereId($this->uid)->value('current_star_level');
 
-        $star_level_info = LevelRepo::getLevelList(1,$current_level,$page,$limit);
+        $star_level_info = LevelRepo::getLevelList('star',$current_level,$page,$limit);
         
         return apiSuccess(compact('current_level','star_level_info'));
     }
     
     public function starQuestions()
     {
-        $page = $this->request->has('page')?$this->params['page']:1;
-        $limit = $this->request->has('limit')?$this->params['limit']:10;
-        return Question::whereLevelId($this->params['star_id'])->take($limit)->offset(($page - 1) * $limit)->get();
+        $model = Question::whereLevelId($this->params['star_id']);
+        if($this->request->has('limit')){
+            $page = $this->request->has('page')?$this->params['page']:1;
+            $model = $model->take($this->params['limit'])->offset(($page - 1) * $this->params['limit']);
+        }
+        $list = $model->get();
+        return apiSuccess($list);
     }
     
     public function goldList()
@@ -38,7 +42,11 @@ class LevelController extends Controller
     
         $current_level=User::whereId($this->uid)->value('current_star_level');
     
-        $gold_level_info = LevelRepo::getLevelList(2,$current_level,$page,$limit);
+        $gold_level_info = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
+    
+        foreach ($gold_level_info as &$v) {
+            $v->challenge_times=0;
+        }
     
         return apiSuccess(compact('current_level','gold_level_info'));
     }

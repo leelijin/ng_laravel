@@ -41,7 +41,7 @@ Route::group(['prefix'=>'index'],function(){
 Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('starList','LevelController@starList');
     Route::any('starDetail','LevelController@starQuestions')->middleware('need:star_id');
-    Route::any('goldList','LevelController@starList');
+    Route::any('goldList','LevelController@goldList');
     Route::any('goldDetail',function(){
         $data=[
             ['id'=>1,'question'=>'请在以下选择一个正确答案','content'=>'问题描述','image1'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','image2'=>'http://7xq7jw.com1.z0.glb.clouddn.com/n0S9qzkI.jpeg','answer_options'=>['选项A','选项B','选项C','选项D'],'right_answer'=>0],
