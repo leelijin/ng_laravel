@@ -14,8 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::any('index','IndexController@index');
-
 Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'user'],function(){

@@ -16,10 +16,6 @@ use App\Models\StartAd;
 
 class IndexController extends Controller
 {
-    public function index()
-    {
-        
-    }
     
     public function startAd()
     {
