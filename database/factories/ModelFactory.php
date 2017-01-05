@@ -37,7 +37,8 @@ $factory->define(App\Models\Level::class, function (Faker\Generator $faker) {
         'question_number' =>  100 ,
         'time_limit' =>  $faker->numberBetween(2,5)*10 ,
         'reward' =>  $faker->numberBetween(1,10)*100 ,
-        'level_type' =>  1 ,
+        'level_type' =>  2 ,
+        'status'=>1,
     ];
 });
 
