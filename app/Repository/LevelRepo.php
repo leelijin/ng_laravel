@@ -9,11 +9,24 @@
 namespace App\Repository;
 
 
+use App\Models\Level;
+
 class LevelRepo
 {
-    public function getLevelList($type)
+    public static function getLevelList($type,$current_level = 0,$page = 1,$limit = 10)
     {
-        
+        //根据等级修正关卡
+        if ($current_level > 10) {
+            $page = (int)($current_level / 10) + $page;
+        }
+        $level_info = Level::whereLevelType($type)->star()->take($limit)->offset(($page - 1) * $limit)->get();
+        if($level_info->isEmpty())return [];
+        $i = 1 * ($page - 1) * $limit + 1;
+        foreach ($level_info as &$v) {
+            $v->num = $i;
+            $i++;
+        }
+        return $level_info;
     }
     
 }

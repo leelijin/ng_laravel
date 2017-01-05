@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use App\Scope\UserScope;
-use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Crypt;
 
 /**
  * App\Models\User
