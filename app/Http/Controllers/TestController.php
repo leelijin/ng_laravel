@@ -17,7 +17,7 @@ class TestController
 {
     public function index()
     {
-        return Level::find(1)->levelSettings()->get();
+        
         
     }
 }

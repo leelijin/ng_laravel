@@ -21,7 +21,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        
+        return Hash::make(123456);
     }
     
     public function startAd()
