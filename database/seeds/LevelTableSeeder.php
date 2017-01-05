@@ -1,7 +1,7 @@
 <?php
 
-use App\Level;
-use App\Question;
+use App\Models\Level;
+use App\Models\Question;
 use Illuminate\Database\Seeder;
 
 class LevelTableSeeder extends Seeder
@@ -13,7 +13,7 @@ class LevelTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Level::class,5)->create()->each(function($level){
+        factory(Level::class,100)->create()->each(function($level){
             $level->questions()->save(factory(Question::class)->make());
         });
     }

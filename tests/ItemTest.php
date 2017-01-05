@@ -10,7 +10,7 @@ class ItemTest extends TestCase
     public function testItemsStore()
     {
         $this->base('/api/items/store',[
-        
+            'uid'=>2,
         ],[
             ['id','title','need_gold','already_have']
         ]);

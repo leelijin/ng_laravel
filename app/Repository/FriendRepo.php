@@ -44,15 +44,35 @@ class FriendRepo
         }
     }
     
+    public static function getMineFriendUid($uid)
+    {
+        return self::getList($uid,1,1,true);
+    }
+    
     public static function getMineFriendList($uid)
     {
-        $reqs = Friend::whereToUid($uid)->whereStatus(1)->whereType(1)
-            ->pluck('from_uid');
+        return self::getList($uid,1,1);
+    }
+    
+    public static function getMyFriendRequest($uid)
+    {
+        return self::getList($uid,0,1);
+    }
+    
+    public static function getMyStrengthRequest($uid)
+    {
+        return self::getList($uid,0,2);
+    }
+    
+    private static function getList($uid,$status,$type,$justUid=false)
+    {
+        $reqs = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid');
         if($reqs->isEmpty())return [];
+        if($justUid)return $reqs;
         foreach ($reqs as $v) {
             $list[]=UserRepo::getUserSimpleInfo($v);
         }
         return $list;
     }
-    
+
 }

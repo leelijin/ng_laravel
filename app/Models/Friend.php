@@ -36,8 +36,6 @@ class Friend extends Model
             ->orderBy('id','desc');
     }
     
-    public function getMyHandleRequest($to_uid)
-    {
-        return $this->whereToUid($to_uid)->whereStatus(0)->type(1)->get();
-    }
+    
+    
 }

@@ -49,6 +49,8 @@ use Illuminate\Support\Facades\Crypt;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User base()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User simple()
  * @mixin \Eloquent
+ * @property bool $status
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStatus($value)
  */
 class User extends Model
 {
@@ -75,11 +77,6 @@ class User extends Model
         return $this->belongsToMany(Item::class);
     }
     
-    //public function setPasswordAttribute()
-    //{
-    //
-    //}
-    
     public function setTokenAttribute()
     {
         $this->attributes['token'] = str_random(20);
@@ -94,4 +91,15 @@ class User extends Model
     {
         return $query->select('id as uid','nickname','avatar');
     }
+    
+    public function scopeTopStar($query,$limit=10)
+    {
+        return $query->orderBy('star','desc')->select('id as uid','nickname','avatar','star')->take($limit);
+    }
+    
+    public function scopeTopGold($query,$limit=10)
+    {
+        return $query->orderBy('gold','desc')->select('id as uid','nickname','avatar','gold')->take($limit);
+    }
+
 }

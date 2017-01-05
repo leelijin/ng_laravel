@@ -37,7 +37,7 @@ $factory->define(App\Models\Level::class, function (Faker\Generator $faker) {
         'question_number' =>  100 ,
         'time_limit' =>  $faker->numberBetween(2,5)*10 ,
         'reward' =>  $faker->numberBetween(1,10)*100 ,
-        'level_type' =>  $faker->numberBetween(1,2) ,
+        'level_type' =>  1 ,
     ];
 });
 
@@ -49,8 +49,8 @@ $factory->define(App\Models\Question::class, function (Faker\Generator $faker) {
         'level_type' =>  $faker->boolean ,
         'title' =>  $faker->sentence(5) ,
         'content' =>  $faker->paragraph(2) ,
-        'image1' =>  $faker->imageUrl(100,100) ,
-        'image2' =>  $faker->imageUrl(100,100) ,
+        'image1' =>  $faker->imageUrl(500,500) ,
+        'image2' =>  $faker->imageUrl(500,500) ,
         'answer_options' =>  json_encode($faker->shuffle(['ans1','ans2','ans3','ans4'])),
         'right_answer' =>  $faker->numberBetween(1,3) ,
     ];

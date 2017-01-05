@@ -9,6 +9,8 @@
 namespace App\Services;
 
 
+use App\Models\Level;
+
 class Func
 {
     /**

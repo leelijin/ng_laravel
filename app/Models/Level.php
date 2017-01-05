@@ -35,8 +35,8 @@ class Level extends Model
         return $this->hasMany(Question::class);
     }
     
-    public function levelSettings()
+    public function scopeStar($query)
     {
-        return $this->hasOne(LevelSetting::class,'level_id');
+        
     }
 }
