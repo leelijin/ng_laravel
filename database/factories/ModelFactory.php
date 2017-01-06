@@ -44,9 +44,10 @@ $factory->define(App\Models\Level::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Question::class, function (Faker\Generator $faker) {
     return [
-        'level_id' =>  function () {
-             return factory(App\Models\Level::class)->create()->id;
-        } ,
+        //'level_id' =>  function () {
+        //     return factory(App\Models\Level::class)->create()->id;
+        //} ,
+        'level_id'=>mt_rand(3,200),
         'question' =>  $faker->sentence(5) ,
         'content' =>  $faker->paragraph(2) ,
         'image1' =>  $faker->imageUrl(500,500) ,

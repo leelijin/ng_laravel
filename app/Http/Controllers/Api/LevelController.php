@@ -24,9 +24,20 @@ class LevelController extends Controller
         return apiSuccess(compact('current_level','star_level_info'));
     }
     
-    public function starQuestions()
+    public function starQuestion()
     {
         $model = Question::whereLevelId($this->params['star_id']);
+        if($this->request->has('limit')){
+            $page = $this->request->has('page')?$this->params['page']:1;
+            $model = $model->take($this->params['limit'])->offset(($page - 1) * $this->params['limit']);
+        }
+        $list = $model->get();
+        return apiSuccess($list);
+    }
+    
+    public function goldQuestion()
+    {
+        $model = Question::whereLevelId($this->params['gold_id']);
         if($this->request->has('limit')){
             $page = $this->request->has('page')?$this->params['page']:1;
             $model = $model->take($this->params['limit'])->offset(($page - 1) * $this->params['limit']);
