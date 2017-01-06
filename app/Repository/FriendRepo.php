@@ -29,17 +29,20 @@ class FriendRepo
         return apiError(1,'对方不存在');
     }
     
-    public static function handleRequest($id,$uid,$request,$type,$type_message)
+    public static function handleRequest($from_uid,$uid,$request,$type,$type_message)
     {
         //检查是否有此请求
-        $requestInfo = Friend::where([['id',$id],['to_uid',$uid],['type',$type],['status',0]])->first();
+        $requestInfo = Friend::where([['from_uid',$from_uid],['to_uid',$uid],['type',$type],['status',0]])->first();
         if(!$requestInfo)return apiError(1,'请求不存在');
     
         if($request == 'accept'){
-            Friend::whereId($id)->update(['status'=>1]);
+            Friend::whereId($requestInfo->id)->update(['status'=>1]);
+            //为用户增加体力
+            $strength = 5;
+            
             return apiSuccess('您已成功'.$type_message);
         }elseif($request == 'reject'){
-            Friend::whereId($id)->update(['status'=>-1]);
+            Friend::whereId($requestInfo->id)->update(['status'=>-1]);
             return apiSuccess('您已拒绝'.$type_message);
         }
     }

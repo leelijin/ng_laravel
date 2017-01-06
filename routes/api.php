@@ -30,8 +30,8 @@ Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
     Route::post('mine','FriendController@mine');
     Route::post('add','FriendController@add')->middleware('need:to_uid');
     Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
-    Route::post('handle','FriendController@handle')->middleware('need:request','need:id');
-    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:id');
+    Route::post('handle','FriendController@handle')->middleware('need:request','need:from_uid');
+    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:from_uid');
 });
 
 Route::group(['prefix'=>'index'],function(){

@@ -16,7 +16,7 @@ class FriendController extends Controller
     
     public function handle()
     {
-        return FriendRepo::handleRequest($this->params['id'],$this->uid,$this->params['request'],1,'添加好友');
+        return FriendRepo::handleRequest($this->params['from_uid'],$this->uid,$this->params['request'],1,'添加好友');
     }
     
     public function strengthRequest()
@@ -26,7 +26,7 @@ class FriendController extends Controller
     
     public function strengthHandle()
     {
-        return FriendRepo::handleRequest($this->params['id'],$this->uid,$this->params['request'],2,'赠送体力');
+        return FriendRepo::handleRequest($this->params['from_uid'],$this->uid,$this->params['request'],2,'赠送体力');
     }
     
     public function mine()
