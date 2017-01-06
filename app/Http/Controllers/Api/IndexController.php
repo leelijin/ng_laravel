@@ -20,7 +20,7 @@ class IndexController extends Controller
     public function startAd()
     {
         $info = StartAd::first();
-        return Api::apiSuccess($info);
+        return apiSuccess($info);
     }
     
     public function notice()
@@ -34,7 +34,7 @@ class IndexController extends Controller
             $friend_requests=$friend_strength=[];
         }
         
-        return Api::apiSuccess(compact('announce','friend_requests','friend_strength'));
+        return apiSuccess(compact('announce','friend_requests','friend_strength'));
     }
     
 }
