@@ -12,7 +12,7 @@ class ItemTest extends TestCase
         $this->base('/api/items/store',[
             'uid'=>$this->params['uid'],
         ],[
-            ['id','title','need_gold','already_have']
+            ['id','title','desc','need_gold','already_have']
         ]);
     }
 }
