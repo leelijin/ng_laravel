@@ -43,12 +43,22 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('starDetail','LevelController@starQuestion')->middleware('need:star_id');
     Route::any('goldList','LevelController@goldList');
     Route::any('goldDetail','LevelController@goldQuestion');
-    Route::any('wrong',function(){
-        
+    
+    Route::group(['prefix'=>'submit'],function(){
+        Route::any('wrong',function(){
+            return Api::apiSuccess('成功提交错题');
+        })->middleware('need:id');
+    
+        Route::any('star',function(){
+            return Api::apiSuccess('星级场关卡已提交');
+        })->middleware('need:star_id');
+    
+        Route::any('gold',function(){
+            return Api::apiSuccess('金币场关卡已提交');
+        })->middleware('need:gold_id');
     });
-    Route::any('submit',function(){
-        return Api::apiSuccess('恭喜过关');
-    });
+    
+    
     
 });
 
