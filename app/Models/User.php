@@ -53,8 +53,8 @@ class User extends Model
 {
     use SoftDeletes;
     
-    protected $guarded=[];
     protected $hidden=['password','deleted_at'];
+    protected $fillable=['nickname','mobile','password','avatar','token','uuid','status'];
     
     public static function boot()
     {
