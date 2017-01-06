@@ -16,12 +16,16 @@ class Controller extends BaseController
     protected $request;
     protected $params;
     protected $uid;
+    protected $page;
+    protected $limit;
     
     public function __construct(Request $request)
     {
         $this->request=$request;
         $this->params=$request->all();
         $this->uid=(int)($this->request->has('uid')?$this->params['uid']:0);
+        $this->page = (int)($this->request->has('page')?$this->params['page']:1);
+        $this->limit = (int)($this->request->has('limit')?$this->params['limit']:10);
     }
     
 }

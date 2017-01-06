@@ -45,10 +45,7 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('goldDetail','LevelController@goldQuestion');
     
     Route::group(['prefix'=>'submit'],function(){
-        Route::any('wrong',function(){
-            return Api::apiSuccess('成功提交错题');
-        })->middleware('need:id');
-    
+        
         Route::any('star',function(){
             return Api::apiSuccess('星级场关卡已提交');
         })->middleware('need:star_id');
