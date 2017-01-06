@@ -69,9 +69,12 @@ class FriendRepo
     
     private static function getList($uid,$status,$type,$justUid=false)
     {
-        $reqs = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid');
+        $reqs1 = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid');
+        $reqs2 = Friend::whereFromUid($uid)->whereStatus($status)->type($type)->pluck('to_uid');
+        $reqs = $reqs1->merge($reqs2);
         if($reqs->isEmpty())return [];
         if($justUid)return $reqs;
+        
         foreach ($reqs as $v) {
             $list[]=UserRepo::getUserSimpleInfo($v);
         }
