@@ -51,7 +51,7 @@ class LevelTest extends TestCase
     
     public function testLevelSubmit()
     {
-        $this->base('/api/level/submit',[
+        $this->base('/api/level/submit/star',[
             'star_id'=>1,'uid'=>$this->params['uid'],
             //'gold_id'=>1,
         ],[

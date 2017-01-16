@@ -28,10 +28,9 @@ class FriendTest extends TestCase
     
     public function testFriendHandle()
     {
-        $random = DB::table('friend_requests')->where('status',0)->whereType(1)->inRandomOrder()->first();
         $handle = array_rand(['accept'=>1,'reject'=>2]);
         $this->base('/api/friends/handle',[
-            'id'=>$random->id,'uid'=>$random->to_uid,'request'=>$handle
+            'from_uid'=>2,'uid'=>$this->params['uid'],'request'=>$handle
         ],[
         
         ]);
@@ -48,10 +47,9 @@ class FriendTest extends TestCase
     
     public function testFriendStrengthHandle()
     {
-        $random = DB::table('friend_requests')->where('status',0)->whereType(2)->inRandomOrder()->first();
         $handle = array_rand(['accept'=>1,'reject'=>2]);
         $this->base('/api/friends/strengthHandle',[
-            'id'=>$random->id,'uid'=>$random->to_uid,'request'=>$handle
+            'from_uid'=>2,'uid'=>$this->params['uid'],'request'=>$handle
         ],[
         
         ]);
