@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Item whereNeedGold($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Item whereSetting($value)
  * @mixin \Eloquent
+ * @property string $desc
+ * @property string $cover
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Item whereDesc($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Item whereCover($value)
  */
 class Item extends Model
 {

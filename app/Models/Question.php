@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $question 标题
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question whereQuestion($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Question base()
  */
 class Question extends Model
 {

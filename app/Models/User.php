@@ -48,6 +48,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @mixin \Eloquent
  * @property bool $status
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User topStar($limit = 10)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\User topGold($limit = 10)
  */
 class User extends Model
 {

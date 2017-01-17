@@ -27,6 +27,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Level whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Level whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property bool $status 关卡状态 0为未开通，1为已开通
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Level whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Level star()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Level gold()
  */
 class Level extends Model
 {
