@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
@@ -87,53 +86,12 @@ class LevelController extends Controller
     
     public function starSubmit()
     {
-        //检查是否存在
-        $info = Level::find($this->params['star_id']);
-        if(!$info)return apiError(1,'此关卡不存在,请检查');
-        
-        if($this->request->has('wrong_ids')){
-            //录入到错题库
-            $wrong_ids = explode(',',$this->params['wrong_ids']);
-            if(is_array($wrong_ids)){
-                foreach ($wrong_ids as $v) {
-                    $params = ['uid'=>$this->uid,'question_id'=>$v,'type'=>1];
-                    if(Question::find($v) && !QuestionWrong::where($params)->first()){
-                        QuestionWrong::create($params);
-                    }
-                }
-                return apiSuccess('成功增加错题');
-            }
-        }else{
-            //关卡通关
-            $re = User::whereId($this->uid)->increment('star');
-            return $re?apiSuccess('恭喜通关'):apiError(1,'通关出错，请重试');
-        }
-        
+        return LevelRepo::submitLevel($this->params['star_id'],1,$this->uid,$this->request->has('wrong_ids')?$this->params['wrong_ids']:[]);
     }
     
     public function goldSubmit()
     {
-        //检查是否存在
-        $info = Level::find($this->params['gold_id']);
-        if(!$info)return apiError(1,'此关卡不存在,请检查');
-    
-        if($this->request->has('wrong_ids')){
-            //录入到错题库
-            $wrong_ids = explode(',',$this->params['wrong_ids']);
-            if(is_array($wrong_ids)){
-                foreach ($wrong_ids as $v) {
-                    $params = ['uid'=>$this->uid,'question_id'=>$v,'type'=>2];
-                    if(Question::find($v) && !QuestionWrong::where($params)->first()){
-                        QuestionWrong::create($params);
-                    }
-                }
-                return apiSuccess('成功增加错题');
-            }
-        }else{
-            //关卡通关
-            $re = User::whereId($this->uid)->increment('gold');
-            return $re?apiSuccess('恭喜通关'):apiError(1,'通关出错，请重试');
-        }
+        return LevelRepo::submitLevel($this->params['gold_id'],2,$this->uid,$this->request->has('wrong_ids')?$this->params['wrong_ids']:[]);
     }
     
     public function mineWrong()
