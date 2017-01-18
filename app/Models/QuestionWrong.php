@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionWrong extends Model
 {
-    //
     protected $guarded=[];
     protected $hidden=['uid','created_at','updated_at'];
     protected $appends=['question'];
