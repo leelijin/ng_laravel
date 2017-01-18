@@ -13,7 +13,7 @@ class FriendTest extends TestCase
         $this->base('/api/friends/mine',[
             'uid'=>$this->params['uid']
         ],[
-            ['uid','nickname','avatar']
+            'data'=>[['uid','nickname','avatar']]
         ]);
     }
     
