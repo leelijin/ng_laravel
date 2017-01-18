@@ -27,5 +27,10 @@ class ItemController extends Controller
         return apiError(1,'暂未开通');
     }
     
+    public function custom()
+    {
+        
+    }
+    
     
 }
