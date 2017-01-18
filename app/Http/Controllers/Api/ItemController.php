@@ -30,7 +30,6 @@ class ItemController extends Controller
     public function consume()
     {
         //查询用户是否还持有此道具
-        
         $amount = ItemUser::whereItemId($this->params['item_id'])->whereUserId($this->uid)->value('amount');
         if($amount >0){
             ItemUser::whereItemId($this->params['item_id'])->whereUserId($this->uid)->decrement('amount');
