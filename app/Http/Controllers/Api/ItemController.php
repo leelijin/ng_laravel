@@ -27,8 +27,17 @@ class ItemController extends Controller
         return apiError(1,'暂未开通');
     }
     
-    public function custom()
+    public function consume()
     {
+        //查询用户是否还持有此道具
+        
+        $amount = ItemUser::whereItemId($this->params['item_id'])->whereUserId($this->uid)->value('amount');
+        if($amount >0){
+            ItemUser::whereItemId($this->params['item_id'])->whereUserId($this->uid)->decrement('amount');
+            return apiSuccess('成功扣减道具');
+        }else{
+            return apiError(1,'您已无此道具可用');
+        }
         
     }
     

@@ -57,6 +57,7 @@ Route::group(['prefix'=>'items','middleware'=>'need:uid'],function(){
     Route::post('store','ItemController@store');
     Route::post('user','ItemController@user')->middleware('need:uid');
     Route::post('buy','ItemController@buy')->middleware('need:uid');
+    Route::post('consume','ItemController@consume')->middleware('need:item_id');
 });
 
 Route::group(['prefix'=>'rank'],function(){
