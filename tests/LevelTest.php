@@ -58,4 +58,15 @@ class LevelTest extends TestCase
         
         ]);
     }
+    
+    public function testMineWrong()
+    {
+        $this->base('/api/level/mineWrong',[
+            'uid'=>$this->params['uid'],
+        ],[
+            'data'=>[
+                ['id','question_id','type','question'],
+            ],
+        ]);
+    }
 }
