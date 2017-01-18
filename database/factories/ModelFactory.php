@@ -108,3 +108,59 @@ $factory->define(App\Models\StartAd::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Models\Item::class, function (Faker\Generator $faker) {
+    return [
+        'title' =>  $faker->word ,
+        'desc' =>  $faker->word ,
+        'cover' =>  $faker->word ,
+        'need_gold' =>  $faker->randomNumber() ,
+        'setting' =>  $faker->word ,
+    ];
+});
+
+$factory->define(App\Models\ItemUser::class, function (Faker\Generator $faker) {
+    return [
+        'item_id' =>  $faker->randomNumber() ,
+        'user_id' =>  $faker->randomNumber() ,
+        'status' =>  $faker->boolean ,
+        'amount' =>  $faker->randomNumber() ,
+    ];
+});
+
+$factory->define(App\Models\LevelSetting::class, function (Faker\Generator $faker) {
+    return [
+        'level_id' =>  $faker->randomNumber() ,
+        'setting' =>  $faker->word ,
+    ];
+});
+
+$factory->define(App\Models\StatDaily::class, function (Faker\Generator $faker) {
+    return [
+        'create_time'=>function(){
+            $max_time = DB::table('stat_daily')->orderBy('create_time')->value('create_time');
+            return $max_time?date('Ymd',strtotime($max_time) - 86400):date('Ymd');
+        },
+        'register_user'=>$faker->numberBetween(5,300),
+        'reg_ios_user'=>$faker->numberBetween(5,300),
+        'reg_android_user'=>$faker->numberBetween(5,300),
+        'dau'=>$faker->numberBetween(5,300),
+        'dau_ios'=>$faker->numberBetween(5,300),
+        'dau_android'=>$faker->numberBetween(5,300),
+        'inviter_user'=>$faker->numberBetween(5,300),
+        'order_payed'=>$faker->numberBetween(5,100),
+        'order_amount'=>$faker->numberBetween(5,300),
+        'article_view'=>$faker->numberBetween(100,30000),
+        'article_view_app'=>$faker->numberBetween(100,30000),
+        'article_view_wap'=>$faker->numberBetween(100,30000),
+        'article_share'=>$faker->numberBetween(5,300),
+        'store_pv'=>$faker->numberBetween(5,300),
+        'store_uv'=>$faker->numberBetween(5,300),
+        'qiandao_pv'=>$faker->numberBetween(5,300),
+        'qiandao_uv'=>$faker->numberBetween(5,300),
+        'comment_for_topic'=>$faker->numberBetween(5,300),
+        'collect'=>$faker->numberBetween(5,300),
+        'zan'=>$faker->numberBetween(5,300),
+        'search'=>$faker->numberBetween(5,300),
+    ];
+});
+

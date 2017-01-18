@@ -33,12 +33,12 @@ class ApiBasicTest extends TestCase
         $this->base('/api/rank/star',[
             
         ],[
-            ['uid','nickname','avatar','star']
+            'data'=>[['uid','nickname','avatar','star']]
         ]);
         $this->base('/api/rank/star',[
             'friends'=>1,
         ],[
-            ['uid','nickname','avatar','star']
+            'data'=>[['uid','nickname','avatar','star']]
         ]);
     }
     
@@ -47,12 +47,12 @@ class ApiBasicTest extends TestCase
         $this->base('/api/rank/gold',[
         
         ],[
-            ['uid','nickname','avatar','gold']
+            'data'=>[['uid','nickname','avatar','gold']]
         ]);
         $this->base('/api/rank/gold',[
             'friends'=>1,
         ],[
-            ['uid','nickname','avatar','gold']
+            'data'=>[['uid','nickname','avatar','gold']]
         ]);
     }
     

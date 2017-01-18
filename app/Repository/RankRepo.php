@@ -13,13 +13,13 @@ use App\Models\User;
 
 class RankRepo
 {
-    public static function getRank($classify,$friendship=false,$uid=0)
+    public static function getRank($classify,$limit,$friendship=false,$uid=0)
     {
         $query = User::$classify();
         if($friendship&&$uid){
             $friends = FriendRepo::getMineFriendUid($uid);
             $query = $query->whereIn('id',$friends);
         }
-        return $query->get();
+        return $query->paginate($limit);
     }
 }

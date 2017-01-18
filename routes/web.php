@@ -11,8 +11,17 @@
 |
 */
 
+use Illuminate\Support\Facades\Artisan;
+
 Route::get('/', function () {
     return redirect('admin');
+});
+
+Route::get('/seed',function(){
+    $time = 200;
+    for($i=0;$i<$time;$i++) {
+        Artisan::call('db:seed');
+    }
 });
 
 Route::get('/test', 'TestController@index');

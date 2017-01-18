@@ -10,7 +10,7 @@ class ItemController extends Controller
 {
     public function store()
     {
-        $items = Item::all();
+        $items = Item::paginate($this->limit);
         foreach ($items as &$item) {
             $item->already_have=$this->uid>0?ItemUser::getUserItemCount($this->uid,$item->id):0;
         }

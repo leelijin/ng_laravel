@@ -64,25 +64,25 @@ class LevelController extends Controller
     
     public function rankStar()
     {
-        $list = RankRepo::getRank('TopStar');
+        $list = RankRepo::getRank('TopStar',$this->limit);
         return apiSuccess($list);
     }
     
     public function rankStarFriends()
     {
-        $list = RankRepo::getRank('TopStar',true,$this->uid);
+        $list = RankRepo::getRank('TopStar',$this->limit,true,$this->uid);
         return apiSuccess($list);
     }
     
     public function rankGold()
     {
-        $list = RankRepo::getRank('TopGold');
+        $list = RankRepo::getRank('TopGold',$this->limit);
         return apiSuccess($list);
     }
     
     public function rankGoldFriends()
     {
-        $list = RankRepo::getRank('TopGold',true,$this->uid);
+        $list = RankRepo::getRank('TopGold',$this->limit,true,$this->uid);
         return apiSuccess($list);
     }
 
