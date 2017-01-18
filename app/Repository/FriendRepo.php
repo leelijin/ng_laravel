@@ -52,9 +52,23 @@ class FriendRepo
         return self::getList($uid,1,1,true);
     }
     
-    public static function getMineFriendList($uid)
+    public static function getMineFriendList($uid,$page,$limit)
     {
-        return self::getList($uid,1,1);
+        //单独做分页也是够拼的
+        $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
+        $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
+        $final_arr = $reqs1->merge($reqs2)->toArray();
+        $reqs = array_slice($final_arr,($page-1)*$limit,$limit);
+        $list=[
+            'total'=>count($final_arr),
+            'current_page'=>$page,
+            'last_page'=>(int)(count($final_arr)/$limit + 1),
+        ];
+        
+        foreach ($reqs as $v) {
+            $list['data'][]=UserRepo::getUserSimpleInfo($v);
+        }
+        return $list;
     }
     
     public static function getMyFriendRequest($uid)

@@ -31,6 +31,6 @@ class FriendController extends Controller
     
     public function mine()
     {
-        return apiSuccess(FriendRepo::getMineFriendList($this->uid));
+        return apiSuccess(FriendRepo::getMineFriendList($this->uid,$this->page,$this->limit));
     }
 }
