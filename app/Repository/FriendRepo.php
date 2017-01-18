@@ -63,9 +63,8 @@ class FriendRepo
         $list=[
             'total'=>count($final_arr),
             'current_page'=>$page,
-            'last_page'=>(int)(count($final_arr)/$limit + 1),
+            'last_page'=>count($final_arr)<=$limit?1:(int)(count($final_arr)/$limit + 1),
         ];
-        
         foreach ($reqs as $v) {
             $list['data'][]=UserRepo::getUserSimpleInfo($v);
         }
