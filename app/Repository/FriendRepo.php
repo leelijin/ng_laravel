@@ -59,11 +59,11 @@ class FriendRepo
         $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
         $final_arr = $reqs1->merge($reqs2)->toArray();
         $reqs = array_slice($final_arr,($page-1)*$limit,$limit);
-        if(!$reqs)return [];
         $list=[
             'total'=>count($final_arr),
             'current_page'=>$page,
             'last_page'=>count($final_arr)<=$limit?1:(int)(count($final_arr)/$limit + 1),
+            'data'=>[],
         ];
         foreach ($reqs as $v) {
             $list['data'][]=UserRepo::getUserSimpleInfo($v);
