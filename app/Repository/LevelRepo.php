@@ -29,4 +29,9 @@ class LevelRepo
         return $level_info;
     }
     
+    public static function submitLevel($id,$type)
+    {
+        
+    }
+    
 }
