@@ -1,28 +1,11 @@
 <?php
 
-use App\Services\Api;
-use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'user'],function(){
     Route::post('reg','UserController@reg') ;
-    
     Route::post('login','UserController@login') ;
-    
     Route::post('thirdLogin','UserController@thirdLogin') ;
-    
     Route::post('uploadAvatar','UserController@uploadAvatar');
 });
 
@@ -47,7 +30,6 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     
     Route::group(['prefix'=>'submit'],function(){
         Route::any('star','LevelController@starSubmit')->middleware('need:star_id');
-    
         Route::any('gold','LevelController@goldSubmit')->middleware('need:gold_id');
     });
     
