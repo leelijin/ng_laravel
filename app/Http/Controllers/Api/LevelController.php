@@ -29,8 +29,7 @@ class LevelController extends Controller
     {
         $model = Question::whereLevelId($this->params['star_id']);
         if($this->request->has('limit')){
-            $page = $this->request->has('page')?$this->params['page']:1;
-            $model = $model->take($this->params['limit'])->offset(($page - 1) * $this->params['limit']);
+            $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $list = $model->get();
         return apiSuccess($list);
@@ -40,8 +39,7 @@ class LevelController extends Controller
     {
         $model = Question::whereLevelId($this->params['gold_id']);
         if($this->request->has('limit')){
-            $page = $this->request->has('page')?$this->params['page']:1;
-            $model = $model->take($this->params['limit'])->offset(($page - 1) * $this->params['limit']);
+            $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $list = $model->get();
         return apiSuccess($list);
