@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'user'],function(){
@@ -7,6 +9,9 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('login','UserController@login') ;
     Route::post('thirdLogin','UserController@thirdLogin') ;
     Route::post('uploadAvatar','UserController@uploadAvatar');
+    Route::post('addStrength',function(\Illuminate\Http\Request $request){
+        User::whereId($request->input('uid'))->increment('strength',$request->input('strength',100));
+    });
 });
 
 Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
