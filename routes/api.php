@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Question;
 use App\Repository\UserRepo;
+use Illuminate\Http\Request;
 
 Route::any('startad','IndexController@startAd') ;
 
@@ -38,6 +40,10 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
         Route::any('gold','LevelController@goldSubmit')->middleware('need:gold_id');
     });
     
+    Route::any('questionDetail',function(Request $request){
+        $info = Question::find($request->input('id'));
+        return $info?apiSuccess($info):apiError(1,'不存在的题目');
+    })->middleware('need:id');
 });
 
 Route::group(['prefix'=>'items','middleware'=>'need:uid'],function(){
