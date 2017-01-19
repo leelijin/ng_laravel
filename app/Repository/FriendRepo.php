@@ -29,20 +29,25 @@ class FriendRepo
         return apiError(1,'对方不存在');
     }
     
-    public static function handleRequest($from_uid,$uid,$request,$type,$type_message)
+    public static function handleRequest($id,$uid,$request,$type,$type_message)
     {
         //检查是否有此请求
-        $requestInfo = Friend::where([['from_uid',$from_uid],['to_uid',$uid],['type',$type],['status',0]])->first();
+        $requestInfo = Friend::where([['id',$id],['type',$type],['status',0]])
+            ->where(function($query) use ($uid){
+                $query->where('to_uid',$uid)->orWhere('from_uid',$uid);
+            })
+            ->first();
         if(!$requestInfo)return apiError(1,'请求不存在');
     
+        
         if($request == 'accept'){
-            Friend::whereId($requestInfo->id)->update(['status'=>1]);
+            Friend::whereId($id)->update(['status'=>1]);
             //为用户增加体力
             $strength = 5;
-            
+            UserRepo::increUserStrength($uid,$strength);
             return apiSuccess('您已成功'.$type_message);
         }elseif($request == 'reject'){
-            Friend::whereId($requestInfo->id)->update(['status'=>-1]);
+            Friend::whereId($id)->update(['status'=>-1]);
             return apiSuccess('您已拒绝'.$type_message);
         }
     }
@@ -83,14 +88,14 @@ class FriendRepo
     
     private static function getList($uid,$status,$type,$justUid=false)
     {
-        $reqs1 = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid');
-        $reqs2 = Friend::whereFromUid($uid)->whereStatus($status)->type($type)->pluck('to_uid');
-        $reqs = $reqs1->merge($reqs2);
+        $reqs = Friend::whereToUid($uid)->whereStatus($status)->type($type)->pluck('from_uid','id');
         if($reqs->isEmpty())return [];
         if($justUid)return $reqs;
-        
-        foreach ($reqs as $v) {
-            $list[]=UserRepo::getUserSimpleInfo($v);
+        $i=0;
+        foreach ($reqs as $id=>$user_id) {
+            $list[$i] = UserRepo::getUserSimpleInfo($user_id);
+            $list[$i]['id']=$id;
+            $i++;
         }
         return $list;
     }

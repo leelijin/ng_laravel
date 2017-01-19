@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Repository\UserRepo;
 
 Route::any('startad','IndexController@startAd') ;
 
@@ -10,7 +10,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('thirdLogin','UserController@thirdLogin') ;
     Route::post('uploadAvatar','UserController@uploadAvatar');
     Route::post('addStrength',function(\Illuminate\Http\Request $request){
-        User::whereId($request->input('uid'))->increment('strength',$request->input('strength',100));
+        UserRepo::increUserStrength($request->input('uid'),$request->input('strength',100));
     });
 });
 
@@ -18,8 +18,8 @@ Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
     Route::post('mine','FriendController@mine');
     Route::post('add','FriendController@add')->middleware('need:to_uid');
     Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
-    Route::post('handle','FriendController@handle')->middleware('need:request','need:from_uid');
-    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:from_uid');
+    Route::post('handle','FriendController@handle')->middleware('need:request','need:id');
+    Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:id');
 });
 
 Route::group(['prefix'=>'index'],function(){
