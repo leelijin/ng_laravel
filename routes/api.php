@@ -11,6 +11,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('login','UserController@login') ;
     Route::post('thirdLogin','UserController@thirdLogin') ;
     Route::post('uploadAvatar','UserController@uploadAvatar');
+    //TODO::deleteme when developed
     Route::post('addStrength',function(\Illuminate\Http\Request $request){
         UserRepo::increUserStrength($request->input('uid'),$request->input('strength',100));
     });
