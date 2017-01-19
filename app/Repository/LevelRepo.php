@@ -57,4 +57,15 @@ class LevelRepo
         }
     }
     
+    public static function checkLevelUser($uid,$id)
+    {
+        //检查用户体力余额是否足够
+        $levelStrength = Level::whereId($id)->value('need_strength');
+        $userStrength = User::whereId($uid)->value('strength');
+        if($userStrength<$levelStrength)return apiError(1,'用户体力不足');
+        //扣减体力
+        $dec = User::whereId($uid)->decrement('strength',$levelStrength);
+        if(!$dec)return apiError(1,'扣减体力错误');
+    }
+    
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
@@ -26,6 +27,8 @@ class LevelController extends Controller
     
     public function starQuestion()
     {
+        $check = LevelRepo::checkLevelUser($this->uid,$this->params['star_id']);
+        if($check)return $check;
         $model = Question::whereLevelId($this->params['star_id']);
         if($this->request->has('limit')){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
@@ -36,6 +39,8 @@ class LevelController extends Controller
     
     public function goldQuestion()
     {
+        $check = LevelRepo::checkLevelUser($this->uid,$this->params['gold_id']);
+        if($check)return $check;
         $model = Question::whereLevelId($this->params['gold_id']);
         if($this->request->has('limit')){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
