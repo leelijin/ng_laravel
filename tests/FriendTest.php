@@ -30,7 +30,7 @@ class FriendTest extends TestCase
     {
         $handle = array_rand(['accept'=>1,'reject'=>2]);
         $this->base('/api/friends/handle',[
-            'from_uid'=>2,'uid'=>$this->params['uid'],'request'=>$handle
+            'id'=>1,'uid'=>$this->params['uid'],'request'=>$handle
         ],[
         
         ]);
@@ -49,7 +49,7 @@ class FriendTest extends TestCase
     {
         $handle = array_rand(['accept'=>1,'reject'=>2]);
         $this->base('/api/friends/strengthHandle',[
-            'from_uid'=>2,'uid'=>$this->params['uid'],'request'=>$handle
+            'id'=>2,'uid'=>$this->params['uid'],'request'=>$handle
         ],[
         
         ]);
