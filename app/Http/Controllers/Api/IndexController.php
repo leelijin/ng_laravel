@@ -25,8 +25,7 @@ class IndexController extends Controller
     
     public function notice()
     {
-        $announce=Notice::first()?:[];
-        $announce['cover']=config('app.url').'/public/img/notice_header.png';
+        $announce=Notice::take(2)->get()?:[];
         if($this->request->has('uid')){
             $friend_requests=FriendRepo::getMyFriendRequest($this->uid);
             $friend_strength=FriendRepo::getMyStrengthRequest($this->uid);

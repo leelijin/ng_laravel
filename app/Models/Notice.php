@@ -26,11 +26,16 @@ class Notice extends Model
 {
     protected $table='notice';
     protected $hidden=['updated_at'];
-    protected $appends=['create_time'];
+    protected $appends=['create_time','cover'];
     
     public function getCreateTimeAttribute()
     {
         return $this->attributes['create_time']=strtotime($this->attributes['created_at']);
         
+    }
+    
+    public function getCoverAttribute()
+    {
+        return $this->attributes['cover']=config('app.url').'/public/img/notice_header.png';
     }
 }
