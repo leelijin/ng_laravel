@@ -63,19 +63,12 @@ class LevelRepo
         //检查跳级开通
         //检查用户体力余额是否足够,如果已通关则不减
         $levelNum = self::getLevelNum($id,$type);
-        if($type == 1){
-            if($userInfo->current_star_level>=$levelNum){
-                return false;
-            }elseif($userInfo->current_star_level + 1<$levelNum){
-                return apiError(1,'必须先完成之前的关卡');
-            }
-        }elseif($type == 2){
-            if($userInfo->current_gold_level>=$levelNum){
-                return false;
-            }elseif($userInfo->current_star_level + 1<$levelNum){
-                return apiError(1,'必须先完成之前的关卡');
-            }
+        if($userInfo->current_star_level>=$levelNum){
+            return false;
+        }elseif($userInfo->current_star_level + 1<$levelNum){
+            return apiError(1,'必须先完成之前的关卡');
         }
+        
         $levelStrength = Level::whereId($id)->value('need_strength');
         if($userInfo->strength<$levelStrength)return apiError(1,'用户体力不足');
         //扣减体力
