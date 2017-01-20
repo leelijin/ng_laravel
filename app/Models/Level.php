@@ -56,4 +56,9 @@ class Level extends Model
     {
         return $query->select('id','need_strength','question_number','time_limit','reward','status')->whereLevelType(2);
     }
+    
+    public function getQuestionNumberAttribute()
+    {
+        return $this->attributes['question_number']=Question::whereLevelId($this->attributes['id'])->count();
+    }
 }

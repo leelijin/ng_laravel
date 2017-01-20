@@ -79,7 +79,7 @@ class LevelRepo
     public static function getLevelNum($level_id,$type)
     {
         //查询等级排位： 之前有多少条数据 + 1  = 当前数据排位
-        $levelCount = Level::where('id','<=',$level_id)->whereLevelType($type)->count();
+        $levelCount = Level::where('id','<=',$level_id)->whereLevelType($type)->whereStatus(1)->count();
         return $levelCount;
     }
     
