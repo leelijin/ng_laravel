@@ -59,11 +59,14 @@ class LevelRepo
     
     public static function checkLevelUser($uid,$id,$type)
     {
-        //检查用户体力余额是否足够,如果已通关则不减
         $userInfo = User::whereId($uid)->select(['strength','current_star_level','current_gold_level'])->first();
-        if($type == 1 && $userInfo->current_star_level>=self::getLevelNum($id))return false;
-        if($type == 2 && $userInfo->current_gold_level>=self::getLevelNum($id))return false;
-        
+        //检查跳级开通
+        //检查用户体力余额是否足够,如果已通关则不减
+        if($type == 1){
+            if($userInfo->current_star_level>=self::getLevelNum($id))return false;
+        }elseif($type == 2){
+            if($userInfo->current_gold_level>=self::getLevelNum($id))return false;
+        }
         $levelStrength = Level::whereId($id)->value('need_strength');
         if($userInfo->strength<$levelStrength)return apiError(1,'用户体力不足');
         //扣减体力
