@@ -62,10 +62,19 @@ class LevelRepo
         $userInfo = User::whereId($uid)->select(['strength','current_star_level','current_gold_level'])->first();
         //检查跳级开通
         //检查用户体力余额是否足够,如果已通关则不减
+        $levelNum = self::getLevelNum($id,$type);
         if($type == 1){
-            if($userInfo->current_star_level>=self::getLevelNum($id))return false;
+            if($userInfo->current_star_level>=$levelNum){
+                return false;
+            }elseif($userInfo->current_star_level + 1<$levelNum){
+                return apiError(1,'必须先完成之前的关卡');
+            }
         }elseif($type == 2){
-            if($userInfo->current_gold_level>=self::getLevelNum($id))return false;
+            if($userInfo->current_gold_level>=$levelNum){
+                return false;
+            }elseif($userInfo->current_star_level + 1<$levelNum){
+                return apiError(1,'必须先完成之前的关卡');
+            }
         }
         $levelStrength = Level::whereId($id)->value('need_strength');
         if($userInfo->strength<$levelStrength)return apiError(1,'用户体力不足');
@@ -74,9 +83,11 @@ class LevelRepo
         if(!$dec)return apiError(1,'扣减体力错误');
     }
     
-    public static function getLevelNum($level_id)
+    public static function getLevelNum($level_id,$type)
     {
-        return $level_id;
+        //查询等级排位： 之前有多少条数据 + 1  = 当前数据排位
+        $levelCount = Level::where('id','<=',$level_id)->whereLevelType($type)->count();
+        return $levelCount;
     }
     
 }

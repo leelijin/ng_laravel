@@ -54,7 +54,7 @@ class LevelController extends Controller
         $page = $this->request->has('page')?$this->params['page']:1;
         $limit = $this->request->has('limit')?$this->params['limit']:10;
     
-        $current_level=User::whereId($this->uid)->value('current_star_level');
+        $current_level=User::whereId($this->uid)->value('current_gold_level');
     
         $gold_level_info = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
     
