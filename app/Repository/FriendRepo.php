@@ -36,7 +36,7 @@ class FriendRepo
             ->where(function($query) use ($uid){
                 $query->where('to_uid',$uid)->orWhere('from_uid',$uid);
             })
-            ->first();
+            ->exists();
         if(!$requestInfo)return apiError(1,'请求不存在');
     
         

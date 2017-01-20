@@ -31,9 +31,14 @@ Route::group(['prefix'=>'index'],function(){
 
 Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('starList','LevelController@starList');
-    Route::any('starDetail','LevelController@starQuestion')->middleware('need:star_id');
     Route::any('goldList','LevelController@goldList');
-    Route::any('goldDetail','LevelController@goldQuestion')->middleware('need:gold_id');
+    
+    Route::any('starDetail','LevelController@starDetail')->middleware('need:star_id');
+    Route::any('starDetail/judge','LevelController@starDetailJudge')->middleware('need:star_id');
+    Route::any('goldDetail','LevelController@goldDetail')->middleware('need:gold_id');
+    Route::any('goldDetail/judge','LevelController@goldDetailJudge')->middleware('need:gold_id');
+    
+    
     Route::any('mineWrong','LevelController@mineWrong');
     
     Route::group(['prefix'=>'submit'],function(){

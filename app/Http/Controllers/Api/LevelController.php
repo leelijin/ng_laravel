@@ -15,20 +15,35 @@ class LevelController extends Controller
     
     public function starList()
     {
-        $page = $this->request->has('page')?$this->params['page']:1;
-        $limit = $this->request->has('limit')?$this->params['limit']:10;
+        $limit = $this->request->has('limit')?$this->limit:10;
         
         $current_level=User::whereId($this->uid)->value('current_star_level');
 
-        $star_level_info = LevelRepo::getLevelList('star',$current_level,$page,$limit);
+        $star_level_info = LevelRepo::getLevelList('star',$current_level,$this->page,$limit);
         
         return apiSuccess(compact('current_level','star_level_info'));
     }
     
-    public function starQuestion()
+    public function goldList()
     {
-        $check = LevelRepo::checkLevelUser($this->uid,$this->params['star_id'],1);
-        if($check)return $check;
+        $page = $this->request->has('page')?$this->params['page']:1;
+        $limit = $this->request->has('limit')?$this->params['limit']:10;
+        
+        $current_level=User::whereId($this->uid)->value('current_gold_level');
+        
+        $gold_level_info = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
+        
+        foreach ($gold_level_info as &$v) {
+            $v->challenge_times=0;
+        }
+        
+        return apiSuccess(compact('current_level','gold_level_info'));
+    }
+    
+    public function starDetail()
+    {
+        $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
+        if($conditionDown)return $conditionDown;
         $model = Question::whereLevelId($this->params['star_id']);
         if($this->request->has('limit') && $this->params['limit']!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
@@ -37,7 +52,7 @@ class LevelController extends Controller
         return apiSuccess($list);
     }
     
-    public function goldQuestion()
+    public function goldDetail()
     {
         $check = LevelRepo::checkLevelUser($this->uid,$this->params['gold_id'],2);
         if($check)return $check;
@@ -49,21 +64,7 @@ class LevelController extends Controller
         return apiSuccess($list);
     }
     
-    public function goldList()
-    {
-        $page = $this->request->has('page')?$this->params['page']:1;
-        $limit = $this->request->has('limit')?$this->params['limit']:10;
-    
-        $current_level=User::whereId($this->uid)->value('current_gold_level');
-    
-        $gold_level_info = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
-    
-        foreach ($gold_level_info as &$v) {
-            $v->challenge_times=0;
-        }
-    
-        return apiSuccess(compact('current_level','gold_level_info'));
-    }
+
     
     public function rankStar()
     {

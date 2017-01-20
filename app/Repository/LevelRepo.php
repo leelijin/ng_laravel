@@ -16,6 +16,8 @@ use App\Models\User;
 
 class LevelRepo
 {
+    
+    
     public static function getLevelList($type,$current_level = 0,$page = 1,$limit = 10)
     {
         //根据等级修正关卡
@@ -30,6 +32,11 @@ class LevelRepo
             $i++;
         }
         return $level_info;
+    }
+    
+    public static function getQuestionDetail()
+    {
+        
     }
     
     public static function submitLevel($id,$type,$uid,$wrong_ids=[])
@@ -57,23 +64,36 @@ class LevelRepo
         }
     }
     
-    public static function checkLevelUser($uid,$id,$type)
+    public static function checkUserCondition($uid,$id,$type)
     {
-        $userInfo = User::whereId($uid)->select(['strength','current_star_level','current_gold_level'])->first();
-        //检查跳级开通
-        //检查用户体力余额是否足够,如果已通关则不减
+        $type_name = $type == 1?'star':'gold';
+        $userInfo = User::whereId($uid)->select(['strength','current_'.$type_name.'_level as current_level'])->first();
+        
         $levelNum = self::getLevelNum($id,$type);
-        if($userInfo->current_star_level>=$levelNum){
-            return false;
-        }elseif($userInfo->current_star_level + 1<$levelNum){
-            return apiError(1,'必须先完成之前的关卡');
+        $checkLevelNum = $levelNum - $userInfo->current_level;
+        
+        if($checkLevelNum == 1){
+            //下一关
+            
         }
         
-        $levelStrength = Level::whereId($id)->value('need_strength');
-        if($userInfo->strength<$levelStrength)return apiError(1,'用户体力不足');
-        //扣减体力
-        $dec = User::whereId($uid)->decrement('strength',$levelStrength);
-        if(!$dec)return apiError(1,'扣减体力错误');
+        
+        if($userInfo->current_level>=$levelNum){
+            //获取已通关
+            return false;
+        }elseif($userInfo->current_level + 1<$levelNum){
+            //检查跳级获取
+            return apiError(1,'必须先完成之前的关卡');
+        }else{
+            //检查用户体力余额是否足够
+            $levelStrength = Level::whereId($id)->value('need_strength');
+            if($userInfo->strength<$levelStrength)return apiError(1,'用户体力不足');
+            //扣减体力
+            $dec = User::whereId($uid)->decrement('strength',$levelStrength);
+            if(!$dec)return apiError(1,'扣减体力错误');
+        }
+        
+        
     }
     
     public static function getLevelNum($level_id,$type)
