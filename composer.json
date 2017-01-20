@@ -10,7 +10,9 @@
         "doctrine/dbal": "^2.5",
         "barryvdh/laravel-debugbar": "^2.3",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "mpociot/laravel-test-factory-helper": "^0.3.1"
+        "mpociot/laravel-test-factory-helper": "^0.3.1",
+        "latrell/alipay": "dev-master",
+        "overtrue/laravel-wechat": "2.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
