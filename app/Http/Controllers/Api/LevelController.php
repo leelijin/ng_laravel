@@ -9,6 +9,7 @@ use App\Models\QuestionWrong;
 use App\Models\User;
 use App\Repository\LevelRepo;
 use App\Repository\RankRepo;
+use App\Repository\UserRepo;
 
 class LevelController extends Controller
 {
@@ -52,6 +53,13 @@ class LevelController extends Controller
         return apiSuccess($list);
     }
     
+    public function starDetailJudge()
+    {
+        $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
+        if($conditionDown)return $conditionDown;
+        return apiSuccess(['message'=>'条件通过','user_strength'=>UserRepo::getUserStrength($this->uid)]);
+    }
+    
     public function goldDetail()
     {
         $check = LevelRepo::checkLevelUser($this->uid,$this->params['gold_id'],2);
@@ -64,7 +72,12 @@ class LevelController extends Controller
         return apiSuccess($list);
     }
     
-
+    public function goldDetailJudge()
+    {
+        $check = LevelRepo::checkLevelUser($this->uid,$this->params['gold_id'],2);
+        if($check)return $check;
+        return apiSuccess(['message'=>'条件通过','user_strength'=>UserRepo::getUserStrength($this->uid)]);
+    }
     
     public function rankStar()
     {

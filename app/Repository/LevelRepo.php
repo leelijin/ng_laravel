@@ -70,12 +70,12 @@ class LevelRepo
         $userInfo = User::whereId($uid)->select(['strength','current_'.$type_name.'_level as current_level'])->first();
         
         $levelNum = self::getLevelNum($id,$type);
-        $checkLevelNum = $levelNum - $userInfo->current_level;
+        //$checkLevelNum = $levelNum - $userInfo->current_level;
         
-        if($checkLevelNum == 1){
-            //下一关
-            
-        }
+        //if($checkLevelNum == 1){
+        //    //下一关
+        //
+        //}
         
         
         if($userInfo->current_level>=$levelNum){

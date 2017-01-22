@@ -18,6 +18,11 @@ class UserRepo
         return User::where('id',$uid)->simple()->first();
     }
     
+    public static function getUserStrength($uid)
+    {
+        return User::whereId($uid)->value('strength');
+    }
+    
     /**
      * 统一为用户增加体力入口
      * @param $uid
