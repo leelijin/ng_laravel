@@ -26,8 +26,6 @@ class LevelController extends AdminController
     public function indexStar($page=1,$r=30){
         $builder=new AdminListBuilder();
         $map['level_type']=1;
-        //$postData = I();
-        //if($postData['key'])$map['title']=['like','%'.trim($postData['key']).'%']; //搜索关键词
         $map['status']=1;
         list($list,$totalCount)=$this->listPage($this->model,$map,$page,null,true,$r);
     
@@ -36,11 +34,6 @@ class LevelController extends AdminController
             $v['question_number']=M('questions')->where(['level_id'=>$v['id']])->count()?:0;
         }
         $builder->title('星级场'.$this->title)
-            //->buttonNew(U($this->editName))
-            //->search('按标题搜索：')
-            //->buttonDelete(U('setStatus?model='.$this->modelName))
-            //->setSelectPostUrl(U())
-            //->select('','type','select','','','',[['id'=>1,'value'=>''],['id'=>2,'value'=>'']])
             ->data($list)
             ->keyText('num','关卡序号')
             ->keyText('question_number','题目数量')
@@ -49,7 +42,6 @@ class LevelController extends AdminController
             ->keyText('created_at','创建时间')
             ->keyDoActionEdit($this->editName.'Star?id=###')
             ->keyDoActionEdit('question?id=###','题目管理')
-            //->keyDoActionEdit('delete?id=###','删除')
             ->pagination($totalCount,$r)
             ->display();
     }
@@ -57,8 +49,6 @@ class LevelController extends AdminController
     public function indexGold($page=1,$r=30){
         $builder=new AdminListBuilder();
         $map['level_type']=2;
-        //$postData = I();
-        //if($postData['key'])$map['title']=['like','%'.trim($postData['key']).'%']; //搜索关键词
         $map['status']=1;
         list($list,$totalCount)=$this->listPage($this->model,$map,$page,null,true,$r);
         foreach ($list as &$v) {
@@ -66,13 +56,7 @@ class LevelController extends AdminController
             $v['question_number']=M('questions')->where(['level_id'=>$v['id']])->count()?:0;
         }
         $builder->title('金币场'.$this->title)
-            //->buttonNew(U($this->editName))
-            //->search('按标题搜索：')
-            //->buttonDelete(U('setStatus?model='.$this->modelName))
-            //->setSelectPostUrl(U())
-            //->select('','type','select','','','',[['id'=>1,'value'=>''],['id'=>2,'value'=>'']])
             ->data($list)
-            ->keyId()
             ->keyText('num','关卡序号')
             ->keyText('question_number','题目数量')
             ->keyText('need_strength','所需体力')
