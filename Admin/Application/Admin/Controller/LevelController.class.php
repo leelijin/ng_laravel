@@ -61,6 +61,10 @@ class LevelController extends AdminController
         //if($postData['key'])$map['title']=['like','%'.trim($postData['key']).'%']; //搜索关键词
         $map['status']=1;
         list($list,$totalCount)=$this->listPage($this->model,$map,$page,null,true,$r);
+        foreach ($list as &$v) {
+            $v['num']=$this->model->where($map + ['id'=>['elt',$v['id']]])->count();
+            $v['question_number']=M('questions')->where(['level_id'=>$v['id']])->count()?:0;
+        }
         $builder->title('金币场'.$this->title)
             //->buttonNew(U($this->editName))
             //->search('按标题搜索：')
