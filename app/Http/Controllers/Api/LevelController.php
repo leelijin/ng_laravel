@@ -74,7 +74,7 @@ class LevelController extends Controller
     
     public function goldDetailJudge()
     {
-        $check = LevelRepo::checkLevelUser($this->uid,$this->params['gold_id'],2);
+        $check = LevelRepo::checkUserCondition($this->uid,$this->params['gold_id'],2);
         if($check)return $check;
         return apiSuccess(['message'=>'条件通过','user_strength'=>UserRepo::getUserStrength($this->uid)]);
     }
