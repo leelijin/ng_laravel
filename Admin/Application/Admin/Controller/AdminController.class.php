@@ -67,7 +67,7 @@ class AdminController extends Controller
         $this->assign('__MENU__', $this->getMenus());
         $this->assign('__MODULE_MENU__', $this->getModules());
 
-        $this->checkUpdate();
+        //$this->checkUpdate();
         //$this->getReport();
         import_lang(ucfirst(CONTROLLER_NAME));
     }
@@ -646,5 +646,22 @@ class AdminController extends Controller
             $can_update = 0;
         }
         $this->assign('update', $can_update);
+    }
+    
+    public function listPage($model,$map,$page=1,$order='id desc',$field='*',$r=20)
+    {
+        $totalCount=$model->where($map)->count();
+        if($totalCount){
+            $list=$model->where($map)->page($page,$r)->order($order)->field($field)->select();
+        }
+        return array($list,$totalCount);
+    }
+    
+    protected function handle($result,$message='操作',$url=''){
+        if($result){
+            $this->success($message.'成功',$url);
+        }else{
+            $this->error($message.'失败');
+        }
     }
 }
