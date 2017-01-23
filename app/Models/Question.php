@@ -57,4 +57,14 @@ class Question extends Model
     {
         return $query->select();
     }
+    
+    public function getImage1Attribute()
+    {
+        return $this->attributes['image1']=pictureTransfer($this->attributes['image1']);
+    }
+    
+    public function getImage2Attribute()
+    {
+        return $this->attributes['image2']=pictureTransfer($this->attributes['image2']);
+    }
 }

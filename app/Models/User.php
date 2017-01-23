@@ -81,6 +81,11 @@ class User extends Model
         $this->attributes['token'] = str_random(20);
     }
     
+    public function getAvatarAttribute()
+    {
+        return $this->attributes['avatar']=pictureTransfer($this->attributes['avatar']);
+    }
+    
     public function scopeBase($query)
     {
         return $query->select('id as uid','nickname','mobile','avatar','rank','gold','star','strength','token');
@@ -100,5 +105,7 @@ class User extends Model
     {
         return $query->orderBy('gold','desc')->select('id as uid','nickname','avatar','gold')->take($limit);
     }
+    
+    
 
 }

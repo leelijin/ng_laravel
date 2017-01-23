@@ -28,6 +28,9 @@ class Item extends Model
         'settins'=>'array',
     ];
     protected $hidden=['setting'];
-    
+    public function getCoverAttribute()
+    {
+        return $this->attributes['cover']=pictureTransfer($this->attributes['cover']);
+    }
     
 }

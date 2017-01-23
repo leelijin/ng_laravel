@@ -18,3 +18,13 @@ if(!function_exists('requireLogin')){
         return apiError(10,'需要登录');
     }
 }
+
+if(!function_exists('pictureTransfer')){
+    function pictureTransfer($cover){
+        if(is_numeric($cover)){
+            return config('app.url').App\Models\Picture::getPath($cover);
+        }else{
+            return $cover;
+        }
+    }
+}

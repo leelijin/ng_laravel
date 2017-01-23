@@ -140,16 +140,14 @@ class LevelController extends AdminController
             $data=$model->create();
             $id = $data['id']=I('id');
             if($data){
-                $data['answer_options']=json_encode(explode('
-                ',$data['answer_options']));
+                $data['answer_options']=json_encode(explode('|',$data['answer_options']));
                 $re = $id?$model->save($data):$model->add($data);
                 $this->handle($re);
             }
         } else {
             if($id){
                 $data=$model->find($id);
-                $data['answer_options']=implode('
-',json_decode($data['answer_options'],true));
+                $data['answer_options']=implode('|',json_decode($data['answer_options'],true));
             }
             $builder = new AdminConfigBuilder();
             $builder->title($this->title)
@@ -159,7 +157,7 @@ class LevelController extends AdminController
                 ->keyTextArea('content','内容')
                 ->keySingleImage('image1','图片1')
                 ->keySingleImage('image2','图片2')
-                ->keyTextArea('answer_options','选项','每行一个选项')
+                ->keyTextArea('answer_options','选项','以竖线分隔选项')
                 ->keySelect('right_answer','正确答案','',[0=>'第一个选项',1=>'第二个选项',2=>'第三个选项',3=>'第四个选项'])
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()

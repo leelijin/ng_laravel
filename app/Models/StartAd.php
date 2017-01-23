@@ -23,4 +23,9 @@ use Illuminate\Database\Eloquent\Model;
 class StartAd extends Model
 {
     protected $table='start_ad';
+    
+    public function getCoverAttribute()
+    {
+        return $this->attributes['cover']=pictureTransfer($this->attributes['cover']);
+    }
 }
