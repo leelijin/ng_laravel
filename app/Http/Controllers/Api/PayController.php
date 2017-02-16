@@ -6,7 +6,7 @@
  * Time: 15:37
  */
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
@@ -18,27 +18,27 @@ use App\Services\Pay\PayService;
 class PayController extends Controller
 {
     
-    public function initPay($item_id)
+    public function initPay($gold)
     {
         //检查是否有未支付
-        $params = Order::whereUidAndItemId($this->uid,$item_id)->where('status',0)->first();
+        $params = Order::whereUid($this->uid)->where('status',0)->first();
         if(!$params){
             //生成订单
             $params = ['uid'         => $this->uid,
-                       'item_id'     => $item_id,
+                       'gold'     => $gold,
                        'order_id'    => generateOrderId(),
-                       'order_name'  => 'eugene alipay test',
-                       'order_desc'  => 'test wap pay',
+                       'order_name'  => '金币购买',
+                       'order_desc'  => "金币购买(数量：$gold,价格：￥0.01)",
                        'order_price' => '0.01'
             ];
             OrderRepo::insertOrderInfo($params);
         }
-        
+        $orderInfo=$params;
         //发起订单
         $payService = new PayService(new AlipayService());
         $url = $payService->createWebPay($params);
         //跳转支付界面
-        return redirect($url);
+        return apiSuccess(compact('url','orderInfo'));
     }
     
     public function notice()

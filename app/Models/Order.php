@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded=['status'];
+    protected $hidden=['status','id'];
 }

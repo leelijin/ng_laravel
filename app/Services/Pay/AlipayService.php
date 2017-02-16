@@ -26,6 +26,6 @@ class AlipayService implements PayInterface
     
     public function getPayClassify()
     {
-        return Config::ALI_CHANNEL_WAP;
+        return Config::ALI_CHANNEL_APP;
     }
 }
