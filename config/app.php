@@ -182,8 +182,6 @@ return [
         //Barryvdh\Debugbar\ServiceProvider::class,
         Mpociot\LaravelTestFactoryHelper\TestFactoryHelperServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Latrell\Alipay\AlipayServiceProvider::class,
-        Overtrue\LaravelWechat\ServiceProvider::class
     ],
 
     /*
@@ -231,7 +229,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Wechat' => Overtrue\LaravelWechat\Facade::class,
     ],
 
 ];

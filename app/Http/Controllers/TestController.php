@@ -17,7 +17,6 @@ class TestController
 {
     public function index()
     {
-        
-        
+        return strlen('2017021621001004520200088263');
     }
 }

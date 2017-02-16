@@ -8,16 +8,17 @@ Route::get('/download',function(){
    return 'ng download page.Developing...';
 });
 
-Route::group(['prefix'=>'pay','namespace'=>'Web'],function(){
-    Route::group(['prefix'=>'alipay'],function(){
-        Route::get('init','AliPayController@createPay');
-        Route::get('webNotice','AliPayController@webNotice');
-        Route::get('webReturn','AliPayController@webReturn');
-    });
-    Route::group(['prefix'=>'wechatPay'],function(){
-        Route::get('init','WechatPayController@createPay');
-        Route::get('webNotice','WechatPayController@webNotice');
-    });
+Route::group(['prefix'=>'alipay','namespace'=>'Web'],function(){
+    Route::get('init/{item_id}','PayController@initPay')->middleware('need:uid');
+    Route::post('webNotice','PayController@notice');
+    Route::get('webReturn','PayController@payReturn');
+    Route::get('refund/{order_id}','PayController@refund');
+});
+Route::group(['prefix'=>'wechatPay','namespace'=>'Web'],function(){
+    Route::get('init/{item_id}','PayController@initPay')->middleware('need:uid');
+    Route::post('webNotice','PayController@notice');
+    Route::get('webReturn','PayController@payReturn');
+    Route::get('refund/{order_id}','PayController@refund');
 });
 
 

@@ -28,3 +28,9 @@ if(!function_exists('pictureTransfer')){
         }
     }
 }
+
+if(!function_exists('generateOrderId')){
+    function generateOrderId(){
+        return date('Ymdhis', time()).substr(floor(microtime()*1000),0,1).rand(0,9);
+    }
+}
