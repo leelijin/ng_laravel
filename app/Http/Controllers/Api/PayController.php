@@ -14,11 +14,22 @@ use App\Models\Order;
 use App\Repository\OrderRepo;
 use App\Services\Pay\AlipayService;
 use App\Services\Pay\PayService;
+use App\Services\Pay\WechatpayService;
 
 class PayController extends Controller
 {
     
-    public function initPay($gold)
+    public function initAlipay($gold)
+    {
+        return $this->commonPay($gold,new AlipayService());
+    }
+    
+    public function initWechatpay($gold)
+    {
+        return $this->commonPay($gold,new WechatpayService());
+    }
+    
+    private function commonPay($gold,$service)
     {
         //检查是否有未支付
         $params = Order::whereUid($this->uid)->where('status',0)->first();
@@ -35,22 +46,24 @@ class PayController extends Controller
         }
         $orderInfo=$params;
         //发起订单
-        $payService = new PayService(new AlipayService());
-        $url = $payService->createWebPay($params);
+        $payService = new PayService($service);
+        $url = $payService->createPay($params);
         //跳转支付界面
         return apiSuccess(compact('url','orderInfo'));
     }
     
-    public function notice()
+    public function aliNotice()
     {
         $payService = new PayService(new AlipayService());
         $re = $payService->notice();
         return $re;
     }
     
-    public function payReturn()
+    public function wxNotice()
     {
-        return 'success';
+        $payService = new PayService(new WechatpayService());
+        $re = $payService->notice();
+        return $re;
     }
     
     public function refund($order_id)

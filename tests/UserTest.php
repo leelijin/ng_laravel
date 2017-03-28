@@ -17,6 +17,8 @@ class UserTest extends TestCase
         ]);
     }
     
+
+    
     public function testReg()
     {
         $this->base('/api/user/reg',[

@@ -22,7 +22,7 @@ class PayService
         $this->payObj=$payObj;
     }
     
-    public function createWebPay($orderInfo)
+    public function createPay($orderInfo)
     {
         // 订单信息
         $payData = [
@@ -46,26 +46,12 @@ class PayService
 
         $callback = new Notify();
 
-        // 支付宝回调
         $notify->initNotify($this->payObj->payType(), $this->payObj->getConfig());
 
         $ret = $notify->notify($callback);
         return $ret;
     }
     
-    public function refund($orderId,$transId,$refundFee,$reason='退款')
-    {
-        $reundData = [
-            'refund_no' => $orderId,
-            'refund_data'   => [
-                ['transaction_id' => $transId, 'amount'   => $refundFee, 'refund_fee' => $refundFee, 'reason' => $reason],
-            ],
-        ];
-        $refund = new RefundContext();
-        $refund->initRefund($this->payObj->payType(), $this->payObj->getConfig());
-        $ret = $refund->refund($reundData);
-        return $ret;
-    }
     
 
 }

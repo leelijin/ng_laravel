@@ -25,7 +25,6 @@ class Notify implements \Payment\Notify\PayNotifyInterface
      */
     public function notifyProcess(array $data)
     {
-        Log::error('eugene:'.json_encode($data));
         if($data)Order::whereOrderIdAndStatus($data['order_no'],0)->update(['status'=>1,'transaction_id'=>$data['transaction_id']]);
         return true;
     }

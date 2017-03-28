@@ -21,7 +21,7 @@ class WechatpayService implements PayInterface
     
     public function getConfig()
     {
-        return config('pay.wechat');
+        return config('pay.wechatpay');
     }
     
     public function getPayClassify()

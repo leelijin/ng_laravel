@@ -29,14 +29,14 @@ return [
         // 取值为分钟
     ],
     'wechatpay' => [
-        'app_id'  => 'wxxxxx',
+        'app_id'  => 'wx5e7403ff0a5fe647',
         // 公众账号ID
         'mch_id'  => 'xxxxx',
         // 商户id
         'md5_key' => 'xxxxxx',
         // md5 秘钥
         
-        'notify_url'  => 'http://1609217uc2.iask.in/wechatpay/webNotice',
+        'notify_url'  => env('APP_URL').'/wechatpay/webNotice',
         'time_expire' => '14',
         
         // 涉及资金流动时 退款  转款，需要提供该文件

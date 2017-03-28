@@ -67,14 +67,8 @@ Route::group(['prefix'=>'rank'],function(){
 });
 
 Route::group(['prefix'=>'alipay'],function(){
-    Route::post('buy/{gold}','PayController@initPay')->middleware('need:uid');
-    Route::post('webNotice','PayController@notice');
-    Route::get('webReturn','PayController@payReturn');
-    Route::get('refund/{order_id}','PayController@refund');
+    Route::any('buy/{gold}','PayController@initAlipay')->middleware('need:uid');
 });
-Route::group(['prefix'=>'wechatPay','namespace'=>'Web'],function(){
-    Route::get('init/{item_id}','PayController@initPay')->middleware('need:uid');
-    Route::post('webNotice','PayController@notice');
-    Route::get('webReturn','PayController@payReturn');
-    Route::get('refund/{order_id}','PayController@refund');
+Route::group(['prefix'=>'wechatpay'],function(){
+    Route::any('buy/{gold}','PayController@initWechatpay')->middleware('need:uid');
 });
