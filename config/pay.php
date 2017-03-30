@@ -31,9 +31,9 @@ return [
     'wechatpay' => [
         'app_id'  => 'wx5e7403ff0a5fe647',
         // 公众账号ID
-        'mch_id'  => 'xxxxx',
+        'mch_id'  => '1446910202',
         // 商户id
-        'md5_key' => 'xxxxxx',
+        'md5_key' => '73AE75B7F3A42C4FDEE875584F5D0A9E',
         // md5 秘钥
         
         'notify_url'  => env('APP_URL').'/wechatpay/webNotice',

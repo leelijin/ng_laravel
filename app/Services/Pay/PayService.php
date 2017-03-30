@@ -31,7 +31,7 @@ class PayService
             "client_ip"	=> '127.0.0.1',
             "subject"	=> $orderInfo['order_name'],
             "body"	=> $orderInfo['order_desc'],
-            "show_url"  => 'http://www.cdfer.com',// 支付宝手机网站支付接口 该参数必须上传 。其他接口忽略
+            "show_url"  => env('APP_URL'),// 支付宝手机网站支付接口 该参数必须上传 。其他接口忽略
             "extra_param"	=> '',
         ];
         $charge = new ChargeContext();
