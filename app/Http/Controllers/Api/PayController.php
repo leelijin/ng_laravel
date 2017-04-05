@@ -21,15 +21,15 @@ class PayController extends Controller
     
     public function initAlipay($gold)
     {
-        return $this->commonPay($gold,new AlipayService());
+        return $this->commonPay($gold,2,new AlipayService());
     }
     
     public function initWechatpay($gold)
     {
-        return $this->commonPay($gold,new WechatpayService());
+        return $this->commonPay($gold,1,new WechatpayService());
     }
     
-    private function commonPay($gold,$service)
+    private function commonPay($gold,$pay_type,$service)
     {
         //检查是否有未支付
         $params = Order::whereUid($this->uid)->where('status',0)->first();
@@ -38,6 +38,7 @@ class PayController extends Controller
             $params = ['uid'         => $this->uid,
                        'gold'     => $gold,
                        'order_id'    => generateOrderId(),
+                       'pay_type' => $pay_type,
                        'order_name'  => '金币购买',
                        'order_desc'  => "金币购买(数量：$gold,价格：￥0.01)",
                        'order_price' => '0.01'
