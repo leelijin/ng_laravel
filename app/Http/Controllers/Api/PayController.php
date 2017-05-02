@@ -19,12 +19,12 @@ use App\Services\Pay\WechatpayService;
 class PayController extends Controller
 {
     
-    public function initAlipay($gold)
+    public function initAlipay($gold=1)
     {
         return $this->commonPay($gold,2,new AlipayService());
     }
     
-    public function initWechatpay($gold)
+    public function initWechatpay($gold=1)
     {
         return $this->commonPay($gold,1,new WechatpayService());
     }
@@ -34,14 +34,16 @@ class PayController extends Controller
         //检查是否有未支付
         $params = Order::whereUid($this->uid)->where('status',0)->first();
         if(!$params){
+            //TODO::根据金币数量计算订单金额
+            $price = 0.01;
             //生成订单
             $params = ['uid'         => $this->uid,
                        'gold'     => $gold,
                        'order_id'    => generateOrderId(),
                        'pay_type' => $pay_type,
                        'order_name'  => '金币购买',
-                       'order_desc'  => "金币购买(数量：$gold,价格：￥0.01)",
-                       'order_price' => '0.01'
+                       'order_desc'  => "金币购买(数量：$gold,价格：￥$price)",
+                       'order_price' => $price
             ];
             OrderRepo::insertOrderInfo($params);
         }
