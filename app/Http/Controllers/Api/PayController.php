@@ -42,7 +42,7 @@ class PayController extends Controller
                        'order_id'    => generateOrderId(),
                        'pay_type' => $pay_type,
                        'order_name'  => '金币购买',
-                       'order_desc'  => "金币购买(数量：$gold,价格：￥$price)",
+                       'order_desc'  => "金币购买(数量:$gold,价格:￥$price)",
                        'order_price' => $price
             ];
             OrderRepo::insertOrderInfo($params);

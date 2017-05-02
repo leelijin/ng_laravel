@@ -10,7 +10,7 @@ Route::get('/download',function(){
 Route::post('wechatpay/webNotice','Api\PayController@wxNotice');
 Route::post('alipay/webNotice','Api\PayController@aliNotice');
 
-Route::get('/test', 'Api\PayController@initAlipay');
+Route::get('/test', 'TestController@index');
 
 Route::get('timestamp',function(){
     return time();

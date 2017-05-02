@@ -44,4 +44,31 @@ class UserRepo
         
     }
     
+    /**
+     * 统一为用户增加金币入口
+     * @param $uid
+     * @param $gold
+     */
+    public static function increUserGold($uid,$gold)
+    {
+        $userModel = User::whereId($uid);
+        $max_gold = 0;
+        
+        if($max_gold > 0){
+            $current_gold = $userModel->value('gold');
+            if($current_gold >=$max_gold){//体力值已满
+                return false;
+            }elseif($current_gold + $gold >=$max_gold){
+                $userModel->update(['gold',$max_gold]);
+            }else{
+                $userModel->increment('gold',$gold);
+            }
+        }else{
+            $userModel->increment('gold',$gold);
+        }
+        return true;
+        
+    }
+    
+    
 }

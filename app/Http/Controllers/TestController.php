@@ -12,13 +12,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Api\PayController;
 use App\Models\Level;
 use App\Models\LevelSetting;
+use App\Models\Order;
 use App\Models\User;
+use App\Repository\UserRepo;
 
 class TestController
 {
     public function index()
     {
-        $pc = new PayController();
-        return $pc->initAlipay(1);
     }
 }
