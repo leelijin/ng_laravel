@@ -4,6 +4,7 @@ Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'user'],function(){
     Route::post('reg','UserController@reg') ;
+    Route::post('info','UserController@info') ;
     Route::post('login','UserController@login') ;
     Route::post('thirdLogin','UserController@thirdLogin') ;
     Route::post('uploadAvatar','UserController@uploadAvatar');

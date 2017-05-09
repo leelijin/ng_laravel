@@ -70,6 +70,16 @@ class UserController extends Controller
         }
     }
     
+    public function info()
+    {
+        $userInfo = User::base()->find($this->uid);
+        $payInfo = [
+            ['amount'=>1,'price'=>0.1],
+            ['amount'=>10,'price'=>1],
+        ];
+        return apiSuccess(compact('userInfo','payInfo'));
+    }
+    
     public function thirdLogin()
     {
         $valid = Validator::make($this->params,[
