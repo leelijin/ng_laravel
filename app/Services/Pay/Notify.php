@@ -27,10 +27,12 @@ class Notify implements \Payment\Notify\PayNotifyInterface
     public function notifyProcess(array $data)
     {
         if($data){
-            Order::whereOrderIdAndStatus($data['order_no'],0)->update(['status'=>1,'transaction_id'=>$data['transaction_id']]);
-            //增加用户金币
-            $orderInfo = Order::whereOrderIdAndStatus($data['order_no'],1)->select('uid','gold')->first();
-            UserRepo::increUserGold($orderInfo->uid,$orderInfo->gold);
+            $updated = Order::whereOrderIdAndStatus($data['order_no'],0)->update(['status'=>1,'transaction_id'=>$data['transaction_id']]);
+            if($updated){
+                //增加用户金币
+                $orderInfo = Order::whereOrderId($data['order_no'])->select('uid','gold')->first();
+                UserRepo::increUserGold($orderInfo->uid,$orderInfo->gold);
+            }
             
         }
         return true;

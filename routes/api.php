@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\Question;
-use App\Repository\UserRepo;
-use Illuminate\Http\Request;
-
 Route::any('startad','IndexController@startAd') ;
 
 Route::group(['prefix'=>'user'],function(){
@@ -13,7 +9,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('uploadAvatar','UserController@uploadAvatar');
     //TODO::deleteme when developed
     Route::post('addStrength',function(\Illuminate\Http\Request $request){
-        UserRepo::increUserStrength($request->input('uid'),$request->input('strength',100));
+        App\Repository\UserRepo::increUserStrength($request->input('uid'),$request->input('strength',100));
     });
 });
 
@@ -46,8 +42,8 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
         Route::any('gold','LevelController@goldSubmit')->middleware('need:gold_id');
     });
     
-    Route::any('questionDetail',function(Request $request){
-        $info = Question::find($request->input('id'));
+    Route::any('questionDetail',function(\Illuminate\Http\Request $request){
+        $info = App\Models\Question::find($request->input('id'));
         return $info?apiSuccess($info):apiError(1,'不存在的题目');
     })->middleware('need:id');
 });
