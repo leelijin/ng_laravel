@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ItemUser extends Model
 {
+    protected $guarded=[];
     public static function getUserItemCount($uid,$item_id)
     {
         return self::whereUserId($uid)->whereItemId($item_id)->value('amount')?:0;
