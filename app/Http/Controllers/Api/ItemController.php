@@ -60,6 +60,4 @@ class ItemController extends Controller
         }
         
     }
-    
-    
 }
