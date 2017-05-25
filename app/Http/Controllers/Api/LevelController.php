@@ -46,7 +46,7 @@ class LevelController extends Controller
         $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
         if($conditionDown)return $conditionDown;
         $model = Question::whereLevelId($this->params['star_id']);
-        if($this->request->has('limit') && $this->params['limit']!=0){
+        if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $list = $model->get();
@@ -65,7 +65,7 @@ class LevelController extends Controller
         $check = LevelRepo::checkUserCondition($this->uid,$this->params['gold_id'],2);
         if($check)return $check;
         $model = Question::whereLevelId($this->params['gold_id']);
-        if($this->request->has('limit') && $this->params['limit']!=0){
+        if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $list = $model->get();
