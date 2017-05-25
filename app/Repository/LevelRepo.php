@@ -55,11 +55,11 @@ class LevelRepo
                         QuestionWrong::create($params);
                     }
                 }
-                return apiSuccess('成功增加错题');
+                return apiError(1,'通关失败,已增加错题');
             }
         }else{
             //关卡通关
-            $re = User::whereId($uid)->increment($type==1?'star':'gold');
+            $re = User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
             return $re?apiSuccess('恭喜通关'):apiError(1,'通关出错，请重试');
         }
     }

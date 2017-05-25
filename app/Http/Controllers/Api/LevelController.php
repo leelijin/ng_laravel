@@ -16,7 +16,7 @@ class LevelController extends Controller
     
     public function starList()
     {
-        $limit = $this->request->has('limit')?$this->limit:10;
+        $limit = 40;
         
         $current_level=User::whereId($this->uid)->value('current_star_level');
 
@@ -28,7 +28,7 @@ class LevelController extends Controller
     public function goldList()
     {
         $page = $this->request->has('page')?$this->params['page']:1;
-        $limit = $this->request->has('limit')?$this->params['limit']:10;
+        $limit = 40;
         
         $current_level=User::whereId($this->uid)->value('current_gold_level');
         
