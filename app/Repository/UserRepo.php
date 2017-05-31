@@ -13,9 +13,9 @@ use App\Models\User;
 
 class UserRepo
 {
-    public static function getUserSimpleInfo($uid)
+    public static function getUserSimpleInfo($uid,$query=[])
     {
-        return User::where('id',$uid)->simple()->first();
+        return User::where('id',$uid)->where($query)->simple()->first();
     }
     
     public static function getUserStrength($uid)

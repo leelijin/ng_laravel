@@ -70,11 +70,10 @@ class LevelRepo
         $userInfo = User::whereId($uid)->select(['strength','current_'.$type_name.'_level as current_level'])->first();
         
         $levelNum = self::getLevelNum($id,$type);
-        
-        if($userInfo->current_level>=$levelNum){
+        if($userInfo->current_level>$levelNum){
             //获取已通关
             return false;
-        }elseif($userInfo->current_level + 1<$levelNum){
+        }elseif($userInfo->current_level + 1<=$levelNum){
             //检查跳级获取
             return apiError(1,'必须先完成之前的关卡');
         }else{

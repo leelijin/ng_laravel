@@ -57,7 +57,7 @@ class FriendRepo
         return self::getList($uid,1,1,true);
     }
     
-    public static function getMineFriendList($uid,$page,$limit)
+    public static function getMineFriendList($uid,$page,$limit,$key)
     {
         //单独做分页也是够拼的
         $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
@@ -71,7 +71,10 @@ class FriendRepo
             'data'=>[],
         ];
         foreach ($reqs as $v) {
-            $list['data'][]=UserRepo::getUserSimpleInfo($v);
+            $have = UserRepo::getUserSimpleInfo($v,function($query) use ($key){
+                $query->where('nickname','like','%'.$key.'%');
+            });
+            if($have)$list['data'][]=$have;
         }
         return $list;
     }
