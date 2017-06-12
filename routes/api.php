@@ -69,3 +69,8 @@ Route::group(['prefix'=>'alipay'],function(){
 Route::group(['prefix'=>'wechatpay'],function(){
     Route::any('buy/{gold}','PayController@initWechatpay')->middleware('need:uid');
 });
+
+Route::group(['prefix'=>'applepay'],function(){
+    Route::any('buy/{gold}','PayController@applePay')->middleware('need:uid');
+    Route::any('notice','PayController@applePayNotice')->middleware('need:uid')->middleware('need:order_no')->middleware('need:transaction_id');
+});

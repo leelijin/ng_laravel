@@ -40,34 +40,34 @@ class UserApi extends Api{
      */
     public function login($username, $password, $type = 1){
         $username=str_replace(array('"',"'",'`',',',')','(','='),'',$username);
-        if(file_exists('./api/uc_login.lock')){
-            include_once './api/uc_client/client.php';
-            if(strtolower(UC_CHARSET) == 'gbk'){
-                $username =  iconv('UTF-8', 'GBK', $username);
-            }
-
-            $uc_user = uc_user_login($username,$password,0);
-            if($uc_user[0]==-2){
-                return '密码错误';
-            }
-            elseif($uc_user[0]==-1){
-                return '用户不存在，或者被删除';
-
-            }
-            elseif($uc_user[0]>0){
-                if(strtolower(UC_CHARSET) == 'gbk'){
-                    $uc_user[1] =  iconv('GBK', 'UTF-8', $uc_user[1]);
-                }
-                D('member')->where(array('uid'=>$uc_user[0]))->setField('nickname',$uc_user[1]);
-                D('ucenter_member')->where(array('id'=>$uc_user[0]))->setField('username',$uc_user[1]);
-                return $uc_user[0];
-            }
-        }else{
-            if(UC_SYNC && $username != get_username(1)){
-                return $this->ucLogin($username, $password);
-            }
+        //if(file_exists('./api/uc_login.lock')){
+        //    include_once './api/uc_client/client.php';
+        //    if(strtolower(UC_CHARSET) == 'gbk'){
+        //        $username =  iconv('UTF-8', 'GBK', $username);
+        //    }
+        //
+        //    $uc_user = uc_user_login($username,$password,0);
+        //    if($uc_user[0]==-2){
+        //        return '密码错误';
+        //    }
+        //    elseif($uc_user[0]==-1){
+        //        return '用户不存在，或者被删除';
+        //
+        //    }
+        //    elseif($uc_user[0]>0){
+        //        if(strtolower(UC_CHARSET) == 'gbk'){
+        //            $uc_user[1] =  iconv('GBK', 'UTF-8', $uc_user[1]);
+        //        }
+        //        D('member')->where(array('uid'=>$uc_user[0]))->setField('nickname',$uc_user[1]);
+        //        D('ucenter_member')->where(array('id'=>$uc_user[0]))->setField('username',$uc_user[1]);
+        //        return $uc_user[0];
+        //    }
+        //}else{
+            //if(UC_SYNC && $username != get_username(1)){
+            //    return $this->ucLogin($username, $password);
+            //}
             return $this->model->login($username, $password, $type);
-        }
+        //}
 
     }
 
