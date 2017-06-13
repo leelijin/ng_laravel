@@ -116,6 +116,8 @@ class LevelController extends Controller
     public function mineWrong()
     {
         //检查是否支付
+        $auth = UserRepo::getUserWrongAuth($this->uid);
+        if(!$auth)return apiError(1,'请先购买权限');
         $list = QuestionWrong::whereUid($this->uid)->select('question_id as id','question_id','type')->orderBy('id','desc')->paginate($this->limit);
         return apiSuccess($list);
     }

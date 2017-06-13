@@ -88,7 +88,7 @@ class User extends Model
     
     public function scopeBase($query)
     {
-        return $query->select('id as uid','nickname','mobile','avatar','rank','gold','star','strength','token');
+        return $query->select('id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','mood','token');
     }
     
     public function scopeSimple($query)

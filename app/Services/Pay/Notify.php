@@ -29,9 +29,9 @@ class Notify implements \Payment\Notify\PayNotifyInterface
         if($data){
             $updated = Order::whereOrderIdAndStatus($data['order_no'],0)->update(['status'=>1,'transaction_id'=>$data['transaction_id']]);
             if($updated){
-                //增加用户金币
+                //添加用户权限
                 $orderInfo = Order::whereOrderId($data['order_no'])->select('uid','gold')->first();
-                UserRepo::increUserGold($orderInfo->uid,$orderInfo->gold);
+                UserRepo::setUserWrongAuth($orderInfo->uid);
             }
             
         }

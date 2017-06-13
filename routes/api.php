@@ -9,8 +9,11 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('thirdLogin','UserController@thirdLogin') ;
     Route::post('uploadAvatar','UserController@uploadAvatar');
     //TODO::deleteme when developed
-    Route::post('addStrength',function(\Illuminate\Http\Request $request){
-        App\Repository\UserRepo::increUserStrength($request->input('uid'),$request->input('strength',100));
+    Route::post('submitMood',function(\Illuminate\Http\Request $request){
+        return App\Repository\UserRepo::submitMood($request->input('uid'),$request->input('mood')) ? apiSuccess('修改心情成功') : apiError(1,'修改失败');
+    });
+    Route::post('submitQuestion',function(){
+        return apiSuccess('出题成功');
     });
 });
 
@@ -38,6 +41,8 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     
     Route::any('mineWrong','LevelController@mineWrong');
     
+    Route::any('mineWrong/delete/{$id}','LevelController@mineWrong');
+    
     Route::group(['prefix'=>'submit'],function(){
         Route::any('star','LevelController@starSubmit')->middleware('need:star_id');
         Route::any('gold','LevelController@goldSubmit')->middleware('need:gold_id');
@@ -64,13 +69,13 @@ Route::group(['prefix'=>'rank'],function(){
 });
 
 Route::group(['prefix'=>'alipay'],function(){
-    Route::any('buy/{gold}','PayController@initAlipay')->middleware('need:uid');
+    Route::any('buy/wrong','PayController@initAlipay')->middleware('need:uid');
 });
 Route::group(['prefix'=>'wechatpay'],function(){
-    Route::any('buy/{gold}','PayController@initWechatpay')->middleware('need:uid');
+    Route::any('buy/wrong','PayController@initWechatpay')->middleware('need:uid');
 });
 
 Route::group(['prefix'=>'applepay'],function(){
-    Route::any('buy/{gold}','PayController@applePay')->middleware('need:uid');
+    Route::any('buy/wrong','PayController@applePay')->middleware('need:uid');
     Route::any('notice','PayController@applePayNotice')->middleware('need:uid')->middleware('need:order_no')->middleware('need:transaction_id');
 });

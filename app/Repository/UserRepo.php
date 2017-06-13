@@ -70,5 +70,20 @@ class UserRepo
         
     }
     
+    public static function getUserWrongAuth($uid)
+    {
+        return User::whereId($uid)->value('wrong_pay');
+    }
+    public static function setUserWrongAuth($uid)
+    {
+        return User::whereId($uid)->update(['wrong_pay'=>1]);
+    }
+    
+    public static function submitMood($uid,$mood)
+    {
+        return User::whereId($uid)->update(['mood'=>$mood]);
+    }
+    
+    
     
 }

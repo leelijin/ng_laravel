@@ -11,7 +11,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use App\Repository\OrderRepo;
+use App\Repository\UserRepo;
 use App\Services\Pay\AlipayService;
 use App\Services\Pay\Notify;
 use App\Services\Pay\PayService;
@@ -20,38 +22,49 @@ use App\Services\Pay\WechatpayService;
 class PayController extends Controller
 {
     
-    public function initAlipay($gold=1)
+    public function initAlipay()
     {
-        return $this->commonPay($gold,2,new AlipayService());
+        return $this->commonPay(2,new AlipayService());
     }
     
-    public function initWechatpay($gold=1)
+    public function initWechatpay()
     {
-        return $this->commonPay($gold,1,new WechatpayService());
+        return $this->commonPay(1,new WechatpayService());
     }
     
-    private function commonPay($gold,$pay_type,$service)
+    public function applePay()
     {
+        return $this->commonPay(3,null);
+    }
+    
+    private function commonPay($pay_type,$service)
+    {
+        //检查是否已开通
+        if(UserRepo::getUserWrongAuth($this->uid) == 1)return apiError(1,'已开通，无需再次支付');
         //检查是否有未支付
         $params = Order::whereUid($this->uid)->where('status',0)->first();
         if(!$params){
-            //TODO::根据金币数量计算订单金额
-            $price = 0.01;
+            $price = 10;
             //生成订单
             $params = ['uid'         => $this->uid,
-                       'gold'     => $gold,
+                       'gold'     => 0,
                        'order_id'    => generateOrderId(),
                        'pay_type' => $pay_type,
-                       'order_name'  => '金币购买',
-                       'order_desc'  => "金币购买(数量:$gold,价格:￥$price)",
+                       'order_name'  => '购买错题库权限',
+                       'order_desc'  => "购买错题库权限(数量:1,价格:￥$price)",
                        'order_price' => $price
             ];
             OrderRepo::insertOrderInfo($params);
         }
         $orderInfo=$params;
         //发起订单
-        $payService = new PayService($service);
-        $url = $payService->createPay($params);
+        if($pay_type != 3){
+            $payService = new PayService($service);
+            $url = $payService->createPay($params);
+        }else{
+            $url = [];
+        }
+        
         //跳转支付界面
         return apiSuccess(compact('url','orderInfo'));
     }
@@ -75,30 +88,6 @@ class PayController extends Controller
         $payService = new PayService(new AlipayService());
         $re = $payService->refund($order_id);
         return $re;
-    }
-    
-    public function applePay($gold)
-    {
-        //检查是否有未支付
-        $params = Order::whereUid($this->uid)->where('status',0)->first();
-        if(!$params){
-            //TODO::根据金币数量计算订单金额
-            $price = 0.01;
-            //生成订单
-            $params = ['uid'         => $this->uid,
-                       'gold'     => $gold,
-                       'order_id'    => generateOrderId(),
-                       'pay_type' => 3,
-                       'order_name'  => '金币购买',
-                       'order_desc'  => "金币购买(数量:$gold,价格:￥$price)",
-                       'order_price' => $price
-            ];
-            OrderRepo::insertOrderInfo($params);
-        }
-        $orderInfo=$params;
-        $url = [];
-        //跳转支付界面
-        return apiSuccess(compact('url','orderInfo'));
     }
     
     public function applePayNotice()
