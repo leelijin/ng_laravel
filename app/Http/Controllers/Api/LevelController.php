@@ -121,5 +121,12 @@ class LevelController extends Controller
         $list = QuestionWrong::whereUid($this->uid)->select('question_id as id','question_id','type')->orderBy('id','desc')->paginate($this->limit);
         return apiSuccess($list);
     }
+    
+    public function mineWrongDelete()
+    {
+        //检查是否支付
+        $list = QuestionWrong::whereUid($this->uid)->select('question_id as id','question_id','type')->orderBy('id','desc')->paginate($this->limit);
+        return apiSuccess($list);
+    }
 
 }
