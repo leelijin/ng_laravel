@@ -4,7 +4,7 @@ Route::get('/', function () {
     return redirect('admin');
 });
 Route::get('/contact_us', function () {
-    return 'contact_us';
+    return 'contact_us_web_page';
 });
 Route::get('/download', function () {
     return redirect('public/download');
