@@ -16,29 +16,29 @@ class LevelController extends Controller
     
     public function starList()
     {
-        $limit = 40;
+        $limit = 20;
         
         $current_level=User::whereId($this->uid)->value('current_star_level');
 
-        $star_level_info = LevelRepo::getLevelList('star',$current_level,$this->page,$limit);
+        $star_level_list = LevelRepo::getLevelList('star',$current_level,$this->page,$limit);
         
-        return apiSuccess(compact('current_level','star_level_info'));
+        return apiSuccess($star_level_list);
     }
     
     public function goldList()
     {
         $page = $this->request->has('page')?$this->params['page']:1;
-        $limit = 40;
+        $limit = 20;
         
         $current_level=User::whereId($this->uid)->value('current_gold_level');
         
-        $gold_level_info = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
+        $gold_level_list = LevelRepo::getLevelList('gold',$current_level,$page,$limit);
         
-        foreach ($gold_level_info as &$v) {
+        foreach ($gold_level_list as &$v) {
             $v->challenge_times=0;
         }
         
-        return apiSuccess(compact('current_level','gold_level_info'));
+        return apiSuccess($gold_level_list);
     }
     
     public function starDetail()

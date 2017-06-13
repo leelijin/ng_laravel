@@ -24,7 +24,7 @@ class LevelRepo
         if ($current_level > 10) {
             $page = (int)($current_level / 10) + $page;
         }
-        $level_info = Level::$type()->take($limit)->offset(($page - 1) * $limit)->get();
+        $level_info = Level::$type()->take($limit)->offset(($page - 1) * $limit)->orderByRaw('rand()')->get();
         if($level_info->isEmpty())return [];
         $i = 1 * ($page - 1) * $limit + 1;
         foreach ($level_info as &$v) {
@@ -60,9 +60,13 @@ class LevelRepo
         }else{
             //关卡通关
             $re = User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
+            //星级奖励
+            //$re2 =
             return $re?apiSuccess('恭喜通关'):apiError(1,'通关出错，请重试');
         }
     }
+    
+
     
     public static function checkUserCondition($uid,$id,$type)
     {

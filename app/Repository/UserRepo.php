@@ -10,6 +10,7 @@ namespace App\Repository;
 
 
 use App\Models\User;
+use App\Models\UserLevel;
 
 class UserRepo
 {
@@ -82,6 +83,20 @@ class UserRepo
     public static function submitMood($uid,$mood)
     {
         return User::whereId($uid)->update(['mood'=>$mood]);
+    }
+    
+    public static function rewardUser($uid,$rank)
+    {
+        User::whereId($uid)->increment('rank',$rank);
+    }
+    
+    public static function passLevel($uid,$level_id)
+    {
+        $exists = UserLevel::where('uid',$uid)->where('level_id',$level_id)->exists();
+        if(!$exists){
+            UserLevel::save(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
+        }
+        
     }
     
     
