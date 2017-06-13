@@ -26,20 +26,14 @@ class OrderController extends AdminController
     public function index($page=1,$r=30){
         $builder=new AdminListBuilder();
         $map=[];
-        //$postData = I();
-        //if($postData['key'])$map['title']=['like','%'.trim($postData['key']).'%']; //搜索关键词
-        //$map['status']=1;
         list($list,$totalCount)=$this->listPage($this->model,$map,$page,null,true,$r);
         $builder->title($this->title)
-            //->buttonNew(U($this->editName))
-            //->search('按标题搜索：')
-            //->buttonDelete(U('setStatus?model='.$this->modelName))
-            //->setSelectPostUrl(U())
-            //->select('','type','select','','','',[['id'=>1,'value'=>''],['id'=>2,'value'=>'']])
             ->data($list)
-            ->keyText('','')
+            ->keyText('order_id','商户订单号')
+            ->keyText('transaction_id','三方订单号')
+            ->keyText('order_name','订单名称')
+            ->keyText('order_price','订单价格')
             ->keyDoActionEdit($this->editName.'?id=###')
-            //->keyDoActionEdit('delete?id=###','删除')
             ->pagination($totalCount,$r)
             ->display();
     }
