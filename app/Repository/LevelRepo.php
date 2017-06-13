@@ -34,11 +34,6 @@ class LevelRepo
         return $level_info;
     }
     
-    public static function getQuestionDetail()
-    {
-        
-    }
-    
     public static function submitLevel($id,$type,$uid,$wrong_ids=[])
     {
         //检查是否存在
