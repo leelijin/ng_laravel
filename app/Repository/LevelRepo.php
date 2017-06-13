@@ -13,6 +13,8 @@ use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
+use App\Models\UserLevel;
+use Illuminate\Support\Facades\DB;
 
 class LevelRepo
 {
@@ -54,10 +56,18 @@ class LevelRepo
             }
         }else{
             //关卡通关
-            $re = User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
-            //星级奖励
-            //$re2 =
-            return $re?apiSuccess('恭喜通关'):apiError(1,'通关出错，请重试');
+            DB::transaction(function() use ($uid,$type,$id,$info){
+                User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
+                //保存关卡
+                UserRepo::passLevel($uid,$id);
+                //星级奖励
+                $reward = $type == 1 ? 1 : $info['reward'];
+                UserRepo::rewardUser($uid,$reward);
+                return apiSuccess('恭喜通关');
+            });
+            
+            
+            
         }
     }
     

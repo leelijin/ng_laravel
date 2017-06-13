@@ -49,7 +49,7 @@ class LevelController extends Controller
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        $list = $model->get();
+        $list = $model->orderByRaw('rand()')->get();
         return apiSuccess($list);
     }
     
@@ -68,7 +68,7 @@ class LevelController extends Controller
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        $list = $model->get();
+        $list = $model->orderByRaw('rand()')->get();
         return apiSuccess($list);
     }
     

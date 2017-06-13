@@ -43,7 +43,15 @@ class Question extends Model
     protected $casts=[
         'answer_options'=>'array',
     ];
-    //
+    
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('status',function(Builder $builder){
+            $builder->where('status','>=',0);
+        });
+    }
+    
     public function level()
     {
         return $this->belongsTo(Level::class);

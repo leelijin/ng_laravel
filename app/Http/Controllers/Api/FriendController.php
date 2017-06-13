@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Repository\FriendRepo;
 use App\Http\Controllers\Controller;
 
@@ -32,5 +33,11 @@ class FriendController extends Controller
     public function mine()
     {
         return apiSuccess(FriendRepo::getMineFriendList($this->uid,$this->page,$this->limit,$this->request->has('key')?$this->params['key']:''));
+    }
+    
+    public function info($friend_uid)
+    {
+        $userInfo = User::base()->find($friend_uid);
+        return $userInfo?apiSuccess($userInfo):apiError(1,'无此用户');
     }
 }

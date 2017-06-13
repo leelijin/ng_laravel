@@ -23,6 +23,8 @@ Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {
     Route::post('strengthRequest','FriendController@strengthRequest')->middleware('need:to_uid');
     Route::post('handle','FriendController@handle')->middleware('need:request','need:id');
     Route::post('strengthHandle','FriendController@strengthHandle')->middleware('need:request','need:id');
+    Route::post('info/{friend_uid}','FriendController@info');
+    
 });
 
 Route::group(['prefix'=>'index'],function(){

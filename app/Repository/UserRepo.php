@@ -94,9 +94,8 @@ class UserRepo
     {
         $exists = UserLevel::where('uid',$uid)->where('level_id',$level_id)->exists();
         if(!$exists){
-            UserLevel::save(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
+            return UserLevel::save(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
         }
-        
     }
     
     
