@@ -87,14 +87,14 @@ class UserRepo
     
     public static function rewardUser($uid,$rank)
     {
-        User::whereId($uid)->increment('rank',$rank);
+        return User::whereId($uid)->increment('rank',$rank);
     }
     
     public static function passLevel($uid,$level_id)
     {
         $exists = UserLevel::where('uid',$uid)->where('level_id',$level_id)->exists();
         if(!$exists){
-            return UserLevel::save(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
+            return UserLevel::create(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
         }
     }
     

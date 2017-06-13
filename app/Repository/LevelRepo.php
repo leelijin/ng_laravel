@@ -38,10 +38,12 @@ class LevelRepo
     
     public static function submitLevel($id,$type,$uid,$wrong_ids=[])
     {
-        //检查是否存在
-        $info = Level::find($id);
-        if(!$info)return apiError(1,'此关卡不存在,请检查');
-    
+        if($type == 2){
+            //检查是否存在
+            $info = Level::find($id);
+            if(!$info)return apiError(1,'此关卡不存在,请检查');
+        }
+        
         if($wrong_ids){
             //录入到错题库
             $wrong_ids = explode(',',$wrong_ids);
@@ -56,15 +58,20 @@ class LevelRepo
             }
         }else{
             //关卡通关
-            DB::transaction(function() use ($uid,$type,$id,$info){
-                User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
-                //保存关卡
-                UserRepo::passLevel($uid,$id);
-                //星级奖励
-                $reward = $type == 1 ? 1 : $info['reward'];
-                UserRepo::rewardUser($uid,$reward);
+            DB::beginTransaction();
+            $re1=User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
+            //保存关卡
+            $re2=UserRepo::passLevel($uid,$id);
+            //星级奖励
+            $reward = $type == 1 ? 1 : $info['reward'];
+            $re3=UserRepo::rewardUser($uid,$reward);
+            if($re1&&$re2&&$re3){
+                DB::commit();
                 return apiSuccess('恭喜通关');
-            });
+            }else{
+                DB::rollback();
+                return apiError(1,'通关失败');
+            }
             
             
             

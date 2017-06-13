@@ -44,14 +44,6 @@ class Question extends Model
         'answer_options'=>'array',
     ];
     
-    public static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('status',function(Builder $builder){
-            $builder->where('status','>=',0);
-        });
-    }
-    
     public function level()
     {
         return $this->belongsTo(Level::class);
@@ -65,6 +57,11 @@ class Question extends Model
     public function scopeBase($query)
     {
         return $query->select();
+    }
+    
+    public function scopePassing($query,$uid)
+    {
+        return $query->whereNotIn('id',UserLevel::where('uid',$uid)->pluck('level_id'));
     }
     
     public function getImage1Attribute()

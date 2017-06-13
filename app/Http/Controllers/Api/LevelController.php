@@ -16,6 +16,7 @@ class LevelController extends Controller
     
     public function starList()
     {
+        return apiError(1,'此接口已弃用');
         $limit = 20;
         
         $current_level=User::whereId($this->uid)->value('current_star_level');
@@ -45,11 +46,11 @@ class LevelController extends Controller
     {
         $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
         if($conditionDown)return $conditionDown;
-        $model = Question::whereLevelId($this->params['star_id']);
+        $model = Question::where('level_id',0)->passing($this->uid);
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        $list = $model->orderByRaw('rand()')->get();
+        $list = $model->get();
         return apiSuccess($list);
     }
     
