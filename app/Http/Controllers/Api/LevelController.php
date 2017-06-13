@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
 use App\Repository\LevelRepo;
 use App\Repository\RankRepo;
 use App\Repository\UserRepo;
+use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
@@ -44,6 +44,7 @@ class LevelController extends Controller
     
     public function starDetail()
     {
+        $this->limit=10;//写死10
         $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
         if($conditionDown)return $conditionDown;
         $model = Question::where('level_id',0)->passing($this->uid);
@@ -65,7 +66,7 @@ class LevelController extends Controller
     {
         $check = LevelRepo::checkUserCondition($this->uid,$this->params['gold_id'],2);
         if($check)return $check;
-        $model = Question::whereLevelId($this->params['gold_id']);
+        $model = Question::passing($this->uid)->whereLevelId($this->params['gold_id']);
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
@@ -128,6 +129,40 @@ class LevelController extends Controller
         //检查是否支付
         $re = QuestionWrong::whereUid($this->uid)->whereQuestionId($this->params['id'])->delete();
         return $re ? apiSuccess('删除成功') : apiError(1,'删除失败');
+    }
+    
+    public function submitQuestion(Request $request)
+    {
+        $this->validate($request,[
+            'question'=>'required',
+            'desc'=>'required',
+            'answer1'=>'required',
+            'answer2'=>'required',
+            'answer3'=>'required',
+            'answer4'=>'required',
+            'right_answer'=>'between:0,3',
+        ],[
+            'question'=>'问题题目必填',
+            'desc'=>'问题描述必填',
+            'answer1'=>'选项一必填',
+            'answer2'=>'选项二必填',
+            'answer3'=>'选项三必填',
+            'answer4'=>'选项四必填',
+            'right_answer'=>'正确答案必填',
+        ]);
+        $re = Question::create([
+            'question' => $request->question,
+            'content' => $request->desc,
+            'answer_options' => [
+                $request->answer1,
+                $request->answer2,
+                $request->answer3,
+                $request->answer4,
+            ],
+            'right_answer'=>$request->right_answer,
+            'level_id'=>0,
+        ]);
+        return $re ? apiSuccess('提交成功') : apiError(1,'提交失败');
     }
 
 }

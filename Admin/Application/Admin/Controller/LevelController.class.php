@@ -28,6 +28,7 @@ class LevelController extends AdminController
         $model = M($modelName);
         $builder=new AdminListBuilder();
         $map['level_id']=0;
+        $map['status']=1;
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
             ->data($list)
@@ -119,6 +120,7 @@ class LevelController extends AdminController
         $model = M($modelName);
         $builder=new AdminListBuilder();
         $map['level_id']=$id;
+        $map['status']=1;
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title($this->title)
             ->data($list)
@@ -126,6 +128,26 @@ class LevelController extends AdminController
             ->keyId()
             ->keyText('question','题目')
             ->keyText('created_at','创建时间')
+            ->keyDoActionEdit('editQuestion?id=###')
+            ->keyDoActionEdit('deleteQuestion?id=###','删除')
+            ->pagination($totalCount,$r)
+            ->display();
+    }
+    
+    public function questionAudit()
+    {
+        $modelName = 'questions';
+        $model = M($modelName);
+        $builder=new AdminListBuilder();
+        $map['status']=0;
+        list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
+        $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
+            ->data($list)
+            ->buttonNew(U('editQuestion'))
+            ->keyId()
+            ->keyText('question','题目')
+            ->keyText('created_at','创建时间')
+            ->keyText('time_limit','时间限制')
             ->keyDoActionEdit('editQuestion?id=###')
             ->keyDoActionEdit('deleteQuestion?id=###','删除')
             ->pagination($totalCount,$r)

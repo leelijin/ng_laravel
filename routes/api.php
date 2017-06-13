@@ -12,9 +12,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('submitMood',function(\Illuminate\Http\Request $request){
         return App\Repository\UserRepo::submitMood($request->input('uid'),$request->input('mood')) ? apiSuccess('修改心情成功') : apiError(1,'修改失败');
     });
-    Route::post('submitQuestion',function(){
-        return apiSuccess('出题成功');
-    });
+    Route::post('submitQuestion','LevelController@submitQuestion');
 });
 
 Route::group(['prefix'=>'friends','middleware'=>'need:uid'],function() {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -43,6 +44,14 @@ class Question extends Model
     protected $casts=[
         'answer_options'=>'array',
     ];
+    
+    public static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('status',function(Builder $builder){
+            $builder->where('status','>',0);
+        });
+    }
     
     public function level()
     {
