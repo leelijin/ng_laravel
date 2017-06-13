@@ -66,6 +66,7 @@ class LevelRepo
     
     public static function checkUserCondition($uid,$id,$type)
     {
+        return false;
         $type_name = $type == 1?'star':'gold';
         $userInfo = User::whereId($uid)->select(['strength','current_'.$type_name.'_level as current_level'])->first();
         

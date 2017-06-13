@@ -125,8 +125,8 @@ class LevelController extends Controller
     public function mineWrongDelete()
     {
         //检查是否支付
-        $list = QuestionWrong::whereUid($this->uid)->select('question_id as id','question_id','type')->orderBy('id','desc')->paginate($this->limit);
-        return apiSuccess($list);
+        $re = QuestionWrong::whereUid($this->uid)->whereQuestionId($this->params['id'])->delete();
+        return $re ? apiSuccess('删除成功') : apiError(1,'删除失败');
     }
 
 }
