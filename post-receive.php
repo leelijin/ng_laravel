@@ -5,7 +5,4 @@
  * Date: 2017/6/14
  * Time: 9:34
  */
-//exec('git pull origin master');
-
-exec("dir",$output);
-print_r($output);
+exec('git pull origin master');
