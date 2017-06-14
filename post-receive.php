@@ -5,4 +5,4 @@
  * Date: 2017/6/14
  * Time: 9:34
  */
-echo 2;
+exec('git pull origin master');
