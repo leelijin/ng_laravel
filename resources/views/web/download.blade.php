@@ -3,8 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="description" content="成都范儿是成都本地最大最全的吃喝玩乐购深度测评与攻略分享平台。成都范儿周二半价日，最棒的专属折扣与个性化选择。成都美食第一搜索入口。发现成都生活方式。">
-    <meta name="keywords" content="成都范儿，成都美食，成都小吃，成都吃喝玩乐，成都美食攻略">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">

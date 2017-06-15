@@ -4,7 +4,8 @@ Route::get('/', function () {
     return redirect('admin');
 });
 Route::get('contact_us', function () {
-    return 'contact_us_web_page';
+    $config_name = 'CONTACT_US_WEB';
+    return \Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value');
 });
 Route::get('share', function () {
     return view('web.download');

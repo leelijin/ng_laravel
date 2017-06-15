@@ -33,7 +33,8 @@ class OrderController extends AdminController
             ->keyText('transaction_id','三方订单号')
             ->keyText('order_name','订单名称')
             ->keyText('order_price','订单价格')
-            ->keyDoActionEdit($this->editName.'?id=###')
+            ->key('status','支付状态','status',[0=>'待支付',1=>'已支付'])
+            //->keyDoActionEdit($this->editName.'?id=###')
             ->pagination($totalCount,$r)
             ->display();
     }
@@ -56,13 +57,6 @@ class OrderController extends AdminController
                 ->buttonSubmit()->buttonBack()
                 ->display();
         }
-    }
-    public function setStatus($model){
-        parent::setStatus($model);
-    }
-    public function delete($id=''){
-        $re = $this->model->delete($id);
-        $this->handle($re,'删除');
     }
     
 }

@@ -72,4 +72,24 @@ class NoticeController extends AdminController
         $re = $this->model->delete($id);
         $this->handle($re,'删除');
     }
+    
+    public function pageEdit()
+    {
+        $config_name = 'CONTACT_US_WEB';
+        $model = M('config');
+        if (IS_POST) {
+            $data=I();
+            $this->handle($model->save($data));
+        } else {
+            $data=$model->where(['name'=>$config_name])->find();
+            $builder = new AdminConfigBuilder();
+            $builder->title('联系我们网页')
+                ->data($data)
+                ->keyId()
+                ->keyEditor('value','内容')
+                ->buttonSubmit()->buttonBack()
+                ->display();
+        }
+    }
+    
 }
