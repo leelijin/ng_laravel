@@ -51,9 +51,9 @@ class LevelController extends Controller
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        $star_level_list = $model->get();
+        $star_question_list = $model->get();
         $current_level=User::whereId($this->uid)->value('current_star_level');
-        return apiSuccess(compact('current_level','star_level_list'));
+        return apiSuccess(compact('current_level','star_question_list'));
     }
     
     public function starDetailJudge()
