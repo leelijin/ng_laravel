@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return redirect('admin');
+    return redirect('master');
 });
 Route::get('contact_us', function () {
     $config_name = 'CONTACT_US_WEB';
