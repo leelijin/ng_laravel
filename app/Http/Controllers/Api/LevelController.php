@@ -47,13 +47,14 @@ class LevelController extends Controller
         $this->limit=10;//写死10
         $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
         if($conditionDown)return $conditionDown;
-        $model = Question::where('level_id',0)->passing($this->uid);
+        $model = Question::where('level_id',0)->orderByRaw('rand()')->passing($this->uid);
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $star_question_list = $model->get();
         $current_level=User::whereId($this->uid)->value('current_star_level');
-        return apiSuccess(compact('current_level','star_question_list'));
+        $total_time_limit = $model->sum('time_limit');
+        return apiSuccess(compact('current_level','total_time_limit','star_question_list'));
     }
     
     public function starDetailJudge()
