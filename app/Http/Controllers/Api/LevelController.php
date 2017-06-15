@@ -71,7 +71,7 @@ class LevelController extends Controller
         $gold_id = LevelRepo::getUserCurrentGoldLevelId($current_level);
         $check = LevelRepo::checkUserCondition($this->uid,$gold_id,2);
         if($check)return $check;
-        $model = Question::passing($this->uid)->whereLevelId($this->params['gold_id']);
+        $model = Question::passing($this->uid)->whereLevelId($gold_id);
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
