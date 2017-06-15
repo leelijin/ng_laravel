@@ -45,7 +45,7 @@ class LevelController extends Controller
     public function starDetail()
     {
         $this->limit=10;//写死10
-        $conditionDown = LevelRepo::checkUserCondition($this->uid,$this->params['star_id'],1);
+        $conditionDown = LevelRepo::checkUserCondition($this->uid,0,1);
         if($conditionDown)return $conditionDown;
         $model = Question::where('level_id',0)->orderByRaw('rand()')->passing($this->uid);
         if($this->limit!=0){
