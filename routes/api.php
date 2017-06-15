@@ -35,7 +35,7 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     
     Route::any('starDetail','LevelController@starDetail');
     Route::any('starDetail/judge','LevelController@starDetailJudge')->middleware('need:star_id');
-    Route::any('goldDetail','LevelController@goldDetail')->middleware('need:gold_id');
+    Route::any('goldDetail','LevelController@goldDetail');
     Route::any('goldDetail/judge','LevelController@goldDetailJudge')->middleware('need:gold_id');
     
     

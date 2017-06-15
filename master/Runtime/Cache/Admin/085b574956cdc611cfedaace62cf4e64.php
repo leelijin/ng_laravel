@@ -3,50 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo ($meta_title); ?>|<?php echo L('_SNS_BACKSTAGE_MANAGE_');?></title>
-    <link href="/admin/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="/master/Public/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
 
     <!--OC 自定义样式-->
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/css/oc.css" media="all">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/css/oc.css" media="all">
     <!--OC 自定义样式 end-->
-    <link rel="stylesheet" href="/admin/Public/static/os-icon/simple-line-icons.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/admin/Application/Admin/Static/css/oc/admin.css" media="all">
+    <link rel="stylesheet" href="/master/Public/static/os-icon/simple-line-icons.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/master/Application/Admin/Static/css/oc/admin.css" media="all">
     <!--adminlte-->
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/adminlte/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/adminlte/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/adminlte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/adminlte/dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/adminlte/plugins/iCheck/flat/blue.css">
-    <link href="/admin/Application/Admin/Static/bootstrap/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/admin/Application/Admin/Static/bootstrap/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/admin/Application/Admin/Static/bootstrap/css/components.min.css" rel="stylesheet" id="style_components" type="text/css">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/adminlte/plugins/iCheck/flat/blue.css">
+    <link href="/master/Application/Admin/Static/bootstrap/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/master/Application/Admin/Static/bootstrap/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/master/Application/Admin/Static/bootstrap/css/components.min.css" rel="stylesheet" id="style_components" type="text/css">
 
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/css/adminlte.css" media="all">
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/css/namecard.css" media="all">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/css/adminlte.css" media="all">
+    <link rel="stylesheet" href="/master/Application/Admin/Static/css/namecard.css" media="all">
     <!--adminlte end-->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="/admin/Application/Admin/Static/bootstrap/plugins/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/admin/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/master/Application/Admin/Static/bootstrap/plugins/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/master/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
 
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="/admin/Public/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/master/Public/static/jquery-1.10.2.min.js"></script>
     <![endif]--><!--[if gte IE 9]><!-->
-    <script type="text/javascript" src="/admin/Public/js/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="/admin/Application/Admin/Static/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="/master/Public/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/master/Application/Admin/Static/js/jquery.mousewheel.js"></script>
     <!--<![endif]-->
     
     <script type="text/javascript">
         var ThinkPHP = window.Think = {
-            "ROOT": "/admin", //当前网站地址
-            "APP": "/admin/index.php?s=", //当前项目地址
-            "PUBLIC": "/admin/Public", //项目公共目录地址
+            "ROOT": "/master", //当前网站地址
+            "APP": "/master/index.php?s=", //当前项目地址
+            "PUBLIC": "/master/Public", //项目公共目录地址
             "DEEP": "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINF<?php echo L("_O_SEGMENTATION_");?>
             "MODEL": ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
             "VAR": ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"],
             'URL_MODEL': "<?php echo C('URL_MODEL');?>"
         }
-        var _ROOT_ = "/admin";
+        var _ROOT_ = "/master";
     </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -121,7 +121,7 @@
                     </li>-->
                     <script>
                         function clear_cache() {
-                            $.get('/admin/cc.php');
+                            $.get('/master/cc.php');
                             toast.success("<?php echo L('_CACHE_CLEAR_SUCCESS_'); echo L('_PERIOD_');?>");
                         }
                     </script>
@@ -746,22 +746,22 @@
 
 <!--adminlte-->
     <!-- FastClick -->
-<script src="/admin/Application/Admin/Static/adminlte/plugins/fastclick/fastclick.js"></script>
-<script src="/admin/Application/Admin/Static/adminlte/bootstrap/js/bootstrap.min.js"></script>
-<script src="/admin/Application/Admin/Static/bootstrap/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="/admin/Application/Admin/Static/adminlte/dist/js/app.min.js"></script>
-<link rel="stylesheet" href="/admin/Application/Admin/Static/bootstrap/plugins/bootstrap-toastr/toastr.min.css">
-<script src="/admin/Application/Admin/Static/bootstrap/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
-<script src="/admin/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/master/Application/Admin/Static/adminlte/plugins/fastclick/fastclick.js"></script>
+<script src="/master/Application/Admin/Static/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<script src="/master/Application/Admin/Static/bootstrap/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="/master/Application/Admin/Static/adminlte/dist/js/app.min.js"></script>
+<link rel="stylesheet" href="/master/Application/Admin/Static/bootstrap/plugins/bootstrap-toastr/toastr.min.css">
+<script src="/master/Application/Admin/Static/bootstrap/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+<script src="/master/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
 <!--adminlte end-->
-<script type="text/javascript" src="/admin/Application/Admin/Static/js/com/com.toast.class.js"></script>
+<script type="text/javascript" src="/master/Application/Admin/Static/js/com/com.toast.class.js"></script>
 
 <script type="text/javascript">
     (function () {
         var ThinkPHP = window.Think = {
-            "ROOT": "/admin", //当前网站地址
-            "APP": "/admin/index.php?s=", //当前项目地址
-            "PUBLIC": "/admin/Public", //项目公共目录地址
+            "ROOT": "/master", //当前网站地址
+            "APP": "/master/index.php?s=", //当前项目地址
+            "PUBLIC": "/master/Public", //项目公共目录地址
             "DEEP": "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
             "MODEL": ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
             "VAR": ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"],
@@ -769,8 +769,8 @@
         }
     })();
 </script>
-<script type="text/javascript" src="/admin/Public/static/think.js"></script>
-<script type="text/javascript" src="/admin/Application/Admin/Static/js/common.js"></script>
+<script type="text/javascript" src="/master/Public/static/think.js"></script>
+<script type="text/javascript" src="/master/Application/Admin/Static/js/common.js"></script>
 
 
 <script type="text/javascript">
@@ -833,15 +833,15 @@
     }
 </script>
 
-    <script src="/admin/Application/Admin/Static/bootstrap/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-    <script src="/admin/Application/Admin/Static/bootstrap/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-    <link href="/admin/Application/Admin/Static/bootstrap/plugins/metro/MetroJs.min.css" type="text/css" rel="stylesheet">
-    <script src="/admin/Application/Admin/Static/bootstrap/plugins/metro/MetroJs.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/admin/Application/Admin/Static/js/highcharts.js"></script>
-    <script type="text/javascript" src="/admin/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="/master/Application/Admin/Static/bootstrap/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="/master/Application/Admin/Static/bootstrap/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+    <link href="/master/Application/Admin/Static/bootstrap/plugins/metro/MetroJs.min.css" type="text/css" rel="stylesheet">
+    <script src="/master/Application/Admin/Static/bootstrap/plugins/metro/MetroJs.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/master/Application/Admin/Static/js/highcharts.js"></script>
+    <script type="text/javascript" src="/master/Application/Admin/Static/adminlte/plugins/jQueryUI/jquery-ui.min.js"></script>
 
-    <script src="/admin/Application/Admin/Static/js/jquery.simple-color.js"></script>
-    <link rel="stylesheet" href="/admin/Application/Admin/Static/css/tile.css" media="all">
+    <script src="/master/Application/Admin/Static/js/jquery.simple-color.js"></script>
+    <link rel="stylesheet" href="/master/Application/Admin/Static/css/tile.css" media="all">
 
 
     <?php echo hook('adminIndexModal', array());?>
@@ -1590,7 +1590,7 @@
         });
 
         $('[data-role=saveCountSetting]').click(function () {
-            $.post("/admin/index.php?s=/index/index.html", {count_day: $('[name=count_day]').val()}, function (msg) {
+            $.post("/master/index.php?s=/index/index.html", {count_day: $('[name=count_day]').val()}, function (msg) {
                 handleAjax(msg);
             });
         });

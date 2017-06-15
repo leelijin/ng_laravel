@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
@@ -66,14 +67,17 @@ class LevelController extends Controller
     
     public function goldDetail()
     {
-        $check = LevelRepo::checkUserCondition($this->uid,$this->params['gold_id'],2);
+        $gold_id = 42;
+        $check = LevelRepo::checkUserCondition($this->uid,$gold_id,2);
         if($check)return $check;
         $model = Question::passing($this->uid)->whereLevelId($this->params['gold_id']);
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        $list = $model->orderByRaw('rand()')->get();
-        return apiSuccess($list);
+        $current_level=User::whereId($this->uid)->value('current_gold_level');
+        $level_info=Level::gold()->find($gold_id);
+        $gold_question_list = $model->orderByRaw('rand()')->get();
+        return apiSuccess(compact('current_level','level_info','gold_question_list'));
     }
     
     public function goldDetailJudge()
