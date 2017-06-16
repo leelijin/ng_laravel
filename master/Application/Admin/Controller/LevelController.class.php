@@ -83,7 +83,7 @@ class LevelController extends AdminController
                 ->keyId()
                 //->keyInteger('need_strength','所需体力')
                 ->keyInteger('time_limit','时间限制')
-                ->keyTextArea('notice','开卷有益提示')
+                //->keyEditor('notice','开卷有益提示')
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
                 ->display();
@@ -107,7 +107,7 @@ class LevelController extends AdminController
                 //->keyInteger('need_strength','所需体力')
                 ->keyInteger('time_limit','时间限制')
                 ->keyInteger('reward','星级奖励')
-                ->keyTextArea('notice','开卷有益提示')
+                ->keyEditor('notice','开卷有益提示')
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
                 ->display();
