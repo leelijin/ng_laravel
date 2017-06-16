@@ -11,9 +11,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserLevel extends Model
+class UserQuestion extends Model
 {
-    protected $table='user_level';
+    protected $table='user_question';
     protected $guarded=[];
     public $timestamps=false;
 }

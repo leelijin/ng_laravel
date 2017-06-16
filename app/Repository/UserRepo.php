@@ -10,7 +10,7 @@ namespace App\Repository;
 
 
 use App\Models\User;
-use App\Models\UserLevel;
+use App\Models\UserQuestion;
 
 class UserRepo
 {
@@ -92,10 +92,21 @@ class UserRepo
     
     public static function passLevel($uid,$level_id)
     {
-        $exists = UserLevel::where('uid',$uid)->where('level_id',$level_id)->exists();
-        if(!$exists){
-            return UserLevel::create(['uid'=>$uid,'level_id'=>$level_id,'status'=>1]);
+        if(is_array($level_id)){
+            foreach ($level_id as $item_id) {
+                $exists = UserQuestion::where('uid',$uid)->where('question_id',$item_id)->exists();
+                if(!$exists){
+                    $re[]=UserQuestion::create(['uid' =>$uid,'question_id' =>$item_id,'status' =>1]);
+                }
+            }
+            return $re;
+        }else{
+            $exists = UserQuestion::where('uid',$uid)->where('question_id',$level_id)->exists();
+            if(!$exists){
+                return UserQuestion::create(['uid' =>$uid,'question_id' =>$level_id,'status' =>1]);
+            }
         }
+        
     }
     
     

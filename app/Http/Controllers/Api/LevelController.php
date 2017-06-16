@@ -115,7 +115,7 @@ class LevelController extends Controller
     
     public function starSubmit()
     {
-        return LevelRepo::submitLevel($this->params['star_id'],1,$this->uid,$this->request->has('wrong_ids')?$this->params['wrong_ids']:[]);
+        return LevelRepo::submitLevel(0,1,$this->uid,$this->request->has('wrong_ids')?$this->params['wrong_ids']:[],$this->request->has('pass_ids')?$this->params['pass_ids']:[]);
     }
     
     public function goldSubmit()

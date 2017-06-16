@@ -13,7 +13,7 @@ use App\Models\Level;
 use App\Models\Question;
 use App\Models\QuestionWrong;
 use App\Models\User;
-use App\Models\UserLevel;
+use App\Models\UserQuestion;
 use Illuminate\Support\Facades\DB;
 
 class LevelRepo
@@ -36,7 +36,7 @@ class LevelRepo
         return $level_info;
     }
     
-    public static function submitLevel($id,$type,$uid,$wrong_ids=[])
+    public static function submitLevel($id,$type,$uid,$wrong_ids=[],$pass_ids=[])
     {
         if($type == 2){
             //检查是否存在
@@ -60,8 +60,12 @@ class LevelRepo
             //关卡通关
             DB::beginTransaction();
             $re1=User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
-            //保存关卡
-            $re2=UserRepo::passLevel($uid,$id);
+            //保存关卡 无尽模式使用
+            if($pass_ids){
+                $pass_ids = explode(',',$pass_ids);
+                if(is_array($pass_ids))$re2=UserRepo::passLevel($uid,$pass_ids);
+            }
+            
             //星级奖励
             $reward = $type == 1 ? 1 : $info['reward'];
             $re3=UserRepo::rewardUser($uid,$reward);

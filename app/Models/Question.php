@@ -70,7 +70,7 @@ class Question extends Model
     
     public function scopePassing($query,$uid)
     {
-        return $query->whereNotIn('id',UserLevel::where('uid',$uid)->pluck('level_id'));
+        return $query->whereNotIn('id',UserQuestion::where('uid',$uid)->pluck('level_id'));
     }
     
     public function getImage1Attribute()
