@@ -63,13 +63,13 @@ class LevelRepo
             //保存关卡 无尽模式使用
             if($pass_ids){
                 $pass_ids = explode(',',$pass_ids);
-                if(is_array($pass_ids))$re2=UserRepo::passLevel($uid,$pass_ids);
+                if(is_array($pass_ids))UserRepo::passLevel($uid,$pass_ids);
             }
             
             //星级奖励
             $reward = $type == 1 ? 1 : $info['reward'];
             $re3=UserRepo::rewardUser($uid,$reward);
-            if($re1&&$re2&&$re3){
+            if($re1&&$re3){
                 DB::commit();
                 return apiSuccess('恭喜通关');
             }else{
