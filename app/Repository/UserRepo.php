@@ -90,10 +90,10 @@ class UserRepo
         return User::whereId($uid)->increment('rank',$rank);
     }
     
-    public static function passLevel($uid,$level_id)
+    public static function passLevel($uid,$question_id)
     {
-        if(is_array($level_id)){
-            foreach ($level_id as $item_id) {
+        if(is_array($question_id)){
+            foreach ($question_id as $item_id) {
                 $exists = UserQuestion::where('uid',$uid)->where('question_id',$item_id)->exists();
                 if(!$exists){
                     $re[]=UserQuestion::create(['uid' =>$uid,'question_id' =>$item_id,'status' =>1]);
@@ -101,9 +101,9 @@ class UserRepo
             }
             return $re;
         }else{
-            $exists = UserQuestion::where('uid',$uid)->where('question_id',$level_id)->exists();
+            $exists = UserQuestion::where('uid',$uid)->where('question_id',$question_id)->exists();
             if(!$exists){
-                return UserQuestion::create(['uid' =>$uid,'question_id' =>$level_id,'status' =>1]);
+                return UserQuestion::create(['uid' =>$uid,'question_id' =>$question_id,'status' =>1]);
             }
         }
         

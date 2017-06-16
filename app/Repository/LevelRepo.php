@@ -59,7 +59,7 @@ class LevelRepo
         }else{
             //关卡通关
             DB::beginTransaction();
-            $re1=User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
+            User::whereId($uid)->increment($type==1?'current_star_level':'current_gold_level');
             //保存关卡 无尽模式使用
             if($pass_ids){
                 $pass_ids = explode(',',$pass_ids);
@@ -68,14 +68,9 @@ class LevelRepo
             
             //星级奖励
             $reward = $type == 1 ? 1 : $info['reward'];
-            $re3=UserRepo::rewardUser($uid,$reward);
-            if($re1&&$re3){
-                DB::commit();
-                return apiSuccess('恭喜通关');
-            }else{
-                DB::rollback();
-                return apiError(1,'通关失败');
-            }
+            UserRepo::rewardUser($uid,$reward);
+            DB::commit();
+            return apiSuccess('恭喜通关');
             
             
             
