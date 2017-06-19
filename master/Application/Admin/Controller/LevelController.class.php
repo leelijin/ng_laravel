@@ -29,10 +29,12 @@ class LevelController extends AdminController
         $builder=new AdminListBuilder();
         $map['level_id']=0;
         $map['status']=1;
+        if(I('post.title'))$map['question']=['like','%'.I('post.title').'%'];
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
             ->data($list)
             ->buttonNew(U('editQuestion'))
+            ->search('搜索','title')
             ->keyId()
             ->keyText('question','题目')
             ->keyText('created_at','创建时间')
