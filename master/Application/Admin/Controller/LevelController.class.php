@@ -58,7 +58,7 @@ class LevelController extends AdminController
             ->keyText('question_number','题目数量')
             //->keyText('need_strength','所需体力')
             ->keyText('time_limit','时间限制')
-            ->keyText('reward','金币奖励')
+            ->keyText('reward','星级奖励')
             ->keyText('created_at','创建时间')
             ->keyDoActionEdit($this->editName.'Gold?id=###')
             ->keyDoActionEdit('question?id=###','题目管理')
