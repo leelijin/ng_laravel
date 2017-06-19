@@ -83,7 +83,7 @@ class NoticeController extends AdminController
             $this->handle($model->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
-            $value=json_decode($data['value']);
+            $value=json_decode($data['value'],true);
             $data['img']=$value['img'];$data['content']=$value['content'];
             $builder = new AdminConfigBuilder();
             $builder->title('联系我们网页')
