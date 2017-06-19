@@ -84,7 +84,7 @@ class NoticeController extends AdminController
         } else {
             $data=$model->where(['name'=>$config_name])->find();
             $value=json_decode($data['value'],true);
-            $data['img']=$value['img'];$data['content']=$value['content'];
+            $data['img']=$value[0];$data['content']=$value[1];
             $builder = new AdminConfigBuilder();
             $builder->title('联系我们网页')
                 ->data($data)
