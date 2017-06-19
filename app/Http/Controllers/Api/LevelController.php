@@ -53,8 +53,12 @@ class LevelController extends Controller
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
         $star_question_list = $model->get();
+        $sum=0;
+        foreach ($star_question_list as $star) {
+            $sum+=$star->time_limit;
+        }
         $current_level=User::whereId($this->uid)->value('current_star_level');
-        $total_time_limit = (int)$model->sum('time_limit');
+        $total_time_limit = (int)$sum;
         return apiSuccess(compact('current_level','total_time_limit','star_question_list'));
     }
     
