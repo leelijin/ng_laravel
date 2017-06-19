@@ -79,7 +79,7 @@ class NoticeController extends AdminController
         $model = M('config');
         if (IS_POST) {
             $data=I();
-            $data['value']=json_encode($data['img'],$data['content']);
+            $data['value']=json_encode([$data['img'],$data['content']]);
             $this->handle($model->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
