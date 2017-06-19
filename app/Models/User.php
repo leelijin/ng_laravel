@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Repository\UserRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -57,7 +58,7 @@ class User extends Model
     
     protected $hidden=['password','deleted_at'];
     protected $fillable=['nickname','mobile','password','avatar','token','uuid','status'];
-    
+    protected $appends=['rank_num'];
     public static function boot()
     {
         parent::boot();
@@ -84,6 +85,11 @@ class User extends Model
     public function getAvatarAttribute()
     {
         return $this->attributes['avatar']=pictureTransfer($this->attributes['avatar']);
+    }
+    
+    public function getRankNumAttribute()
+    {
+        return $this->attributes['rank_num']=UserRepo::getUserRankNum($this->attributes['rank']);
     }
     
     public function scopeBase($query)

@@ -109,6 +109,11 @@ class UserRepo
         
     }
     
+    public static function getUserRankNum($rank)
+    {
+        return User::where('rank','>=',$rank)->whereStatus(1)->count();
+    }
+    
     
     
 }
