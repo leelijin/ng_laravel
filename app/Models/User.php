@@ -98,12 +98,12 @@ class User extends Model
     
     public function scopeTopStar($query,$limit=10)
     {
-        return $query->orderBy('star','desc')->select('id as uid','nickname','avatar','star')->take($limit);
+        return $query->orderBy('current_star_level','desc')->select('id as uid','nickname','avatar','current_star_level','rank')->take($limit);
     }
     
     public function scopeTopGold($query,$limit=10)
     {
-        return $query->orderBy('gold','desc')->select('id as uid','nickname','avatar','gold')->take($limit);
+        return $query->orderBy('current_gold_level','desc')->select('id as uid','nickname','avatar','current_gold_level','rank')->take($limit);
     }
     
     
