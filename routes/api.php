@@ -61,12 +61,12 @@ Route::group(['prefix'=>'items','middleware'=>'need:uid'],function(){
     Route::post('consume','ItemController@consume')->middleware('need:item_id');
 });
 
-Route::group(['prefix'=>'rank'],function(){
-    Route::any('star','LevelController@rankStar');
-    Route::any('star/friends','LevelController@rankStarFriends')->middleware('need:uid');
-    Route::any('gold','LevelController@rankGold');
-    Route::any('gold/friends','LevelController@rankGoldFriends')->middleware('need:uid');
-});
+//Route::group(['prefix'=>'rank'],function(){
+    Route::any('rank','LevelController@rank');
+    Route::any('rank/friends','LevelController@rankFriends')->middleware('need:uid');
+    //Route::any('gold','LevelController@rankGold');
+    //Route::any('gold/friends','LevelController@rankGoldFriends')->middleware('need:uid');
+//});
 
 Route::group(['prefix'=>'alipay'],function(){
     Route::any('buy/wrong','PayController@initAlipay')->middleware('need:uid');

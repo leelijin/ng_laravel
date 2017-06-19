@@ -93,29 +93,29 @@ class LevelController extends Controller
         return apiSuccess(['message'=>'条件通过','user_strength'=>UserRepo::getUserStrength($this->uid)]);
     }
     
-    public function rankStar()
+    public function rank()
     {
-        $list = RankRepo::getRank('TopStar',$this->limit);
+        $list = RankRepo::getRank('top',$this->limit);
         return apiSuccess($list);
     }
     
-    public function rankStarFriends()
+    public function rankFriends()
     {
-        $list = RankRepo::getRank('TopStar',$this->limit,true,$this->uid);
+        $list = RankRepo::getRank('Top',$this->limit,true,$this->uid);
         return apiSuccess($list);
     }
     
-    public function rankGold()
-    {
-        $list = RankRepo::getRank('TopGold',$this->limit);
-        return apiSuccess($list);
-    }
-    
-    public function rankGoldFriends()
-    {
-        $list = RankRepo::getRank('TopGold',$this->limit,true,$this->uid);
-        return apiSuccess($list);
-    }
+    //public function rankGold()
+    //{
+    //    $list = RankRepo::getRank('TopGold',$this->limit);
+    //    return apiSuccess($list);
+    //}
+    //
+    //public function rankGoldFriends()
+    //{
+    //    $list = RankRepo::getRank('TopGold',$this->limit,true,$this->uid);
+    //    return apiSuccess($list);
+    //}
     
     public function starSubmit()
     {
