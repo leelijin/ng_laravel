@@ -27,9 +27,9 @@ class IndexController extends Controller
     {
         $announce=Notice::take(2)->get()?:[];
         if($this->request->has('uid')){
-            //$friend_requests=FriendRepo::getMyFriendRequest($this->uid);
+            $friend_requests=FriendRepo::getMyFriendRequest($this->uid);
             //$friend_strength=FriendRepo::getMyStrengthRequest($this->uid);
-            $friend_requests=[];
+            //$friend_requests=[];
             $friend_strength=[];
         }else{
             $friend_requests=$friend_strength=[];
