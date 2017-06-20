@@ -99,7 +99,7 @@ class User extends Model
     
     public function scopeSimple($query)
     {
-        return $query->select('id as uid','nickname','avatar');
+        return $query->select('id as uid','nickname','avatar','rank');
     }
     
     public function scopeTop($query,$limit=10)
