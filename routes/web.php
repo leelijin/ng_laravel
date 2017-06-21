@@ -10,6 +10,9 @@ Route::get('contact_us', function () {
     $data['content']=$value[1];
     return $data;
 });
+Route::get('share', function () {
+    return view('web.download');
+});
 
 Route::post('wechatpay/webNotice','Api\PayController@wxNotice');
 Route::post('alipay/webNotice','Api\PayController@aliNotice');

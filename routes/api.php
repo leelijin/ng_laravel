@@ -85,6 +85,6 @@ Route::get('share', function () {
         'title'=>'分享标题',
         'desc'=>'分享描述',
         'thumb'=>'分享头图',
-        'link'=>'分享链接',
+        'link'=>env('APP_URL').'/share',
     ];
 });
