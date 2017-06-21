@@ -96,4 +96,35 @@ class NoticeController extends AdminController
         }
     }
     
+    public function shareSettins()
+    {
+        $config_name = 'SHARE_SETTINGS';
+        $model = M('config');
+        if (IS_POST) {
+            $post=I();
+            $data['value']=json_encode([
+                'title'=>$post['title'],
+                'desc'=>$post['desc'],
+                'thumb'=>$post['thumb'],
+                'link'=>$post['link'],
+                'content'=>$post['content'],
+            ]);
+            $this->handle($model->save($data));
+        } else {
+            $data=$model->where(['name'=>$config_name])->find();
+            $value=json_decode($data['value'],true);
+            $builder = new AdminConfigBuilder();
+            $builder->title('分享配置')
+                ->data($value)
+                ->keyId()
+                ->keyText('title','分享标题')
+                ->keyText('desc','分享描述')
+                ->keySingleImage('thumb','分享头图')
+                ->keyText('link','分享链接','不填链接则显示以下内容')
+                ->keyEditor('content','内容')
+                ->buttonSubmit()->buttonBack()
+                ->display();
+        }
+    }
+    
 }

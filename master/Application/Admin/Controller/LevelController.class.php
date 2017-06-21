@@ -136,14 +136,14 @@ class LevelController extends AdminController
             ->display();
     }
     
-    public function questionAudit()
+    public function questionAudit($page=1,$r=30)
     {
         $modelName = 'questions';
         $model = M($modelName);
         $builder=new AdminListBuilder();
         $map['status']=0;
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
-        $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
+        $builder->title('待审核题库')
             ->data($list)
             ->buttonNew(U('editQuestion'))
             ->keyId()
