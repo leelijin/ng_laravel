@@ -79,3 +79,12 @@ Route::group(['prefix'=>'applepay'],function(){
     Route::any('buy/wrong','PayController@applePay')->middleware('need:uid');
     Route::any('notice','PayController@applePayNotice')->middleware('need:uid')->middleware('need:order_no')->middleware('need:transaction_id');
 });
+
+Route::get('share', function () {
+    return [
+        'title'=>'分享标题',
+        'desc'=>'分享描述',
+        'thumb'=>'分享头图',
+        'link'=>'分享链接',
+    ];
+});
