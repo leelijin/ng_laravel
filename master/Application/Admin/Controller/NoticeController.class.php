@@ -96,7 +96,7 @@ class NoticeController extends AdminController
         }
     }
     
-    public function shareSettins()
+    public function shareSettings()
     {
         $config_name = 'SHARE_SETTINGS';
         $model = M('config');
