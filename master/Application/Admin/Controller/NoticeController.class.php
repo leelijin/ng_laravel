@@ -110,10 +110,11 @@ class NoticeController extends AdminController
                 'content'=>$post['content'],
             ]);
             $data['id']=$post['id'];
-            $this->handle($model->where(['name'=>$config_name])->save($data));
+            $this->handle($model->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
             $value=json_decode($data['value'],true);
+            $value['id']=$data['id'];
             $builder = new AdminConfigBuilder();
             $builder->title('分享配置')
                 ->data($value)

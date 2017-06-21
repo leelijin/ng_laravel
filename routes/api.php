@@ -88,10 +88,10 @@ Route::get('share', function () {
     //if($info['link']){
     //
     //}
-    return [
+    return apiSuccess([
         'title'=>'分享标题',
         'desc'=>'分享描述',
         'thumb'=>'分享头图',
         'link'=>$_SERVER['HTTP_HOST'].'/share',
-    ];
+    ]);
 });
