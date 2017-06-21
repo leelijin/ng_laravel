@@ -110,7 +110,7 @@ class NoticeController extends AdminController
                 'content'=>$post['content'],
             ]);
             $data['id']=$post['id'];
-            $this->handle($model->save($data));
+            $this->handle($model->where(['name'=>$config_name])->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
             $value=json_decode($data['value'],true);
