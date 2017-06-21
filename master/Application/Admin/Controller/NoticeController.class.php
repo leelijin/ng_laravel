@@ -108,8 +108,8 @@ class NoticeController extends AdminController
                 'thumb'=>$post['thumb'],
                 'link'=>$post['link'],
                 'content'=>$post['content'],
-                'id'=>$post['id'],
             ]);
+            $data['id']=$post['id'];
             $this->handle($model->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
