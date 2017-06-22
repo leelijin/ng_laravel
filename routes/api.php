@@ -80,7 +80,7 @@ Route::group(['prefix'=>'applepay'],function(){
     Route::any('notice','PayController@applePayNotice')->middleware('need:uid')->middleware('need:order_no')->middleware('need:transaction_id');
 });
 
-Route::get('share', function () {
+Route::any('share', function () {
     //$config_name = 'SHARE_SETTINGS';
     //$info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
     //$info['thumb']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
