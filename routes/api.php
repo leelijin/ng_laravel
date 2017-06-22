@@ -83,7 +83,7 @@ Route::group(['prefix'=>'applepay'],function(){
 Route::any('share', function () {
     $config_name = 'SHARE_SETTINGS';
     $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    $info['thumb']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
+    $info['thumb']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
     $info['link'] = $info['link']?:$_SERVER['HTTP_HOST'].'/share_self';
     unset($info['content']);
     return apiSuccess($info);
@@ -92,8 +92,8 @@ Route::any('share', function () {
 Route::any('contact_us', function () {
     $config_name = 'CONTACT_US_WEB';
     $value= json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    $data['img1']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img1'])->value('path');
-    $data['img2']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img2'])->value('path');
+    $data['img1']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img1'])->value('path');
+    $data['img2']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img2'])->value('path');
     $data['content']=$value['content'];
     return apiSuccess($data);
 });
