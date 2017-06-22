@@ -55,11 +55,22 @@ class Level extends Model
     
     public function scopeGold($query)
     {
-        return $query->select('id','question_number','time_limit','reward','status','notice')->whereLevelType(2);
+        return $query->select('id','question_number','time_limit','reward','status','notice','notice_img1','notice_img2')->whereLevelType(2);
     }
     
     public function getQuestionNumberAttribute()
     {
         return $this->attributes['question_number']=Question::whereLevelId($this->attributes['id'])->count();
     }
+    
+    public function getNoticeImg1Attribute()
+    {
+        return $this->attributes['notice_img1']=pictureTransfer($this->attributes['notice_img1']);
+    }
+    
+    public function getNoticeImg2Attribute()
+    {
+        return $this->attributes['notice_img2']=pictureTransfer($this->attributes['notice_img2']);
+    }
+    
 }

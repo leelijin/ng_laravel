@@ -21,6 +21,7 @@ if(!function_exists('requireLogin')){
 
 if(!function_exists('pictureTransfer')){
     function pictureTransfer($cover){
+        if(!$cover)return '';
         if(is_numeric($cover)){
             return config('app.master_url').App\Models\Picture::getPath($cover);
         }else{

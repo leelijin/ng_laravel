@@ -110,6 +110,8 @@ class LevelController extends AdminController
                 //->keyInteger('need_strength','所需体力')
                 ->keyInteger('time_limit','时间限制')
                 ->keyInteger('reward','星级奖励')
+                ->keySingleImage('notice_img1','开卷有益提示-图片1')
+                ->keySingleImage('notice_img2','开卷有益提示-图片2')
                 ->keyEditor('notice','开卷有益提示','无图',$config)
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
