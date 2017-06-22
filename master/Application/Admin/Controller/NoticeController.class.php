@@ -86,7 +86,7 @@ class NoticeController extends AdminController
             $value=json_decode($data['value'],true);
             $data['img1']=$value['img1'];$data['img2']=$value['img2'];$data['content']=$value['content'];
             $builder = new AdminConfigBuilder();
-            $config= "toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily']]";
+            $config= "'source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily'";
             $builder->title('联系我们网页')
                 ->data($data)
                 ->keyId()
