@@ -84,7 +84,7 @@ Route::any('share', function () {
     $config_name = 'SHARE_SETTINGS';
     $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
     $info['thumb']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
-    $info['link'] = $info['link']?:$_SERVER['HTTP_HOST'].'/share_self';
+    $info['link'] = $info['link']?:env('APP_URL').'/share_self';
     unset($info['content']);
     return apiSuccess($info);
 });
