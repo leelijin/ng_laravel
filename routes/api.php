@@ -81,17 +81,18 @@ Route::group(['prefix'=>'applepay'],function(){
 });
 
 Route::any('share', function () {
-    //$config_name = 'SHARE_SETTINGS';
-    //$info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    //$info['thumb']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
-    //$info['link'] = $info['link']?:$_SERVER['HTTP_HOST'].'/share_self';
-    //if($info['link']){
-    //
-    //}
-    return apiSuccess([
-        'title'=>'分享标题',
-        'desc'=>'分享描述',
-        'thumb'=>'分享头图',
-        'link'=>$_SERVER['HTTP_HOST'].'/share',
-    ]);
+    $config_name = 'SHARE_SETTINGS';
+    $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
+    $info['thumb']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
+    $info['link'] = $info['link']?:$_SERVER['HTTP_HOST'].'/share_self';
+    unset($info['content']);
+    return apiSuccess($info);
+});
+
+Route::any('contact_us', function () {
+    $config_name = 'CONTACT_US_WEB';
+    $value= json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
+    $data['img']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value[0])->value('path');
+    $data['content']=$value[1];
+    return apiSuccess($data);
 });
