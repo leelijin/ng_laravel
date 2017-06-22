@@ -79,18 +79,20 @@ class NoticeController extends AdminController
         $model = M('config');
         if (IS_POST) {
             $data=I();
-            $data['value']=json_encode([$data['img'],$data['content']]);
+            $data['value']=json_encode(['img1'=>$data['img1'],'img2'=>$data['img2'],'content'=>$data['content']]);
             $this->handle($model->save($data));
         } else {
             $data=$model->where(['name'=>$config_name])->find();
             $value=json_decode($data['value'],true);
-            $data['img']=$value[0];$data['content']=$value[1];
+            $data['img1']=$value['img1'];$data['img2']=$value['img2'];$data['content']=$value['content'];
             $builder = new AdminConfigBuilder();
+            $config= "toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily']]";
             $builder->title('联系我们网页')
                 ->data($data)
                 ->keyId()
-                ->keySingleImage('img','图片')
-                ->keyEditor('content','内容')
+                ->keySingleImage('img1','图片1')
+                ->keySingleImage('img2','图片2')
+                ->keyEditor('content','内容','无图',$config)
                 ->buttonSubmit()->buttonBack()
                 ->display();
         }

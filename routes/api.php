@@ -92,7 +92,8 @@ Route::any('share', function () {
 Route::any('contact_us', function () {
     $config_name = 'CONTACT_US_WEB';
     $value= json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    $data['img']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value[0])->value('path');
-    $data['content']=$value[1];
+    $data['img1']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img1'])->value('path');
+    $data['img2']=$_SERVER['HTTP_HOST'].\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img2'])->value('path');
+    $data['content']=$value['content'];
     return apiSuccess($data);
 });
