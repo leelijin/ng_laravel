@@ -103,13 +103,14 @@ class LevelController extends AdminController
         } else {
             if($id)$data=$this->model->find($id);
             $builder = new AdminConfigBuilder();
+            $config= "'source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily'";
             $builder->title($this->title)
                 ->data($data)
                 ->keyId()
                 //->keyInteger('need_strength','所需体力')
                 ->keyInteger('time_limit','时间限制')
                 ->keyInteger('reward','星级奖励')
-                ->keyEditor('notice','开卷有益提示')
+                ->keyEditor('notice','开卷有益提示','无图',$config)
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
                 ->display();
