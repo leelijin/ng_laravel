@@ -11,11 +11,11 @@
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-    <link rel="Shortcut Icon" href="images/favicon.ico" >
+    <link rel="Shortcut Icon" href="images/favicon.ico">
     <title>颠覆吧NG</title>
 </head>
 <body id="body">
-{{htmlspecialchars_decode($content)}}
+{!!$content!!}
 
 </body>
 </html>

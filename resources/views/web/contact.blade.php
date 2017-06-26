@@ -15,6 +15,6 @@
     <title>颠覆吧NG-联系我们</title>
 </head>
 <body>
-{{htmlspecialchars_decode($content)}}
+{!! $content !!}
 </body>
 </html>
