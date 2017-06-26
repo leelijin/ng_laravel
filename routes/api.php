@@ -83,7 +83,7 @@ Route::group(['prefix'=>'applepay'],function(){
 Route::any('share', function () {
     $config_name = 'SHARE_SETTINGS';
     $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    $info['thumb']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($info['thumb'])->value('path');
+    $info['thumb']=pictureTransfer($info['thumb']);
     $info['link'] = $info['link']?:env('APP_URL').'/share_self';
     unset($info['content']);
     return apiSuccess($info);
@@ -92,8 +92,8 @@ Route::any('share', function () {
 Route::any('contact_us', function () {
     $config_name = 'CONTACT_US_WEB';
     $value= json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    $data['img1']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img1'])->value('path');
-    $data['img2']=env('APP_URL').\Illuminate\Support\Facades\DB::table('picture')->whereId($value['img2'])->value('path');
+    $data['img1']=pictureTransfer($value['img1']);
+    $data['img2']=pictureTransfer($value['img2']);
     $data['content']=$value['content'];
     return apiSuccess($data);
 });
