@@ -15,7 +15,7 @@
     <title>颠覆吧NG</title>
 </head>
 <body id="body">
-{{$content}}
+{{htmlspecialchars_decode($content)}}
 
 </body>
 </html>
