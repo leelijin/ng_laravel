@@ -112,7 +112,7 @@ class LevelController extends AdminController
                 ->keyInteger('reward','星级奖励')
                 //->keySingleImage('notice_img1','开卷有益提示-图片1')
                 //->keySingleImage('notice_img2','开卷有益提示-图片2')
-                ->keyEditor('notice','开卷有益提示','无图')
+                ->keyEditor('notice','开卷有益提示')
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
                 ->display();

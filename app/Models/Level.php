@@ -75,7 +75,7 @@ class Level extends Model
     public function getNoticeAttribute()
     {
         $url = env('APP_URL').'/master/Uploads/Picture/2017-06-27/595226db1a8a3.png';
-        return $this->attributes['notice']=htmlspecialchars(sprintf('<body style="background:url(%s)">%s</body>',$url,$this->attributes['notice']));
+        return $this->attributes['notice']=htmlspecialchars(sprintf('<body style="background:url(%s)">%s</body>',$url,batchTransferPics($this->attributes['notice'])));
     }
     
     

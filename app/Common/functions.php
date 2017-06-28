@@ -35,3 +35,17 @@ if(!function_exists('generateOrderId')){
         return date('Ymdhis', time()).substr(floor(microtime()*1000),0,1).rand(0,9);
     }
 }
+
+if(!function_exists('batchTransferPics')){
+    function imgReplace($img){
+        $ori_src = stripos($img[1],'http') !== FALSE ? $img[1] : config('app.url').$img[1];
+        return "<img src=\"$ori_src\"/>";
+    }
+    
+    function batchTransferPics($content){
+        $img_reg = "/<img.+?src\\s*=\\s*[\"|\'](.*?)[\"|\'].*?>/";
+    
+        return preg_replace_callback($img_reg,'imgReplace',$content);
+    }
+    
+}
