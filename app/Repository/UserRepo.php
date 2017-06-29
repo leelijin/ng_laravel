@@ -74,7 +74,7 @@ class UserRepo
     
     public static function getUserWrongAuth($uid)
     {
-        return DB::table('friend_requests')->where(function($query){
+        return DB::table('friend_requests')->where(function($query) use ($uid){
             $query->where('from_uid',$uid)
                 ->orWhere('to_uid',$uid);
         })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
