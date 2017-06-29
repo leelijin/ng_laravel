@@ -11,6 +11,7 @@ namespace App\Repository;
 
 use App\Models\User;
 use App\Models\UserQuestion;
+use Illuminate\Support\Facades\DB;
 
 class UserRepo
 {
@@ -73,7 +74,10 @@ class UserRepo
     
     public static function getUserWrongAuth($uid)
     {
-        return User::whereId($uid)->value('wrong_pay');
+        return DB::table('friend_requests')->where(function($query){
+            $query->where('from_uid',$uid)
+                ->orWhere('to_uid',$uid);
+        })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
     }
     public static function setUserWrongAuth($uid)
     {
