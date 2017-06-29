@@ -19,7 +19,9 @@ class FriendRepo
         
         $check_user = User::find($to_uid);
         if($check_user){
-            $exists = Friend::whereFromUid($from_uid)->whereToUid($to_uid)->whereType($type)->count();
+            $exists=0;
+            $exists += Friend::whereFromUid($from_uid)->whereToUid($to_uid)->whereType($type)->count();
+            $exists += Friend::whereToUid($from_uid)->whereFromUid($to_uid)->whereType($type)->count();
             if(!$exists){
                 $re = Friend::create(['from_uid'=>$from_uid,'to_uid'=>$to_uid,'type'=>$type]);
                 if($re)return apiSuccess('成功发送'.$type_message.'请求');
