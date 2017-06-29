@@ -6,6 +6,7 @@ use App\Repository\UserRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\User
@@ -77,10 +78,6 @@ class User extends Model
         return $this->belongsToMany(Item::class);
     }
     
-    //public function friends()
-    //{
-    //}
-    
     
     public function setTokenAttribute()
     {
@@ -101,10 +98,14 @@ class User extends Model
         return $this->attributes['login_type']?:'phone';
     }
     
-    //public function getWrongPayAttribute()
-    //{
-    //    return $this->withCount('friends')
-    //}
+    public function getWrongPayAttribute()
+    {
+        return DB::table('friend_requests')->where(function($query){
+            $query->where('from_uid',$this->attributes['uid'])
+                ->orWhere('to_uid',$this->attributes['uid']);
+        })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
+        
+    }
     
     
     public function scopeBase($query)
