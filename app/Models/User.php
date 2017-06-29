@@ -107,7 +107,6 @@ class User extends Model
         
     }
     
-    
     public function scopeBase($query)
     {
         return $query->select('id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','wrong_pay','mood','token');

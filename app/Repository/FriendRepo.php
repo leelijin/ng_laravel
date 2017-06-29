@@ -62,7 +62,7 @@ class FriendRepo
         //单独做分页也是够拼的
         $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
         $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
-        $final_arr = $reqs1->merge($reqs2)->toArray();
+        $final_arr = $reqs1->union($reqs2)->toArray();
         $reqs = array_slice($final_arr,($page-1)*$limit,$limit);
         $list=[
             'total'=>count($final_arr),
