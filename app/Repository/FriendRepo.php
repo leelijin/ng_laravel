@@ -63,7 +63,7 @@ class FriendRepo
         $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
         $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
         $final_arr = $reqs1->union($reqs2)->toArray();
-        $reqs = array_slice($final_arr,($page-1)*$limit,$limit);
+        $reqs = $reqs1->union($reqs2)->forPage($page,$limit);
         $list=[
             'total'=>count($final_arr),
             'current_page'=>$page,
@@ -76,6 +76,7 @@ class FriendRepo
             });
             if($have)$list['data'][]=$have;
         }
+        $list['total']=count($list['data']);
         return $list;
     }
     

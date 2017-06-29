@@ -81,7 +81,6 @@ class LevelController extends Controller
         }
         
         $level_info=Level::gold()->find($gold_id);
-        $level_info->time_limit=10;
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
         $gold_question_list = $model->orderByRaw('rand()')->get();
         return apiSuccess(compact('current_level','level_info','gold_question_list'));
