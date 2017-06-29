@@ -39,7 +39,7 @@ if(!function_exists('generateOrderId')){
 if(!function_exists('batchTransferPics')){
     function imgReplace($img){
         $ori_src = stripos($img[1],'http') !== FALSE ? $img[1] : config('app.url').$img[1];
-        return "<img src=\"$ori_src\"/>";
+        return "<img src=\"$ori_src\" style=\"width:100%;\"/>";
     }
     
     function batchTransferPics($content){

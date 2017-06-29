@@ -57,7 +57,7 @@ class User extends Model
     use SoftDeletes;
     
     protected $hidden=['password','deleted_at'];
-    protected $fillable=['nickname','mobile','password','avatar','token','uuid','status'];
+    protected $fillable=['nickname','mobile','password','avatar','token','uuid','status','login_type'];
     protected $appends=['rank_num'];
     public static function boot()
     {
@@ -77,6 +77,10 @@ class User extends Model
         return $this->belongsToMany(Item::class);
     }
     
+    //public function friends()
+    //{
+    //}
+    
     
     public function setTokenAttribute()
     {
@@ -92,6 +96,16 @@ class User extends Model
     {
         return $this->attributes['rank_num']=UserRepo::getUserRankNum($this->attributes['rank']);
     }
+    public function getLoginTypeAttribute()
+    {
+        return $this->attributes['login_type']?:'phone';
+    }
+    
+    //public function getWrongPayAttribute()
+    //{
+    //    return $this->withCount('friends')
+    //}
+    
     
     public function scopeBase($query)
     {
@@ -100,7 +114,7 @@ class User extends Model
     
     public function scopeSimple($query)
     {
-        return $query->select('id as uid','nickname','avatar','rank');
+        return $query->select('id as uid','nickname','avatar','rank','login_type');
     }
     
     public function scopeTop($query,$limit=10)
