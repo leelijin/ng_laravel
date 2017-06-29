@@ -77,6 +77,7 @@ class User extends Model
         return $this->belongsToMany(Item::class);
     }
     
+    
     public function setTokenAttribute()
     {
         $this->attributes['token'] = str_random(20);

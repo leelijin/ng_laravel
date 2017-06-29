@@ -82,9 +82,11 @@ class UserController extends Controller
         $valid = Validator::make($this->params,[
             'uuid'=>'required',
             'nickname'=>'required',
+            'login_type'=>'required|in:wx,qq'
         ],[
             'uiid.required'=>'uuid必须',
             'nickname.required'=>'需要填写昵称',
+            'login_type.in=>login_type必须传wx或qq',
         ]);
         if($valid->passes()){
             $userInfo = User::where('uuid',$this->request['uuid'])->base()->first();
