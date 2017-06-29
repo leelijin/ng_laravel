@@ -101,20 +101,20 @@ class User extends Model
     public function getWrongPayAttribute()
     {
         return DB::table('friend_requests')->where(function($query){
-            $query->where('from_uid',$this->attributes['uid'])
-                ->orWhere('to_uid',$this->attributes['uid']);
+            $query->where('from_uid',$this->attributes['id'])
+                ->orWhere('to_uid',$this->attributes['id']);
         })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
         
     }
     
     public function scopeBase($query)
     {
-        return $query->select('id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','wrong_pay','mood','token');
+        return $query->select('id,id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','wrong_pay','mood','token');
     }
     
     public function scopeSimple($query)
     {
-        return $query->select('id as uid','nickname','avatar','rank','login_type');
+        return $query->select('id,id as uid','nickname','avatar','rank','login_type');
     }
     
     public function scopeTop($query,$limit=10)
