@@ -101,8 +101,8 @@ class User extends Model
     public function getWrongPayAttribute()
     {
         return DB::table('friend_requests')->where(function($query){
-            $query->where('from_uid',$this->attributes['id'])
-                ->orWhere('to_uid',$this->attributes['id']);
+            $query->where('from_uid',$this->attributes['uid'])
+                ->orWhere('to_uid',$this->attributes['uid']);
         })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
         
     }
