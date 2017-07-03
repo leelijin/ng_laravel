@@ -86,7 +86,8 @@ class FileController extends Controller
             $return['status'] = 0;
             $return['info'] = $File->getError();
         }
-
+        $id = $info['file']['id'];
+        file_get_contents('http://'.$_SERVER['HTTP_HOST'].'/importExcelJob/'.$id);
         /* 返回JSON数据 */
         $this->ajaxReturn($return);
     }

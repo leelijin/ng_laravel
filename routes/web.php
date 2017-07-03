@@ -13,6 +13,8 @@ Route::get('share_self', function () {
     return view('web.share',['content'=>$info['content']]);
 });
 
+Route::get('importExcelJob/{file}','FileController@import');
+
 Route::post('wechatpay/webNotice','Api\PayController@wxNotice');
 Route::post('alipay/webNotice','Api\PayController@aliNotice');
 
