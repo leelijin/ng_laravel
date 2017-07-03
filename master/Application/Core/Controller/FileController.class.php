@@ -72,7 +72,7 @@ class FileController extends Controller
         $driver = modC('DOWNLOAD_UPLOAD_DRIVER','local','config');
         $driver = check_driver_is_exist($driver);
         $uploadConfig = get_upload_config($driver);
-
+        var_dump(C('DOWNLOAD_UPLOAD'));exit;
         $info = $File->upload(
             $_FILES,
             C('DOWNLOAD_UPLOAD'),
