@@ -89,16 +89,11 @@ class PictureController extends AdminController
     
     public function newExcel()
     {
-        if (IS_POST) {
-            $post=I();
-            dump($post);exit;
-        } else {
-            $builder = new AdminConfigBuilder();
-            $builder->title('上传Excel文件')
-                ->keySingleFile('excel','上传Excel文件')
-                ->buttonSubmit()->buttonBack()
-                ->display();
-        }
+        $builder = new AdminConfigBuilder();
+        $builder->title('上传Excel文件')
+            ->keySingleFile('excel','上传Excel文件')
+            ->buttonSubmit()->buttonBack()
+            ->display();
     }
     
     public function newPicture()
