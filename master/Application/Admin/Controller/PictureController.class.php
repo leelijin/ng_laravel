@@ -104,8 +104,7 @@ class PictureController extends AdminController
     public function newPicture()
     {
         $builder = new AdminConfigBuilder();
-        $builder->title('新增图片')
-            ->keyId()
+        $builder->title('新增图片后到图库列表查看ID')
             ->keySingleImage('thumb','图片')
             ->display();
     }
