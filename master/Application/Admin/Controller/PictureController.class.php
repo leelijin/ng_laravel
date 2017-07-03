@@ -71,7 +71,7 @@ class PictureController extends AdminController
         }
         $builder=new AdminListBuilder();
         $builder->title('图片列表')
-            ->button('新增图片',U('newPicture'))
+            ->buttonNew('新增图片',U('newPicture'))
             ->keyId()
             ->keyCreateTime('create_time','上传时间')
             ->keyText('type','存储空间')
