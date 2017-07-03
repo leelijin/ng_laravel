@@ -56,6 +56,7 @@ class LevelController extends AdminController
         }
         $builder->title('特殊挑战'.$this->title)
             ->data($list)
+            ->keyId('id','关卡ID')
             ->keyText('num','关卡序号')
             ->keyText('question_number','题目数量')
             //->keyText('need_strength','所需体力')
@@ -125,14 +126,14 @@ class LevelController extends AdminController
         $model = M($modelName);
         $builder=new AdminListBuilder();
         $map['level_id']=$id;
-        $map['status']=1;
+        $map['status']=['egt',0];
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title($this->title)
             ->data($list)
             ->buttonNew(U('editQuestion'))
             ->keyId()
             ->keyText('question','题目')
-            //->keyText('created_at','创建时间')
+            ->keyStatus()
             ->keyDoActionEdit('editQuestion?id=###')
             ->keyDoActionEdit('deleteQuestion?id=###','删除')
             ->pagination($totalCount,$r)

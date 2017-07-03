@@ -71,8 +71,7 @@ class PictureController extends AdminController
         }
         $builder=new AdminListBuilder();
         $builder->title('图片列表')
-            ->setStatusUrl(U('Picture/setStatus'))
-            ->buttonEnable()->buttonDisable()->buttonDelete()
+            ->button('新增图片',U('newPicture'))
             ->keyId()
             ->keyCreateTime('create_time','上传时间')
             ->keyText('type','存储空间')
@@ -86,6 +85,29 @@ class PictureController extends AdminController
             ->pagination($totalCount,$r)
             ->display();
 
+    }
+    
+    public function newExcel()
+    {
+        if (IS_POST) {
+            $post=I();
+            dump($post);exit;
+        } else {
+            $builder = new AdminConfigBuilder();
+            $builder->title('上传Excel文件')
+                ->keySingleFile('excel','上传Excel文件')
+                ->buttonSubmit()->buttonBack()
+                ->display();
+        }
+    }
+    
+    public function newPicture()
+    {
+        $builder = new AdminConfigBuilder();
+        $builder->title('新增图片')
+            ->keyId()
+            ->keySingleImage('thumb','图片')
+            ->display();
     }
 
     public function setStatus($ids,$status=1)
