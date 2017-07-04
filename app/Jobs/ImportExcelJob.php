@@ -4,14 +4,11 @@ namespace App\Jobs;
 
 use App\Models\File;
 use App\Models\Question;
-use App\Services\QuestionListImport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
-use Maatwebsite\Excel\Excel;
-use Mockery\Exception;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportExcelJob implements ShouldQueue
 {
