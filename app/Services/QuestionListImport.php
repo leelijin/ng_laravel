@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Files\ExcelFile;
 
 class QuestionListImport extends ExcelFile
 {
+    public $filePath;
     
     /**
      * Get file
@@ -21,10 +22,10 @@ class QuestionListImport extends ExcelFile
      */
     public function getFile()
     {
-        return resource_path().'/excel/ng_demo.xlsx';
+        return $this->filePath;
     }
     
-    public function getRawData()
+    public function saveRawData()
     {
         $rawList = collect($this->getSheet(0)->toArray())->map(function($item){
             return array_slice($item,0,11);
