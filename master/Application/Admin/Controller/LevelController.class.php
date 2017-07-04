@@ -34,6 +34,7 @@ class LevelController extends AdminController
         $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
             ->data($list)
             ->buttonNew(U('editQuestion'))
+            ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->search('搜索','title')
             ->keyId()
             ->keyText('question','题目')
@@ -44,6 +45,28 @@ class LevelController extends AdminController
             ->keyDoActionEdit('deleteQuestion?id=###','删除')
             ->pagination($totalCount,$r)
             ->display();
+    }
+    
+    public function deleteQuestions(){
+        $ids=I('ids',array());
+        $map['id']=array('in',$ids);
+        $result = D('questions')->where($map)->delete();
+        if ($result) {
+            $this->success('删除成功', 0);
+        } else {
+            $this->error('删除失败');
+        }
+    }
+    
+    public function deleteLevels(){
+        $ids=I('ids',array());
+        $map['id']=array('in',$ids);
+        $result = D('levels')->where($map)->delete();
+        if ($result) {
+            $this->success('删除成功', 0);
+        } else {
+            $this->error('删除失败');
+        }
     }
     
     public function indexGold($page=1,$r=30){
@@ -57,6 +80,7 @@ class LevelController extends AdminController
         }
         $builder->title('特殊挑战'.$this->title)
             ->data($list)
+            ->buttonDelete(U('deleteLevels'),'批量删除')
             ->keyId('id','关卡ID')
             ->keyText('num','关卡序号')
             ->keyText('question_number','题目数量')
@@ -132,6 +156,7 @@ class LevelController extends AdminController
         $builder->title($this->title)
             ->data($list)
             ->buttonNew(U('editQuestion'))
+            ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->keyId()
             ->keyText('question','题目')
             ->keyStatus()
@@ -151,6 +176,7 @@ class LevelController extends AdminController
         $builder->title('待审核题库')
             ->data($list)
             ->buttonNew(U('editQuestion'))
+            ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->keyId()
             ->keyText('question','题目')
             ->keyText('created_at','创建时间')

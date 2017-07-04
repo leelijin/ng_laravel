@@ -57,9 +57,9 @@ class ReportController extends AdminController
         $map['id']=array('in',$ids);
         $result = D('Addons://Report/Report')->where($map)->delete();
         if ($result) {
-            $this->success(L('_DELETE_SUCCESS_'), 0);
+            $this->success('删除成功', 0);
         } else {
-            $this->error(L('_DELETE_FAILED_'));
+            $this->error('删除失败');
         }
     }
 
