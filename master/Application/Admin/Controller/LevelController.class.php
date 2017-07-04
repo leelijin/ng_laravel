@@ -39,6 +39,7 @@ class LevelController extends AdminController
             ->keyText('question','题目')
             ->keyText('created_at','创建时间')
             ->keyText('time_limit','时间限制')
+            ->keyStatus()
             ->keyDoActionEdit('editQuestion?id=###')
             ->keyDoActionEdit('deleteQuestion?id=###','删除')
             ->pagination($totalCount,$r)
