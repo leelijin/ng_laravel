@@ -94,7 +94,7 @@ class PictureController extends AdminController
         } else {
             $builder = new AdminConfigBuilder();
             $builder->title('上传Excel文件')
-                ->keySingleFile('excel','上传Excel文件')
+                ->keySingleFile('excel','推荐用xls后缀')
                 ->buttonSubmit()->buttonBack()
                 ->display();
         }
