@@ -35,7 +35,7 @@ class ImportExcelJob implements ShouldQueue
      */
     public function handle()
     {
-        $excelPath = config('app.master_url').$this->file->savepath.$this->file->savename;
+        $excelPath = 'master/'.$this->file->savepath.$this->file->savename;
        
         $excelList =  Excel::load($excelPath)->getSheet(0)->toArray();
         $rawList = collect($excelList)->map(function($item){
