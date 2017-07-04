@@ -36,7 +36,7 @@ class ImportExcelJob implements ShouldQueue
     public function handle()
     {
         $excelPath = 'master/'.$this->file->savepath.$this->file->savename;
-       
+        
         $excelList =  Excel::load($excelPath)->getSheet(0)->toArray();
         $rawList = collect($excelList)->map(function($item){
             return array_slice($item,0,11);
@@ -52,7 +52,7 @@ class ImportExcelJob implements ShouldQueue
                 'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
                 'right_answer'=>(int)($item[8]-1),
             ];
-            Question::create($list);
+            if($list['question'] && $list['content'] && $list['right_answer'])Question::create($list);
         });
     }
 }
