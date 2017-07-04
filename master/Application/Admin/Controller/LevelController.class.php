@@ -28,7 +28,7 @@ class LevelController extends AdminController
         $model = M($modelName);
         $builder=new AdminListBuilder();
         $map['level_id']=0;
-        $map['status']=1;
+        $map['status']=['egt',0];
         if(I('title'))$map['question']=['like','%'.I('title').'%'];
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title('无尽挑战题库')->suggest('从所有题库中随机挑选题目，和关卡无关')
