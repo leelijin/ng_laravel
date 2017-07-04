@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\File;
+use App\Models\Question;
 use App\Services\QuestionListImport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -27,17 +28,34 @@ class ImportExcelJob implements ShouldQueue
     {
         $this->file=$file;
     }
-
+    
     /**
      * Execute the job.
+     *
+     * @param \App\Services\QuestionListImport $qli
      *
      * @return void
      */
     public function handle()
     {
         $excelPath = config('app.master_url').$this->file->savepath.$this->file->savename;
-        $qli = new QuestionListImport();
-        $qli->filePath=$excelPath;
-        $qli->saveRawData();
+       
+        $excelList =  Excel::load($excelPath)->getSheet(0)->toArray();
+        $rawList = collect($excelList)->map(function($item){
+            return array_slice($item,0,11);
+        });
+        $rawList->shift();
+        $rawList->each(function($item){
+            $list=[
+                'level_id'=>(int)$item[10],
+                'question'=>$item[0],
+                'content'=>$item[1],
+                'image1'=>(int)$item[2],
+                'image2'=>(int)$item[3],
+                'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
+                'right_answer'=>(int)($item[8]-1),
+            ];
+            Question::create($list);
+        });
     }
 }
