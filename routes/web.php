@@ -1,5 +1,7 @@
 <?php
 
+use Maatwebsite\Excel\Facades\Excel;
+
 Route::get('/', function () {
     return redirect('master');
 });

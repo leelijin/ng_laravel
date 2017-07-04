@@ -43,16 +43,18 @@ class ImportExcelJob implements ShouldQueue
         });
         $rawList->shift();
         $rawList->each(function($item){
-            $list=[
-                'level_id'=>(int)$item[10],
-                'question'=>$item[0],
-                'content'=>$item[1],
-                'image1'=>(int)$item[2],
-                'image2'=>(int)$item[3],
-                'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
-                'right_answer'=>(int)($item[8]-1),
-            ];
-            if($list['question'] && $list['content'] && $list['right_answer'])Question::create($list);
+            if($item[0] && $item[1] && $item[8]>0){
+                $list=[
+                    'level_id'=>(int)$item[10],
+                    'question'=>$item[0],
+                    'content'=>$item[1],
+                    'image1'=>(int)$item[2],
+                    'image2'=>(int)$item[3],
+                    'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
+                    'right_answer'=>(int)($item[8]-1),
+                ];
+                Question::create($list);
+            }
         });
     }
 }
