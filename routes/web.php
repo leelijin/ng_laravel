@@ -39,6 +39,8 @@ Route::get('importExcelJob/{file}',function($file){
                 'image2'=>(int)$item[3],
                 'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
                 'right_answer'=>(int)($item[8]-1),
+                'time_limit'=>(int)$item[11]?:10,
+                'status'=>$item[12]=='直接启用'?1:0,
             ];
             App\Models\Question::create($list);
         }
