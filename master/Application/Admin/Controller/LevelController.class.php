@@ -35,6 +35,7 @@ class LevelController extends AdminController
             ->data($list)
             ->buttonNew(U('editQuestion'))
             ->buttonDelete(U('deleteQuestions'),'批量删除')
+            ->buttonDelete(U('auditQuestions'),'批量审核通过')
             ->search('搜索','title')
             ->keyId()
             ->keyText('question','题目')
@@ -55,6 +56,17 @@ class LevelController extends AdminController
             $this->success('删除成功', 0);
         } else {
             $this->error('删除失败');
+        }
+    }
+    
+    public function auditQuestions(){
+        $ids=I('ids',array());
+        $map['id']=array('in',$ids);
+        $result = D('questions')->where($map)->setField('status',1);
+        if ($result) {
+            $this->success('已经全部审核通过', 0);
+        } else {
+            $this->error('审核失败');
         }
     }
     

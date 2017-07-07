@@ -30,7 +30,7 @@ Route::get('importExcelJob/{file}',function($file){
     });
     $rawList->shift();
     $rawList->each(function($item){
-        if($item[0] && $item[1] && $item[8]>0){
+        if($item[0] && $item[8]>0){
             $list=[
                 'level_id'=>(int)$item[10],
                 'question'=>$item[0],

@@ -384,7 +384,7 @@ class AdminListBuilder extends AdminBuilder
 
     public function keyStatus($name = 'status', $title = '状态')
     {
-        $map = array(-1 => '删除', 0 => '禁用', 1 => '启用', 2 => '未审核');
+        $map = array(-1 => '删除', 0 => '待审核', 1 => '启用', 2 => '未审核');
         return $this->key($name, $title, 'status', $map);
     }
 
