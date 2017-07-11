@@ -100,6 +100,20 @@ class PayController extends Controller
         }
     }
     
+    public function restore()
+    {
+        $mobile = $this->params['mobile'];
+        $user = User::where('mobile',$mobile)->first();
+        if($user){
+            $user->wrong_pay = 1;
+            $re = $user->save();
+            if($re)return apiSuccess([],'已恢复内购');
+        }else{
+            return apiError(1,'用户不存在');
+        }
+        
+    }
+    
 
     
     

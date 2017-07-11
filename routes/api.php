@@ -78,6 +78,7 @@ Route::group(['prefix'=>'wechatpay'],function(){
 Route::group(['prefix'=>'applepay'],function(){
     Route::any('buy/wrong','PayController@applePay')->middleware('need:uid');
     Route::any('notice','PayController@applePayNotice')->middleware('need:uid')->middleware('need:order_no')->middleware('need:transaction_id');
+    Route::any('restore','PayController@restore')->middleware('need:mobile');
 });
 
 Route::any('share', function () {
