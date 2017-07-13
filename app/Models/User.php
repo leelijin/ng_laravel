@@ -100,11 +100,14 @@ class User extends Model
     
     public function getWrongPayAttribute()
     {
-        return DB::table('friend_requests')->where(function($query){
-            $query->where('from_uid',$this->attributes['uid'])
-                ->orWhere('to_uid',$this->attributes['uid']);
-        })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
-        
+        if($this->attributes['wrong_pay'] !=1){
+            $checkHaveEnoughFriends = DB::table('friend_requests')->where(function($query){
+                    $query->where('from_uid',$this->attributes['uid'])
+                        ->orWhere('to_uid',$this->attributes['uid']);
+                })->whereType(1)->whereStatus(1)->count() >=5;
+            return $checkHaveEnoughFriends ? 1 : 0;
+        }
+        return 1;
     }
     
     public function scopeBase($query)

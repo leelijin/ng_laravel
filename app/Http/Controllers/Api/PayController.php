@@ -46,13 +46,15 @@ class PayController extends Controller
         if(!$params){
             $price = 0.01;
             //生成订单
-            $params = ['uid'         => $this->uid,
-                       'gold'     => 0,
-                       'order_id'    => generateOrderId(),
-                       'pay_type' => $pay_type,
-                       'order_name'  => '购买错题库权限',
-                       'order_desc'  => "购买错题库权限(数量:1,价格:￥$price)",
-                       'order_price' => $price
+            $params = [
+                'uid' => $this->uid,
+                'gold' => 0,
+                'order_id' => generateOrderId(),
+                'pay_type' => $pay_type,
+                'order_name' => '购买错题库权限',
+                'order_desc' => "购买错题库权限(数量:1,价格:￥$price)",
+                'order_price' => $price,
+                'uuid' => $this->params['uuid']
             ];
             OrderRepo::insertOrderInfo($params);
         }
@@ -102,14 +104,11 @@ class PayController extends Controller
     
     public function restore()
     {
-        $mobile = $this->params['mobile'];
-        $user = User::where('mobile',$mobile)->first();
-        if($user){
-            $user->wrong_pay = 1;
-            $re = $user->save();
-            if($re)return apiSuccess([],'已恢复内购');
+        $have_payed = Order::where('transaction_id',$this->params['transaction_id'])->where('status',1)->exists();
+        if($have_payed){
+            return apiSuccess([],'已内购');
         }else{
-            return apiError(1,'用户不存在');
+            return apiError(1,'未找到此购买');
         }
         
     }
