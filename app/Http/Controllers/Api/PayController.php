@@ -54,7 +54,6 @@ class PayController extends Controller
                 'order_name' => '购买错题库权限',
                 'order_desc' => "购买错题库权限(数量:1,价格:￥$price)",
                 'order_price' => $price,
-                'uuid' => $this->params['uuid']
             ];
             OrderRepo::insertOrderInfo($params);
         }
