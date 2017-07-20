@@ -48,7 +48,7 @@ Route::get('importExcelJob/{file}',function($file){
 });
 
 Route::get('envtest',function(){
-    return 'haha';
+    return 'haha2';
 });
 
 
