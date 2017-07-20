@@ -1,5 +1,5 @@
 @servers(['online'=>'120.77.71.171'])
 
-@task('foo',['on'=>'local'])
+@task('foo',['on'=>'online'])
     ls -la
 @endtask
