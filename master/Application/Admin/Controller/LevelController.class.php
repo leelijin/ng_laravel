@@ -92,6 +92,7 @@ class LevelController extends AdminController
         }
         $builder->title('特殊挑战'.$this->title)
             ->data($list)
+            ->buttonNew(U('editGold'))
             ->buttonDelete(U('deleteLevels'),'批量删除')
             ->keyId('id','关卡ID')
             ->keyText('num','关卡序号')
