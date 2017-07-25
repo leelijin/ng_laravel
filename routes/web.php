@@ -26,9 +26,8 @@ Route::get('importExcelJob/{file}',function($file){
     
     $excelList =  Maatwebsite\Excel\Facades\Excel::load($excelPath)->getSheet(0)->toArray();
     $rawList = collect($excelList)->map(function($item){
-        return array_slice($item,0,11);
+        return array_slice($item,0,14);
     });
-    dd($rawList);
     $rawList->shift();
     $rawList->each(function($item){
         if($item[0] && $item[8]>0){
