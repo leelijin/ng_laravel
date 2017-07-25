@@ -34,7 +34,7 @@ Route::get('importExcelJob/{file}',function($file){
             $list=[
                 'level_id'=>(int)$item[10],
                 'question'=>$item[0],
-                'content'=>$item[1],
+                'content'=>$item[1]?:'',
                 'image1'=>(int)$item[2],
                 'image2'=>(int)$item[3],
                 'answer_options'=>[$item[4],$item[5],$item[6],$item[7]],
