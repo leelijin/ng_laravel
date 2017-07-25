@@ -79,10 +79,10 @@ class LevelController extends Controller
         if($this->limit!=0){
             $model = $model->take($this->limit)->offset(($this->page - 1) * $this->limit);
         }
-        
+
         $level_info=Level::gold()->find($gold_id);
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
-        $gold_question_list = $model->orderByRaw('rand()')->get();
+        $gold_question_list = $model->inRandomOrder()->get();
         return apiSuccess(compact('current_level','level_info','gold_question_list'));
     }
     
