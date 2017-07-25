@@ -125,6 +125,7 @@ class LevelController extends AdminController
                 //->keyInteger('need_strength','所需体力')
                 ->keyInteger('time_limit','时间限制')
                 //->keyEditor('notice','开卷有益提示')
+                    ->keyHidden('level_type')->keyDefault('level_type',2)
                 ->keyStatus()->keyDefault('status',1)
                 ->buttonSubmit()->buttonBack()
                 ->display();
