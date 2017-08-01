@@ -1,5 +1,5 @@
 @servers(['online'=>'120.77.71.171'])
 
-@task('foo',['on'=>'online'])
-    ls -la
+@task('deploy',['on'=>'online'])
+    php artisan init:file
 @endtask
