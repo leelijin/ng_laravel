@@ -19,6 +19,8 @@ Route::get('share_self', function () {
 Route::post('wechatpay/webNotice','Api\PayController@wxNotice');
 Route::post('alipay/webNotice','Api\PayController@aliNotice');
 
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 Route::get('importExcelJob/{file}',function($file){
     $fileInfo = App\Models\File::find($file);
     
