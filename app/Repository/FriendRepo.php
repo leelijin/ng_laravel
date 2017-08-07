@@ -81,8 +81,7 @@ class FriendRepo
             }
         }
         if($key){
-            $allLikeUser = User::simple()->whereStatus(1)->whereNotIn('id',array_pluck($list['data'],'uid'))->where('nickname','like','%'.$key.'%')->forPage($page,$limit);
-            dd($list['data'],array_pluck($list['data'],'uid'),$allLikeUser);
+            $allLikeUser = User::simple()->whereStatus(1)->whereNotIn('id',array_pluck($list['data'],'uid'))->where('nickname','like','%'.$key.'%')->forPage($page,$limit)->get();
             $list['data'] = $allLikeUser;
         }
         $list['total']=count($list['data']);
