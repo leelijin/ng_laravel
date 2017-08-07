@@ -82,6 +82,12 @@ class FriendRepo
         }
         if($key){
             $allLikeUser = User::simple()->whereStatus(1)->whereNotIn('id',array_pluck($list['data'],'uid'))->where('nickname','like','%'.$key.'%')->forPage($page,$limit)->get();
+            $list=[
+                'total'=>count($allLikeUser),
+                'current_page'=>$page,
+                'last_page'=>count($allLikeUser)<=$limit?1:(int)(count($allLikeUser)/$limit + 1),
+                'data'=>[],
+            ];
             $list['data'] = $allLikeUser;
         }
         $list['total']=count($list['data']);
