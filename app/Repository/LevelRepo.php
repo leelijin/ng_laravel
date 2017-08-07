@@ -55,6 +55,11 @@ class LevelRepo
                     }
                 }
                 return apiError(1,'通关失败,已增加错题');
+            }else{
+                $params = ['uid'=>$uid,'question_id'=>$wrong_ids,'type'=>$type];
+                if(Question::find($wrong_ids) && !QuestionWrong::where($params)->first()){
+                    QuestionWrong::create($params);
+                }
             }
         }else{
             //关卡通关

@@ -44,7 +44,7 @@ Route::group(['prefix'=>'level','middleware'=>'need:uid'],function(){
     Route::any('mineWrong/delete','LevelController@mineWrongDelete');
     
     Route::group(['prefix'=>'submit'],function(){
-        Route::any('star','LevelController@starSubmit')->middleware('need:pass_ids');
+        Route::any('star','LevelController@starSubmit');
         Route::any('gold','LevelController@goldSubmit')->middleware('need:gold_id');
     });
     

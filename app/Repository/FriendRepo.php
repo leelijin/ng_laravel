@@ -58,7 +58,7 @@ class FriendRepo
     {
         return self::getList($uid,1,1,true);
     }
-    
+
     public static function getMineFriendList($uid,$page,$limit,$key)
     {
         //单独做分页也是够拼的
