@@ -76,11 +76,11 @@ class FriendRepo
             $have = UserRepo::getUserSimpleInfo($v,function($query) use ($key){
                 $query->where('nickname','like','%'.$key.'%');
             });
-            if($key && !$have){
-                $list['data'][]=$have;
-            }else{
-                $list['data'][]=$have;
-            }
+            if($have)$list['data'][]=$have;
+        }
+        if($key){
+            $allLikeUser = User::simple()->whereStatus(1)->where('nickname','like','%'.$key.'%')->forPage($page,$limit);
+            $list['data'] = array_diff($allLikeUser,$list['data']);
         }
         $list['total']=count($list['data']);
         return $list;
