@@ -61,35 +61,28 @@ class FriendRepo
 
     public static function getMineFriendList($uid,$page,$limit,$key)
     {
-        if($key){
-            $reqs = User::simple()->whereStatus(1)->where('nickname','like','%'.$key.'%')->forPage($page,$limit);
-            $list=[
-                'total'=>count($reqs),
-                'current_page'=>$page,
-                'last_page'=>count($reqs)<=$limit?1:(int)(count($reqs)/$limit + 1),
-                'data'=>$reqs,
-            ];
-        }else{
-            //单独做分页也是够拼的
-            $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
-            $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
-            $final_arr = $reqs1->union($reqs2)->toArray();
-            $reqs = $reqs1->union($reqs2)->forPage($page,$limit);
-            $list=[
-                'total'=>count($final_arr),
-                'current_page'=>$page,
-                'last_page'=>count($final_arr)<=$limit?1:(int)(count($final_arr)/$limit + 1),
-                'data'=>[],
-            ];
-            foreach ($reqs as $v) {
-                $have = UserRepo::getUserSimpleInfo($v,function($query) use ($key){
-                    $query->where('nickname','like','%'.$key.'%');
-                });
-                if($have)$list['data'][]=$have;
+        //单独做分页也是够拼的
+        $reqs1 = Friend::whereToUid($uid)->whereStatus(1)->type(1)->pluck('from_uid');
+        $reqs2 = Friend::whereFromUid($uid)->whereStatus(1)->type(1)->pluck('to_uid');
+        $final_arr = $reqs1->union($reqs2)->toArray();
+        $reqs = $reqs1->union($reqs2)->forPage($page,$limit);
+        $list=[
+            'total'=>count($final_arr),
+            'current_page'=>$page,
+            'last_page'=>count($final_arr)<=$limit?1:(int)(count($final_arr)/$limit + 1),
+            'data'=>[],
+        ];
+        foreach ($reqs as $v) {
+            $have = UserRepo::getUserSimpleInfo($v,function($query) use ($key){
+                $query->where('nickname','like','%'.$key.'%');
+            });
+            if($key && !$have){
+                $list['data'][]=$have;
+            }else{
+                $list['data'][]=$have;
             }
-            $list['total']=count($list['data']);
         }
-
+        $list['total']=count($list['data']);
         return $list;
     }
     
