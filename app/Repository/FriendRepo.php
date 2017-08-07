@@ -67,7 +67,7 @@ class FriendRepo
                 'total'=>count($reqs),
                 'current_page'=>$page,
                 'last_page'=>count($reqs)<=$limit?1:(int)(count($reqs)/$limit + 1),
-                'data'=>[],
+                'data'=>$reqs,
             ];
         }else{
             //单独做分页也是够拼的
