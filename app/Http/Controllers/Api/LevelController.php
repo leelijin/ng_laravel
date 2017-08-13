@@ -73,6 +73,7 @@ class LevelController extends Controller
     {
         $current_level=User::whereId($this->uid)->value('current_gold_level');
         $gold_id = LevelRepo::getUserCurrentGoldLevelId($current_level);
+        if(!$gold_id)return apiError(1,'无更多关卡');
         $check = LevelRepo::checkUserCondition($this->uid,$gold_id,2);
         if($check)return $check;
         $model = Question::passing($this->uid)->whereLevelId($gold_id);

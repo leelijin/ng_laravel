@@ -119,7 +119,7 @@ class LevelRepo
     public static function getUserCurrentGoldLevelId($current_gold_level)
     {
         $current_gold_level = $current_gold_level>=0?$current_gold_level:0;
-        return $level_id = Level::whereLevelType(2)->whereStatus(1)->limit(1)->offset($current_gold_level)->value('id');
+        return  Level::whereLevelType(2)->whereStatus(1)->limit(1)->offset($current_gold_level)->value('id');
     }
     
 }
