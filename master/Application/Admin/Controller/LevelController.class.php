@@ -169,7 +169,7 @@ class LevelController extends AdminController
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title($this->title)
             ->data($list)
-            ->buttonNew(U('editQuestion'))
+            ->buttonNew(U('editQuestion',['level_id'=>I('get.id',0)]))
             ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->buttonEnable(U('auditQuestions'),'批量审核通过')
             ->keyId()
@@ -190,7 +190,7 @@ class LevelController extends AdminController
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title('待审核题库')
             ->data($list)
-            ->buttonNew(U('editQuestion',['level_id'=>I('get.id',0)]))
+            ->buttonNew(U('editQuestion'))
             ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->buttonEnable(U('auditQuestions'),'批量审核通过')
             ->keyId()
