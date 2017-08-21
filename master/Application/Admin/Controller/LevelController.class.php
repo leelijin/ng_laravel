@@ -190,7 +190,7 @@ class LevelController extends AdminController
         list($list,$totalCount)=$this->listPage($model,$map,$page,null,true,$r);
         $builder->title('待审核题库')
             ->data($list)
-            ->buttonNew(U('editQuestion'))
+            ->buttonNew(U('editQuestion',['level_id'=>I('get.id',0)]))
             ->buttonDelete(U('deleteQuestions'),'批量删除')
             ->buttonEnable(U('auditQuestions'),'批量审核通过')
             ->keyId()
@@ -203,7 +203,7 @@ class LevelController extends AdminController
             ->display();
     }
     
-    public function editQuestion($id=''){
+    public function editQuestion($id='',$level_id=0){
         $modelName = 'questions';
         $model = M($modelName);
         if (IS_POST) {
@@ -223,6 +223,7 @@ class LevelController extends AdminController
             $builder->title($this->title)
                 ->data($data)
                 ->keyId()
+                ->keyHidden('level_id')->keyDefault('level_id',$level_id)
                 ->keyText('question','题目')
                 ->keyTextArea('content','内容')
                 ->keySingleImage('image1','图片1')
