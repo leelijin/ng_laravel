@@ -180,7 +180,7 @@ class AdminConfigBuilder extends AdminBuilder
     {
         $toolbars = "toolbars:[[" . $config . "]]";
         if (empty($config)) {
-            $toolbars = "toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily','|','map','emotion','insertimage','insertcode']]";
+            $toolbars = "toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','justifyleft','fontfamily','|','map','emotion','insertimage','background','insertcode']]";
         }
         if ($config == 'all') {
             $toolbars = 'all';
