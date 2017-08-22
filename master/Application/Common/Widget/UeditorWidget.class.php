@@ -17,7 +17,7 @@ class UeditorWidget extends Controller
         $this->assign('style',$style);
         if($config=='')
         {
-            $config="toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','fontfamily','backcolor','|','insertimage','insertcode','link','emotion','scrawl','wordimage']]";
+            $config="toolbars:[['source','|','bold','italic','underline','fontsize','forecolor','fontfamily','backcolor','|','insertimage','insertcode','link','emotion','scrawl','background','wordimage']]";
         }
         if($config == 'all'){
             $config='';
