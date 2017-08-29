@@ -123,7 +123,7 @@ class User extends Model
     
     public function scopeTop($query,$limit=10)
     {
-        return $query->orderBy('rank','desc')->select('id as uid','nickname','avatar','rank')->take($limit);
+        return $query->orderBy('rank','desc')->orderBy('id')->select('id as uid','nickname','avatar','rank')->take($limit);
     }
     
     //public function scopeTopGold($query,$limit=10)
