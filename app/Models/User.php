@@ -6,6 +6,7 @@ use App\Repository\UserRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -91,7 +92,7 @@ class User extends Model
     
     public function getRankNumAttribute()
     {
-        return $this->attributes['rank_num']=UserRepo::getUserRankNum($this->attributes['id']);
+        return $this->attributes['rank_num']=UserRepo::getUserRankNum(Request::input('uid'));
     }
     public function getLoginTypeAttribute()
     {
