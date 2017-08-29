@@ -54,7 +54,7 @@ class LevelRepo
                         QuestionWrong::create($params);
                     }
                 }
-                return apiError(1,'通关失败,已增加错题');
+                return apiError(1,'挑战失败,再接再厉吧');
             }else{
                 $params = ['uid'=>$uid,'question_id'=>$wrong_ids,'type'=>$type];
                 if(Question::find($wrong_ids) && !QuestionWrong::where($params)->first()){
