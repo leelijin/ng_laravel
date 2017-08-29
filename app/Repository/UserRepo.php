@@ -113,9 +113,10 @@ class UserRepo
         
     }
     
-    public static function getUserRankNum($rank)
+    public static function getUserRankNum($uid)
     {
-        return User::where('rank','>',$rank)->whereStatus(1)->count() + 1;
+        $uids = User::orderBy('rank','desc')->orderBy('id')->pluck('id');
+        return array_search($uid,$uids->toArray(),true) + 1;
     }
     
     

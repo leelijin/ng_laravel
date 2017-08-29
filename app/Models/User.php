@@ -91,7 +91,7 @@ class User extends Model
     
     public function getRankNumAttribute()
     {
-        return $this->attributes['rank_num']=UserRepo::getUserRankNum($this->attributes['rank']);
+        return $this->attributes['rank_num']=UserRepo::getUserRankNum($this->attributes['id']);
     }
     public function getLoginTypeAttribute()
     {
