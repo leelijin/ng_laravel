@@ -81,6 +81,7 @@ class PictureController extends AdminController
             ->keyText('sha1','文件sha1编码')
             ->keyStatus()
             ->keyImage('image','图片')
+            ->keyDoActionEdit('newPicture?id=###')
             ->data($list)
             ->pagination($totalCount,$r)
             ->display();
@@ -100,12 +101,24 @@ class PictureController extends AdminController
         }
     }
     
-    public function newPicture()
+    public function newPicture($id='')
     {
-        $builder = new AdminConfigBuilder();
-        $builder->title('新增图片后到图库列表查看ID')
-            ->keySingleImage('thumb','图片')
-            ->display();
+        $this->model = D('Picture');
+        if (IS_POST) {
+            $data=$this->model->create();
+            $id = $data['id']=I('id');
+            if($data){
+                $re = $id?$this->model->save($data):$this->model->add($data);
+                $this->handle($re);
+            }
+        } else {
+            if ($id) $data = $this->model->find($id);
+            $builder = new AdminConfigBuilder();
+            $builder->title('新增图片后到图库列表查看ID')->data($data)
+                ->keySingleImage('path','图片')
+                ->display();
+        }
+        
     }
 
     public function setStatus($ids,$status=1)
