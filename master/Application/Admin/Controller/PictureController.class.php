@@ -117,6 +117,7 @@ class PictureController extends AdminController
             $builder->title('新增/修改图片')->data($data)
                 ->keyId()
                 ->keySingleImage('path','图片')
+                ->buttonSubmit()->buttonBack()
                 ->display();
         }
         
