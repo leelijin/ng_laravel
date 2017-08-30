@@ -115,6 +115,7 @@ class PictureController extends AdminController
             if ($id) $data = $this->model->find($id);
             $builder = new AdminConfigBuilder();
             $builder->title('新增图片后到图库列表查看ID')->data($data)
+                ->keyId()
                 ->keySingleImage('path','图片')
                 ->display();
         }
