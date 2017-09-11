@@ -1,9 +1,5 @@
 <?php
 
-
-Route::get('/', function () {
-    return redirect('master');
-});
 Route::get('timestamp',function(){
     return time();
 });
