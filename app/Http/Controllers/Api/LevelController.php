@@ -88,7 +88,7 @@ class LevelController extends Controller
         
         $level_info = $level_info->toArray();
         
-        if($request->has('client') && $request->get('client') == 'android'){
+        if($request->has('client') && $request->get('client') == 'android' && $request->has('test')){
             dd($level_info);
             $level_info['notice'] = $notice;
         }
