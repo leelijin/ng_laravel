@@ -85,7 +85,7 @@ class LevelController extends Controller
         
         $level_info = Level::gold()->find($gold_id);
         if($request->has('client') && $request->get('client') == 'android'){
-            $level_info->notice = strip_tags($level_info->notice,'<p><span><img>');
+            $level_info->notice = $level_info->getOriginal('notice');
         }
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
         $gold_question_list = $model->inRandomOrder()->get();
