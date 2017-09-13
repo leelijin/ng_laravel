@@ -85,15 +85,14 @@ class LevelController extends Controller
         
         $level_info = Level::gold()->find($gold_id);
         $notice = $level_info->getOriginal('notice');
-        
+        $level_info->num = LevelRepo::getLevelNum($gold_id,2);
         $level_info = $level_info->toArray();
         
         if($request->has('client') && $request->get('client') == 'android' && $request->has('test')){
-            dd($level_info);
             $level_info['notice'] = $notice;
         }
         
-        $level_info->num = LevelRepo::getLevelNum($gold_id,2);
+        
         $gold_question_list = $model->inRandomOrder()->get();
         return apiSuccess(compact('current_level','level_info','gold_question_list'));
     }
