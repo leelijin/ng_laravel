@@ -71,7 +71,7 @@ class LevelController extends Controller
         ]);
     }
     
-    public function goldDetail()
+    public function goldDetail(Request $request)
     {
         $current_level = User::whereId($this->uid)->value('current_gold_level');
         $gold_id = LevelRepo::getUserCurrentGoldLevelId($current_level);
@@ -84,7 +84,7 @@ class LevelController extends Controller
         }
         
         $level_info = Level::gold()->find($gold_id);
-        if(\request('client') == 'android'){
+        if($request->has('client') && $request->get('client') == 'android'){
             $level_info->notice = strip_tags($level_info->notice,'<p><span><img>');
         }
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
