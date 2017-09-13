@@ -84,7 +84,7 @@ class LevelController extends Controller
         }
         
         $level_info = Level::gold()->find($gold_id);
-        $notice = $level_info->getOriginal('notice');
+        $notice = htmlspecialchars($level_info->getOriginal('notice'));
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
         $level_info = $level_info->toArray();
         
