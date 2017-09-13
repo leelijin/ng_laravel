@@ -88,7 +88,7 @@ class LevelController extends Controller
         $level_info->num = LevelRepo::getLevelNum($gold_id,2);
         $level_info = $level_info->toArray();
         
-        if($request->has('client') && $request->get('client') == 'android' && $request->has('test')){
+        if($request->has('client') && $request->get('client') == 'android'){
             $level_info['notice'] = $notice;
         }
         
