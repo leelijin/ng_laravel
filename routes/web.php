@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/',function(){
+   return redirect()->to('/public/download');
+});
+
 Route::get('timestamp',function(){
     return time();
 });
