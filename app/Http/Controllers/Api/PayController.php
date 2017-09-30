@@ -44,7 +44,7 @@ class PayController extends Controller
         //检查是否有未支付
         $params = Order::whereUid($this->uid)->where('status',0)->first();
         if(!$params){
-            $price = 0.01;
+            $price = 18;
             //生成订单
             $params = [
                 'uid' => $this->uid,
