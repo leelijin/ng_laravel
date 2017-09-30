@@ -74,13 +74,16 @@ class UserRepo
     
     public static function getUserWrongAuth($uid)
     {
-        $friend =  DB::table('friend_requests')->where(function($query) use ($uid){
-            $query->where('from_uid',$uid)
-                ->orWhere('to_uid',$uid);
-        })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
-        if($friend)return 1;
-        if(User::whereId($uid)->value('wrong_pay') == 1)return 1;
-        return 0;
+        $userInfo = User::find($uid);
+        if($userInfo['wrong_pay'] ==1){
+            return 1;
+        }else{
+            $checkHaveEnoughFriends = DB::table('friend_requests')->where(function($query) use ($uid){
+                $query->where('from_uid',$uid)
+                    ->orWhere('to_uid',$uid);
+            })->whereType(1)->whereStatus(1)->count() >=5 ?1:0;
+            return $checkHaveEnoughFriends ? 1 : 0;
+        }
     }
     public static function setUserWrongAuth($uid)
     {

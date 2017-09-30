@@ -103,8 +103,8 @@ class User extends Model
     {
         if($this->attributes['wrong_pay'] !=1){
             $checkHaveEnoughFriends = DB::table('friend_requests')->where(function($query){
-                    $query->where('from_uid',$this->attributes['id'])
-                        ->orWhere('to_uid',$this->attributes['id']);
+                    $query->where('from_uid',$this->attributes['uid'])
+                        ->orWhere('to_uid',$this->attributes['uid']);
                 })->whereType(1)->whereStatus(1)->count() >=5;
             return $checkHaveEnoughFriends ? 1 : 0;
         }
@@ -113,7 +113,7 @@ class User extends Model
     
     public function scopeBase($query)
     {
-        return $query->select('id','id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','wrong_pay','mood','token');
+        return $query->select('id as uid','nickname','mobile','avatar','current_gold_level','current_star_level','rank','wrong_pay','mood','token');
     }
     
     public function scopeSimple($query)
