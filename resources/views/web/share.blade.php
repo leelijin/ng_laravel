@@ -15,9 +15,12 @@
     <title>颠覆吧NG</title>
 </head>
 <body>
+{{$info['nickname']}}
+{{$info['avatar']}}
+{{$info['beyond_rate']}}
+{{$info['current_level']}}
 <h1>
-    <a href="#">打开APP</a>
+    <a href="dianfuba://home">打开APP</a>
 </h1>
-
 </body>
 </html>
