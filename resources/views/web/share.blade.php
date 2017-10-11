@@ -16,7 +16,7 @@
 </head>
 <body>
 {{$info['nickname']}}
-<img src="{{$info['avatar']}}">
+<img src="{{$info['avatar']}}" style="max-width: 80px;">
 {{$info['beyond_rate']}}
 {{$info['current_level']}}
 <h1>
