@@ -20,7 +20,7 @@
 {{$info['beyond_rate']}}
 {{$info['current_level']}}
 <h1>
-    <a href="dianfuba://home">打开APP</a>
+    <a href="dianfuba://home?uid={{$info['uid'] or 0}}">打开APP</a>
 </h1>
 </body>
 </html>

@@ -16,6 +16,7 @@ Route::get('share_self/{uid?}', function ($uid=0) {
     $userInfo = User::find($uid);
     if(!$userInfo)return '';
     $info=[
+        'uid'=>$uid,
         'nickname'=>$userInfo->nickname,
         'avatar'=>$userInfo->avatar,
         'beyond_rate'=>round(User::where('current_star_level','<=',$userInfo->current_star_level)->count()*100/User::count()*1).'%',
