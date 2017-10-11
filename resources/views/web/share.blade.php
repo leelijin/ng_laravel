@@ -14,7 +14,10 @@
     <link rel="Shortcut Icon" href="images/favicon.ico">
     <title>颠覆吧NG</title>
 </head>
-
 <body>
+<h1>
+    <a href="#">打开APP</a>
+</h1>
+
 </body>
 </html>
