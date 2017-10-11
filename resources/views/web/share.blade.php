@@ -14,8 +14,7 @@
     <link rel="Shortcut Icon" href="images/favicon.ico">
     <title>颠覆吧NG</title>
 </head>
-<body id="body">
-{!!$content!!}
 
+<body>
 </body>
 </html>

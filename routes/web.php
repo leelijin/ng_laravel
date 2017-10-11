@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 Route::get('/',function(){
    return redirect()->to('/public/download');
 });
@@ -10,10 +12,16 @@ Route::get('timestamp',function(){
 Route::get('download', function () {
     return view('web.download');
 });
-Route::get('share_self', function () {
-    $config_name = 'SHARE_SETTINGS';
-    $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
-    return view('web.share',['content'=>$info['content']]);
+Route::get('share_self/{uid?}', function ($uid=0) {
+    $userInfo = User::find($uid);
+    if(!$userInfo)return '';
+    $info=[
+        'nickname'=>$userInfo->nickname,
+        'avatar'=>$userInfo->avatar,
+        'beyond_rate'=>round(User::where('current_star_level','<=',$userInfo->current_star_level)->count()*100/User::count()*1).'%',
+        'current_level'=>$userInfo->current_star_level
+    ];
+    return view('web.share',compact('info'));
 });
 
 Route::post('wechatpay/webNotice','Api\PayController@wxNotice');
