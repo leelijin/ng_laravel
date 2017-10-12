@@ -25,7 +25,7 @@
         a{text-decoration:none;}
         em,i{font-style:normal}
         body{
-            background: url('images/homebg.png') no-repeat;
+            background: url({{public_path('img/share/homebg.png')}}) no-repeat;
             background-size: cover;
             font-size: .28rem;
             line-height: 1.8;
@@ -36,7 +36,7 @@
             height: 1.3rem;
             margin: 1rem auto 0 .5rem;
             padding: .5rem .2rem .5rem;
-            background: url('images/paopao.png') no-repeat;
+            background: url({{public_path('img/share/paopao.png')}}) no-repeat;
             background-size: 100% auto;
             color: #fff;
         }
@@ -86,18 +86,18 @@
 <body id="body">
 <div class="bubble">
     <p>
-        我在<img src="images/logo2.png" alt="" /><br />
+        我在<img src="{{public_path('img/share/logo2.png')}}" alt="" /><br />
         超越了<em>{{$info['beyond_rate'] or '0%'}}</em>的小伙伴！
     </p>
 </div>
-<img class="title" src="images/logo1.png" alt="" />
+<img class="title" src="{{public_path('img/share/logo1.png')}}" alt="" />
 <div class="userInfo">
     <img class="userPhoto" src="{{$info['avatar']}}" alt="" />
     <p class="userName">{{$info['nickname']}}</p>
     <p class="level">第{{$info['current_level']}}关</p>
 </div>
 <a href="dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}" class="start">
-    <img src="images/start.png" alt="" />
+    <img src="{{public_path('img/share/start.png')}}" alt="" />
 </a>
 
 </body>
