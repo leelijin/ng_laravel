@@ -101,7 +101,7 @@
 </a>
 <script>
     var ios = 'https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8';
-    var android = 'http://120.77.71.171/public/download/dianfuba_0912.apk';
+    var android = {{env('APP_URL')}}'/public/download/dianfuba_0912.apk';
     if (/ipad|iphone|mac/i.test(navigator.userAgent)){
         window.onload=function(){
             setTimeout(function(){
