@@ -14,7 +14,7 @@ Route::get('download', function () {
 });
 Route::get('share_self/{uid?}', function ($uid=0) {
     $userInfo = User::find($uid);
-    if(!$userInfo)return redirect('/download');
+    if(!$userInfo)return redirect()->to('/public/download');
     $info=[
         'uid'=>$uid,
         'nickname'=>$userInfo->nickname,
