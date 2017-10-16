@@ -99,7 +99,25 @@
 <a href="dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}" class="start">
     <img src="{{asset('public/img/share/start.png')}}" alt="" />
 </a>
-
+<script>
+    var ios = 'https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8';
+    var android = 'http://120.77.71.171/public/download/dianfuba_0912.apk';
+    if (/ipad|iphone|mac/i.test(navigator.userAgent)){
+        window.onload=function(){
+            setTimeout(function(){
+                //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
+                window.location.href=ios;
+            },2000);
+        }
+    }else if(/android/i.test(navigator.userAgent)){
+        window.onload=function(){
+            setTimeout(function(){
+                //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
+                window.location.href=android;
+            },2000);
+        }
+    }
+</script>
 </body>
 </html>
 
