@@ -86,7 +86,7 @@
 <body id="body">
 <div class="bubble">
     <p>
-        我在<img src="{{asset('public/img/share/logo2.png')}}" alt="" /><br />
+        <img src="{{asset('public/img/share/logo_new.png')}}" alt="" /><br />
         超越了<em>{{$info['beyond_rate'] or '0%'}}</em>的小伙伴！
     </p>
 </div>
