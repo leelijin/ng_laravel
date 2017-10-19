@@ -86,7 +86,7 @@ Route::any('share', function () {
     $info = json_decode(\Illuminate\Support\Facades\DB::table('config')->whereName($config_name)->value('value'),true);
     $info['thumb']=pictureTransfer($info['thumb']);
     $uid = request('uid',0);
-    $info['link'] = $info['link']?:env('APP_URL').'/share_self/'.$uid;
+    $info['link'] = $info['link']?:'http://ng.dianfubang.com/share_self/'.$uid;
     unset($info['content']);
     return apiSuccess($info);
 });
