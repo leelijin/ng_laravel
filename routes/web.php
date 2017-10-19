@@ -5,6 +5,9 @@ use App\Models\User;
 Route::get('/',function(){
    return redirect()->to('/public/download');
 });
+Route::get('home',function(){
+    return redirect()->to('/public/download');
+});
 
 Route::get('timestamp',function(){
     return time();
