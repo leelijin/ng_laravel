@@ -96,17 +96,20 @@
     <p class="userName">{{$info['nickname']}}</p>
     <p class="level">第{{$info['current_level']}}关</p>
 </div>
-<a href="https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}" class="start">
+<a href="javascript:void(0)" class="start" id="click_href">
     <img src="{{asset('public/img/share/start.png')}}" alt="" />
 </a>
 <script>
     var ios = 'https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8';
     var android = '{{env('APP_URL')}}/public/download/dianfuba_0912.apk';
+    var ios_click = "https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
+    var android_click = "dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
     if (/ipad|iphone|mac/i.test(navigator.userAgent)){
         window.onload=function(){
             setTimeout(function(){
                 //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
                 window.location.href=ios;
+                document.getElementById('click_href').setAttribute('href',ios_click);
             },5000);
         }
     }else if(/android/i.test(navigator.userAgent)){
@@ -114,6 +117,7 @@
             setTimeout(function(){
                 //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
                 window.location.href=android;
+                document.getElementById('click_href').setAttribute('href',android_click);
             },5000);
         }
     }
