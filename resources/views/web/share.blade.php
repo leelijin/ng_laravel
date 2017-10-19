@@ -107,14 +107,14 @@
             setTimeout(function(){
                 //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
                 window.location.href=ios;
-            },2000);
+            },5000);
         }
     }else if(/android/i.test(navigator.userAgent)){
         window.onload=function(){
             setTimeout(function(){
                 //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
                 window.location.href=android;
-            },2000);
+            },5000);
         }
     }
 </script>
