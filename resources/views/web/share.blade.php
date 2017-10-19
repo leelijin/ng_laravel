@@ -96,7 +96,7 @@
     <p class="userName">{{$info['nickname']}}</p>
     <p class="level">第{{$info['current_level']}}关</p>
 </div>
-<a href="dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}" class="start">
+<a href="https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}" class="start">
     <img src="{{asset('public/img/share/start.png')}}" alt="" />
 </a>
 <script>
