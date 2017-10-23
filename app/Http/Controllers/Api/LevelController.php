@@ -114,7 +114,7 @@ class LevelController extends Controller
     
     public function rankFriends()
     {
-        $list = RankRepo::getRank('Top',$this->limit,true,$this->uid);
+        $list = RankRepo::getRank('top',$this->limit,true,$this->uid);
         return apiSuccess($list);
     }
     

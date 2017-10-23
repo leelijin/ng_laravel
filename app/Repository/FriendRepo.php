@@ -16,7 +16,7 @@ class FriendRepo
 {
     public static function triggerRequest($from_uid,$to_uid,$type,$type_message)
     {
-        
+        if($from_uid == $to_uid)return apiError(1,'不能添加自己');
         $check_user = User::find($to_uid);
         if($check_user){
             $exists=0;
