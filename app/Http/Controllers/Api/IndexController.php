@@ -20,6 +20,8 @@ class IndexController extends Controller
     public function startAd()
     {
         $info = StartAd::first();
+        $info['link']=getCurrentAndroidDownloadLink();
+        $info['version']='1.0';
         return apiSuccess($info);
     }
     
