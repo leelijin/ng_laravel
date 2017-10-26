@@ -50,6 +50,8 @@ if(!function_exists('batchTransferPics')){
     
 }
 
-function getCurrentAndroidDownloadLink(){
-    return env('APP_URL').'/public/download/dianfuba_0912.apk';
+if(!function_exists('batchTransferPics')){
+    function getCurrentAndroidDownloadLink(){
+        return env('APP_URL').'/public/download/dianfuba_0912.apk';
+    }
 }
