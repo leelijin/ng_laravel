@@ -40,9 +40,12 @@
             background-size: 100% auto;
             color: #fff;
         }
+        .bubble p {
+            line-height: 1.3rem;
+        }
         .bubble img {
             width: 2.4rem;
-            vertical-align: bottom;
+            vertical-align: middle;
         }
         .bubble em {
             color: #f39b39;
@@ -79,6 +82,16 @@
             width: 3.7rem;
             margin: auto;
         }
+        .btn {
+            display: block;
+            color: #fff;
+            width: 2rem;
+            height: .8rem;
+            margin: 0 auto .2rem;
+            background: #397;
+            line-height: .8rem;
+            border-radius: .4rem;
+        }
     </style>
 
 </head>
@@ -95,15 +108,14 @@
     <p class="userName">{{$info['nickname']}}</p>
     <p class="level">实力星级<em>{{$info['current_level']}}</em>星</p>
 </div>
-<p>
-    <a href="#" id="click_href">添加好友</a>
-</p>
-<p>
-    <a href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk">安卓下载</a>
-</p>
-<p>
-    <a href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
-</p>
+
+
+    <a class="btn" href="#" id="click_href">添加好友</a>
+
+    <a class="btn" href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk">安卓下载</a>
+
+    <a class="btn" href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
+
 <script>
     var ios_click = "https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
     var android_click = "dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
