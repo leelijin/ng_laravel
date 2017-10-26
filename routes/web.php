@@ -22,6 +22,7 @@ Route::get('share_self/{uid?}', function ($uid=0) {
         'uid'=>$uid,
         'nickname'=>$userInfo->nickname,
         'avatar'=>$userInfo->avatar,
+        'beyond_rate'=>round(User::where('current_star_level','<=',$userInfo->current_star_level)->count()*100/User::count()*1).'%',
         'current_level'=>$userInfo->current_star_level
     ];
     return view('web.share',compact('info'));

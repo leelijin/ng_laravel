@@ -87,7 +87,6 @@
 <div class="bubble">
     <p>
         <img src="{{asset('public/img/share/logo_new.png')}}" alt="" /><br />
-        超越了<em>{{$info['beyond_rate'] or '0%'}}</em>的小伙伴！
     </p>
 </div>
 <img class="title" src="{{asset('public/img/share/logo1.png')}}" alt="" />
@@ -105,9 +104,6 @@
 <p>
     <a href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
 </p>
-<a href="javascript:void(0)" class="start" id="click_href">
-    <img src="{{asset('public/img/share/start.png')}}" alt="" />
-</a>
 <script>
     var ios_click = "https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
     var android_click = "dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
