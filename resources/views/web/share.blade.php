@@ -88,7 +88,7 @@
             width: 2rem;
             height: .8rem;
             margin: 0 auto .2rem;
-            background: #397;
+            background: #00c073;
             line-height: .8rem;
             border-radius: .4rem;
         }
