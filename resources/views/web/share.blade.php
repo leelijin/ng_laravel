@@ -99,7 +99,7 @@
     <a href="#" id="click_href">添加好友</a>
 </p>
 <p>
-    <a href="{{getCurrentAndroidDownloadLink()}}">安卓下载</a>
+    <a href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk">安卓下载</a>
 </p>
 <p>
     <a href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
