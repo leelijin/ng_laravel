@@ -112,26 +112,26 @@
 
     <a class="btn" href="#" id="click_href">添加好友</a>
 
-    <a class="btn" href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk">安卓下载</a>
+    <a class="btn android" href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk">安卓下载</a>
 
-    <a class="btn" href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
+    <a class="btn ios" href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8">IOS下载</a>
 
 <script>
     var ios_click = "https://www.dianfubang.com/home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
     var android_click = "dianfuba://home?uid={{$info['uid'] or 0}}&nickname={{$info['nickname'] or '无'}}";
     if (/ipad|iphone|mac/i.test(navigator.userAgent)){
         window.onload=function(){
-//            setTimeout(function(){
-                //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
-                document.getElementById('click_href').setAttribute('href',ios_click);
-//            },5000);
+            document.getElementById('click_href').setAttribute('href',ios_click);
+            setTimeout(function(){
+                window.location.href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8";
+            },5000);
         }
     }else if(/android/i.test(navigator.userAgent)){
         window.onload=function(){
-//            setTimeout(function(){
-                //window.location.href="http://www.huaxi100.com/apps/cdfer.apk";
-                document.getElementById('click_href').setAttribute('href',android_click);
-//            },5000);
+            document.getElementById('click_href').setAttribute('href',android_click);
+            setTimeout(function(){
+                window.location.href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk";
+            },5000);
         }
     }
 </script>
