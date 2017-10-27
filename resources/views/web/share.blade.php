@@ -99,7 +99,6 @@
 <body id="body">
 <div class="bubble">
     <p>
-        <img src="{{asset('public/img/share/logo_new.png')}}" alt="" /><br />
     </p>
 </div>
 <img class="title" src="{{asset('public/img/share/logo1.png')}}" alt="" />
