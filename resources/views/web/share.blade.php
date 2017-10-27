@@ -122,16 +122,23 @@
     if (/ipad|iphone|mac/i.test(navigator.userAgent)){
         window.onload=function(){
             document.getElementById('click_href').setAttribute('href',ios_click);
-            setTimeout(function(){
-                window.location.href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8";
-            },5000);
+            document.getElementById('click_href').onclick=function () {
+                setTimeout(function(){
+                    window.location.href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8";
+                },5000);
+            };
+
         }
     }else if(/android/i.test(navigator.userAgent)){
         window.onload=function(){
             document.getElementById('click_href').setAttribute('href',android_click);
-            setTimeout(function(){
-                window.location.href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk";
-            },5000);
+
+            document.getElementById('click_href').onclick=function () {
+                setTimeout(function(){
+                    window.location.href="{{env('APP_URL')}}/public/download/dianfuba_0912.apk";
+                },5000);
+            };
+
         }
     }
 </script>
