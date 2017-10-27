@@ -33,10 +33,10 @@
         }
         .bubble {
             width: 3.9rem;
-            height: 1.3rem;
+            height: 0.1rem;
             margin: 1rem auto 0 .5rem;
             padding: .5rem .2rem .5rem;
-            background: url({{asset('public/img/share/paopao.png')}}) no-repeat;
+            {{--background: url({{asset('public/img/share/paopao.png')}}) no-repeat;--}}
             background-size: 100% auto;
             color: #fff;
         }
