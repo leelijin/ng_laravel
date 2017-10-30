@@ -21,7 +21,7 @@ class IndexController extends Controller
     {
         $info = StartAd::first();
         $info['link']=getCurrentAndroidDownloadLink();
-        $info['version']='1.0';
+        $info['version']=1;
         return apiSuccess($info);
     }
     

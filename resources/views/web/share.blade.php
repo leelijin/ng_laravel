@@ -126,7 +126,6 @@
                     window.location.href="https://itunes.apple.com/us/app/颠覆吧ng/id1236015707?l=zh&ls=1&mt=8";
                 },5000);
             };
-
         }
     }else if(/android/i.test(navigator.userAgent)){
         window.onload=function(){
