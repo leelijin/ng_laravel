@@ -103,7 +103,13 @@ class PayController extends Controller
     
     public function restore()
     {
-        if(!$this->request->has('transaction_id'))return apiSuccess([]);
+        if($this->request->has('uid')){
+            //恢复内购
+            if(UserRepo::setUserWrongAuth($this->params['uid'])){
+                return apiSuccess([],'已恢复内购');
+            }
+            return apiError(1,'恢复内购失败');
+        }
         $have_payed = Order::where('transaction_id',$this->params['transaction_id'])->where('status',1)->exists();
         if($have_payed){
             return apiSuccess([],'已内购');
